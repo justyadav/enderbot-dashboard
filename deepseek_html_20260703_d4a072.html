@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EnderBot - Ultimate Discord Bot</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ─── CSS Variables ─── */
+        :root {
+            --primary: #6C3CE1;
+            --primary-dark: #4A1FAB;
+            --primary-light: #8A6DE9;
+            --secondary: #00F5FF;
+            --accent: #FF2D95;
+            --accent-glow: rgba(255, 45, 149, 0.3);
+            --dark: #0A0A0F;
+            --darker: #050508;
+            --dark-card: #12121A;
+            --dark-hover: #1A1A2E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A8A8C8;
+            --text-muted: #6A6A8A;
+            --border: #2A2A4A;
+            --shadow: 0 8px 32px rgba(108, 60, 225, 0.3);
+            --shadow-glow: 0 0 60px rgba(108, 60, 225, 0.15);
+            --radius: 16px;
+            --radius-sm: 8px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ─── Reset & Base ─── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', 'Inter', sans-serif;
+            background: var(--darker);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ─── Animated Background ─── */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(108, 60, 225, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(0, 245, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 100%, rgba(255, 45, 149, 0.04) 0%, transparent 30%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ─── Particle Canvas ─── */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ─── Scrollbar ─── */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-light);
+        }
+
+        /* ─── Navigation ─── */
+        .navbar {
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+        }
+
+        .navbar-brand .logo {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 22px;
+            font-weight: 900;
+            color: white;
+            box-shadow: 0 0 30px rgba(108, 60, 225, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .navbar-brand .logo::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .navbar-brand .brand-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: 1px;
+            text-shadow: 0 0 20px rgba(108, 60, 225, 0.3);
+        }
+
+        .navbar-brand .brand-text span {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .navbar-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: var(--radius-sm);
+            font-size: 15px;
+            font-weight: 600;
+            transition: var(--transition);
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .navbar-links a:hover {
+            color: var(--text-primary);
+            background: var(--dark-hover);
+        }
+
+        .navbar-links a.active {
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            box-shadow: 0 0 30px rgba(108, 60, 225, 0.3);
+        }
+
+        .navbar-links .btn-login {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 10px 24px;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            transition: var(--transition);
+            box-shadow: 0 0 30px rgba(108, 60, 225, 0.2);
+        }
+
+        .navbar-links .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px rgba(108, 60, 225, 0.4);
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* ─── Status Indicator ─── */
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+        }
+
+        .status-indicator .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--secondary);
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.4);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .status-indicator .status-text {
+            font-size: 13px;
+            color: var(--secondary);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* ─── Hero Section ─── */
+        .hero {
+            padding: 100px 2rem 80px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            background: rgba(108, 60, 225, 0.15);
+            color: var(--primary-light);
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            border: 1px solid rgba(108, 60, 225, 0.2);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #FFFFFF 0%, var(--primary-light) 50%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 60px rgba(108, 60, 225, 0.2);
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        .hero .subtitle strong {
+            color: var(--text-primary);
+        }
+
+        .hero .btn-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 36px;
+            border-radius: var(--radius-sm);
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 0 40px rgba(108, 60, 225, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 50px rgba(108, 60, 225, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--dark-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--dark-hover);
+            transform: translateY(-3px);
+            border-color: var(--primary);
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), #CC0066);
+            color: white;
+            box-shadow: 0 0 40px rgba(255, 45, 149, 0.3);
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 50px rgba(255, 45, 149, 0.5);
+        }
+
+        /* ─── Glow Effect ─── */
+        .glow-effect {
+            position: relative;
+        }
+
+        .glow-effect::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: var(--radius-sm);
+            padding: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        /* ─── Stats Section ─── */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: -40px auto 60px;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .stat-card {
+            background: var(--dark-card);
+            padding: 28px 20px;
+            border-radius: var(--radius);
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .stat-card .stat-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-card .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 30px;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .stat-card .stat-label {
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ─── Features Section ─── */
+        .section {
+            padding: 60px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff, var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--dark-card);
+            padding: 32px 28px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(108, 60, 225, 0.05), transparent);
+            pointer-events: none;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .feature-card .feature-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .feature-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* ─── Commands Section ─── */
+        .commands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 12px;
+        }
+
+        .command-card {
+            background: var(--dark-card);
+            padding: 14px 18px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+            cursor: default;
+        }
+
+        .command-card:hover {
+            border-color: var(--primary);
+            background: var(--dark-hover);
+            transform: translateX(5px);
+        }
+
+        .command-card .cmd-name {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            color: var(--secondary);
+            font-size: 14px;
+            min-width: 100px;
+            letter-spacing: 0.5px;
+        }
+
+        .command-card .cmd-desc {
+            color: var(--text-secondary);
+            font-size: 13px;
+            flex: 1;
+        }
+
+        .command-card .cmd-perm {
+            font-size: 11px;
+            padding: 2px 12px;
+            border-radius: 12px;
+            background: rgba(108, 60, 225, 0.2);
+            color: var(--primary-light);
+            font-weight: 600;
+            white-space: nowrap;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* ─── Footer ─── */
+        .footer {
+            background: var(--dark-card);
+            border-top: 1px solid var(--border);
+            padding: 50px 2rem;
+            text-align: center;
+            margin-top: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .footer .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .footer .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer .footer-text {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .footer .footer-text .heart {
+            color: var(--accent);
+            display: inline-block;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .footer .footer-text span {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .navbar-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: var(--dark);
+                padding: 16px 20px;
+                border-bottom: 1px solid var(--border);
+                gap: 4px;
+            }
+
+            .navbar-links.open {
+                display: flex;
+            }
+
+            .navbar-links a {
+                width: 100%;
+                text-align: center;
+                padding: 12px;
+            }
+
+            .status-indicator {
+                display: none;
+            }
+
+            .hero {
+                padding: 60px 1.5rem 40px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                margin-top: -20px;
+            }
+
+            .section {
+                padding: 40px 1.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .commands-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .stat-card {
+                padding: 16px;
+            }
+
+            .stat-card .stat-number {
+                font-size: 22px;
+            }
+
+            .btn {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+
+            .navbar-brand .brand-text {
+                font-size: 18px;
+            }
+
+            .navbar-brand .logo {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+        }
+
+        /* ─── Animations ─── */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.1s;
+            opacity: 0;
+        }
+        .delay-2 {
+            animation-delay: 0.2s;
+            opacity: 0;
+        }
+        .delay-3 {
+            animation-delay: 0.3s;
+            opacity: 0;
+        }
+        .delay-4 {
+            animation-delay: 0.4s;
+            opacity: 0;
+        }
+        .delay-5 {
+            animation-delay: 0.5s;
+            opacity: 0;
+        }
+        .delay-6 {
+            animation-delay: 0.6s;
+            opacity: 0;
+        }
+
+        /* ─── Glitch Text Effect ─── */
+        .glitch {
+            position: relative;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .glitch::before {
+            color: var(--accent);
+            animation: glitch1 3s infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+        }
+
+        .glitch::after {
+            color: var(--secondary);
+            animation: glitch2 3s infinite;
+            clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+        }
+
+        @keyframes glitch1 {
+            0%, 90%, 100% { transform: translate(0); }
+            92% { transform: translate(-3px, 2px); }
+            94% { transform: translate(3px, -1px); }
+            96% { transform: translate(-2px, -2px); }
+        }
+
+        @keyframes glitch2 {
+            0%, 90%, 100% { transform: translate(0); }
+            92% { transform: translate(3px, -1px); }
+            94% { transform: translate(-2px, 2px); }
+            96% { transform: translate(2px, 1px); }
+        }
+
+        /* ─── Floating Elements ─── */
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* ─── Neon Border ─── */
+        .neon-border {
+            position: relative;
+        }
+
+        .neon-border::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: var(--radius);
+            padding: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--accent), var(--secondary));
+            background-size: 300% 300%;
+            animation: gradientMove 3s ease infinite;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ─── Particles Canvas ─── -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- ─── Navigation ─── -->
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">
+            <div class="logo">E</div>
+            <div class="brand-text">Ender<span>Bot</span></div>
+        </a>
+
+        <button class="mobile-toggle" onclick="toggleMobile()" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="navbar-links" id="navLinks">
+            <a href="#" class="active">Dashboard</a>
+            <a href="#features">Features</a>
+            <a href="#commands">Commands</a>
+            <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support</a>
+            <div class="status-indicator">
+                <span class="dot"></span>
+                <span class="status-text">Online</span>
+            </div>
+            <a href="#" class="btn-login">
+                <i class="fab fa-discord"></i> Login
+            </a>
+        </div>
+    </nav>
+
+    <!-- ─── Hero ─── -->
+    <section class="hero">
+        <div class="badge animate-in">🚀 Next-Gen Discord Bot</div>
+        <h1 class="glitch animate-in delay-1" data-text="The Ultimate Discord Bot">The Ultimate <br>Discord Bot</h1>
+        <p class="subtitle animate-in delay-2">
+            Advanced moderation, auto-roles, logging, and more — all in one powerful bot.<br>
+            Trusted by <strong>500+</strong> servers and <strong>50K+</strong> users.
+        </p>
+        <div class="btn-group animate-in delay-3">
+            <a href="#" class="btn btn-primary">
+                <i class="fab fa-discord"></i> Add to Server
+            </a>
+            <a href="#features" class="btn btn-secondary">
+                <i class="fas fa-arrow-down"></i> Explore Features
+            </a>
+            <a href="https://discord.gg/PGwbyWX3DS" target="_blank" class="btn btn-accent">
+                <i class="fas fa-headset"></i> Support Server
+            </a>
+        </div>
+    </section>
+
+    <!-- ─── Stats ─── -->
+    <div class="stats">
+        <div class="stat-card animate-in delay-1">
+            <div class="stat-icon"><i class="fas fa-server"></i></div>
+            <div class="stat-number" id="serverCount">500+</div>
+            <div class="stat-label">Servers</div>
+        </div>
+        <div class="stat-card animate-in delay-2">
+            <div class="stat-icon"><i class="fas fa-users"></i></div>
+            <div class="stat-number" id="userCount">50K+</div>
+            <div class="stat-label">Users</div>
+        </div>
+        <div class="stat-card animate-in delay-3">
+            <div class="stat-icon"><i class="fas fa-terminal"></i></div>
+            <div class="stat-number">77</div>
+            <div class="stat-label">Commands</div>
+        </div>
+        <div class="stat-card animate-in delay-4">
+            <div class="stat-icon"><i class="fas fa-clock"></i></div>
+            <div class="stat-number" id="uptime">99.9%</div>
+            <div class="stat-label">Uptime</div>
+        </div>
+        <div class="stat-card animate-in delay-5">
+            <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Protection</div>
+        </div>
+        <div class="stat-card animate-in delay-6">
+            <div class="stat-icon"><i class="fas fa-robot"></i></div>
+            <div class="stat-number">v2.0</div>
+            <div class="stat-label">Version</div>
+        </div>
+    </div>
+
+    <!-- ─── Features ─── -->
+    <section class="section" id="features">
+        <div class="section-header animate-in">
+            <h2>⚡ Powerful Features</h2>
+            <p>Everything you need to manage and grow your Discord server</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card neon-border animate-in delay-1">
+                <div class="feature-icon">🔨</div>
+                <h3>Advanced Moderation</h3>
+                <p>Kick, ban, mute, warn, and more with automated moderation tools including spam protection and content filtering.</p>
+            </div>
+            <div class="feature-card neon-border animate-in delay-2">
+                <div class="feature-icon">🎭</div>
+                <h3>Auto-Role System</h3>
+                <p>Automatically assign roles to new members, boosters, bots, and verified users with customizable conditions and delays.</p>
+            </div>
+            <div class="feature-card neon-border animate-in delay-3">
+                <div class="feature-icon">📋</div>
+                <h3>Comprehensive Logging</h3>
+                <p>Track every action with detailed logs for moderation, messages, voice, members, server events, and auto-mod actions.</p>
+            </div>
+            <div class="feature-card neon-border animate-in delay-4">
+                <div class="feature-icon">🛡️</div>
+                <h3>Auto-Moderation</h3>
+                <p>Protect your server with invite filters, link filters, spam detection, and profanity filtering — all configurable.</p>
+            </div>
+            <div class="feature-card neon-border animate-in delay-5">
+                <div class="feature-icon">⚙️</div>
+                <h3>Full Configuration</h3>
+                <p>Customize every aspect of the bot with per-server configuration, multi-language support, and easy setup commands.</p>
+            </div>
+            <div class="feature-card neon-border animate-in delay-6">
+                <div class="feature-icon">🎮</div>
+                <h3>Fun & Utility</h3>
+                <p>Engage your community with polls, random generators, AI responses, motivation quotes, and fun commands.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Commands ─── -->
+    <section class="section" id="commands">
+        <div class="section-header animate-in">
+            <h2>📋 Command List</h2>
+            <p>All 77 commands available at your fingertips</p>
+        </div>
+
+        <div class="commands-grid">
+            <!-- Moderation -->
+            <div class="command-card animate-in delay-1">
+                <span class="cmd-name">/kick</span>
+                <span class="cmd-desc">Kick a member</span>
+                <span class="cmd-perm">Kick</span>
+            </div>
+            <div class="command-card animate-in delay-2">
+                <span class="cmd-name">/ban</span>
+                <span class="cmd-desc">Ban a member</span>
+                <span class="cmd-perm">Ban</span>
+            </div>
+            <div class="command-card animate-in delay-3">
+                <span class="cmd-name">/mute</span>
+                <span class="cmd-desc">Timeout a member</span>
+                <span class="cmd-perm">Moderate</span>
+            </div>
+            <div class="command-card animate-in delay-4">
+                <span class="cmd-name">/warn</span>
+                <span class="cmd-desc">Warn a member</span>
+                <span class="cmd-perm">Kick</span>
+            </div>
+            <div class="command-card animate-in delay-5">
+                <span class="cmd-name">/clear</span>
+                <span class="cmd-desc">Delete messages</span>
+                <span class="cmd-perm">Manage Msg</span>
+            </div>
+            <div class="command-card animate-in delay-6">
+                <span class="cmd-name">/lock</span>
+                <span class="cmd-desc">Lock channel</span>
+                <span class="cmd-perm">Manage Chnl</span>
+            </div>
+            <div class="command-card animate-in delay-1">
+                <span class="cmd-name">/nuke</span>
+                <span class="cmd-desc">Nuke channel</span>
+                <span class="cmd-perm">Admin</span>
+            </div>
+            <div class="command-card animate-in delay-2">
+                <span class="cmd-name">/setlog</span>
+                <span class="cmd-desc">Set log channel</span>
+                <span class="cmd-perm">Admin</span>
+            </div>
+            <div class="command-card animate-in delay-3">
+                <span class="cmd-name">/autorole</span>
+                <span class="cmd-desc">Auto-role config</span>
+                <span class="cmd-perm">Admin</span>
+            </div>
+            <div class="command-card animate-in delay-4">
+                <span class="cmd-name">/config</span>
+                <span class="cmd-desc">Server config</span>
+                <span class="cmd-perm">Admin</span>
+            </div>
+            <div class="command-card animate-in delay-5">
+                <span class="cmd-name">/filter-invites</span>
+                <span class="cmd-desc">Toggle invite filter</span>
+                <span class="cmd-perm">Manage Guild</span>
+            </div>
+            <div class="command-card animate-in delay-6">
+                <span class="cmd-name">/ping</span>
+                <span class="cmd-desc">Check latency</span>
+                <span class="cmd-perm">None</span>
+            </div>
+            <div class="command-card animate-in delay-1">
+                <span class="cmd-name">/stats</span>
+                <span class="cmd-desc">Bot statistics</span>
+                <span class="cmd-perm">None</span>
+            </div>
+            <div class="command-card animate-in delay-2">
+                <span class="cmd-name">/help</span>
+                <span class="cmd-desc">Get help</span>
+                <span class="cmd-perm">None</span>
+            </div>
+            <div class="command-card animate-in delay-3">
+                <span class="cmd-name">/poll</span>
+                <span class="cmd-desc">Create a poll</span>
+                <span class="cmd-perm">None</span>
+            </div>
+            <div class="command-card animate-in delay-4">
+                <span class="cmd-name">/ai</span>
+                <span class="cmd-desc">AI response</span>
+                <span class="cmd-perm">None</span>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="#" class="btn btn-secondary">
+                <i class="fas fa-list"></i> View All 77 Commands
+            </a>
+        </div>
+    </section>
+
+    <!-- ─── Footer ─── -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#">Dashboard</a>
+            <a href="#features">Features</a>
+            <a href="#commands">Commands</a>
+            <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+        <div class="footer-text">
+            Made with <span class="heart">❤️</span> by <span>yaduvanshi1816_</span> • EnderBot v2.0.0
+        </div>
+    </footer>
+
+    <!-- ─── JavaScript ─── -->
+    <script>
+        // ─── Particles Background ───
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let particles = [];
+        let mouseX = 0;
+        let mouseY = 0;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = document.documentElement.scrollHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+
+                // Mouse interaction
+                const dx = mouseX - this.x;
+                const dy = mouseY - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 150) {
+                    const force = (150 - distance) / 150;
+                    this.x -= dx * force * 0.01;
+                    this.y -= dy * force * 0.01;
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(108, 60, 225, ${this.opacity})`;
+                ctx.fill();
+
+                // Glow
+                ctx.shadowColor = 'rgba(108, 60, 225, 0.2)';
+                ctx.shadowBlur = 10;
+            }
+        }
+
+        function initParticles(count) {
+            particles = [];
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function connectParticles() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(108, 60, 225, ${0.1 * (1 - distance / 150)})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            connectParticles();
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles(100);
+        animateParticles();
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY + window.scrollY;
+        });
+
+        document.addEventListener('scroll', () => {
+            resizeCanvas();
+        });
+
+        // ─── Mobile Toggle ───
+        function toggleMobile() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('open');
+        }
+
+        document.querySelectorAll('.navbar-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('open');
+            });
+        });
+
+        // ─── Smooth Scroll ───
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ─── Animate Stats ───
+        const stats = document.querySelectorAll('.stat-number');
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const finalText = el.textContent;
+                    const isNumber = /^[\d.]+$/.test(finalText.replace(/[^0-9.]/g, ''));
+                    if (isNumber) {
+                        const finalNum = parseFloat(finalText.replace(/[^0-9.]/g, ''));
+                        let current = 0;
+                        const increment = finalNum / 40;
+                        const interval = setInterval(() => {
+                            current += increment;
+                            if (current >= finalNum) {
+                                current = finalNum;
+                                clearInterval(interval);
+                            }
+                            if (finalText.includes('.')) {
+                                el.textContent = current.toFixed(1) + (finalText.includes('K') ? 'K' : '') + (finalText.includes('+') ? '+' : '');
+                            } else {
+                                el.textContent = Math.floor(current) + (finalText.includes('K') ? 'K' : '') + (finalText.includes('+') ? '+' : '');
+                            }
+                        }, 25);
+                    }
+                    observer.unobserve(el);
+                }
+            });
+        }, observerOptions);
+
+        stats.forEach(stat => observer.observe(stat));
+
+        // ─── Console Welcome ───
+        console.log('%c🚀 EnderBot Dashboard', 'font-size: 28px; font-weight: bold; color: #6C3CE1; font-family: Orbitron, sans-serif;');
+        console.log('%cMade by yaduvanshi1816_', 'font-size: 16px; color: #A8A8C8;');
+        console.log('%c💻 Version 2.0.0', 'font-size: 14px; color: #6A6A8A;');
+        console.log('%c🔗 https://github.com/yourusername/enderbot', 'font-size: 14px; color: #6A6A8A;');
+    </script>
+
+</body>
+</html>
