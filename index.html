@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EnderBot – Ultimate Discord Bot</title>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
     <style>
@@ -789,10 +787,8 @@
 </head>
 <body>
 
-    <!-- ─── Particles Canvas ─── -->
     <canvas id="particles-canvas"></canvas>
 
-    <!-- ─── Navigation ─── -->
     <nav class="navbar">
         <a href="#" class="navbar-brand">
             <div class="logo">E</div>
@@ -818,7 +814,6 @@
         </div>
     </nav>
 
-    <!-- ─── Hero ─── -->
     <section class="hero" id="home">
         <div class="badge animate-in">🚀 Next-Gen Discord Bot</div>
         <h1 class="glitch animate-in delay-1" data-text="The Ultimate Discord Bot">The Ultimate <br>Discord Bot</h1>
@@ -839,7 +834,6 @@
         </div>
     </section>
 
-    <!-- ─── Stats ─── -->
     <div class="stats">
         <div class="stat-card animate-in delay-1">
             <div class="stat-icon"><i class="fas fa-server"></i></div>
@@ -873,7 +867,6 @@
         </div>
     </div>
 
-    <!-- ─── Features ─── -->
     <section class="section" id="features">
         <div class="section-header animate-in">
             <h2>⚡ Powerful Features</h2>
@@ -914,7 +907,6 @@
         </div>
     </section>
 
-    <!-- ─── Commands ─── -->
     <section class="section" id="commands">
         <div class="section-header animate-in">
             <h2>📋 Command List</h2>
@@ -987,62 +979,35 @@
                 <span class="cmd-desc">Bot statistics</span>
                 <span class="cmd-perm">None</span>
             </div>
-            <div class="command-card animate-in delay-2">
-                <span class="cmd-name">/help</span>
-                <span class="cmd-desc">Get help</span>
-                <span class="cmd-perm">None</span>
-            </div>
-            <div class="command-card animate-in delay-3">
-                <span class="cmd-name">/poll</span>
-                <span class="cmd-desc">Create a poll</span>
-                <span class="cmd-perm">None</span>
-            </div>
-            <div class="command-card animate-in delay-4">
-                <span class="cmd-name">/ai</span>
-                <span class="cmd-desc">AI response</span>
-                <span class="cmd-perm">None</span>
-            </div>
-        </div>
-
-        <div class="text-center">
-            <a href="#" class="btn btn-secondary">
-                <i class="fas fa-list"></i> View All 77 Commands
-            </a>
         </div>
     </section>
 
-    <!-- ─── Footer ─── -->
     <footer class="footer">
         <div class="footer-links">
-            <a href="#">Home</a>
+            <a href="#home">Home</a>
             <a href="#features">Features</a>
             <a href="#commands">Commands</a>
-            <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
+            <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support Server</a>
         </div>
-        <div class="footer-text">
-            Made with <span class="heart">❤️</span> by <span>yaduvanshi1816_</span> • EnderBot v2.0.0
-        </div>
-        <div class="footer-text" style="margin-top: 6px; font-size: 12px;">
-            <i class="fas fa-code"></i> Built with Python & discord.py
-        </div>
+        <p class="footer-text">Made with <span class="heart">❤️</span> by the EnderBot Team. All Rights Reserved.</p>
     </footer>
 
-    <!-- ─── JavaScript ─── -->
     <script>
-        // ─── Particles Background ───
+        // Toggle mobile responsive navigation menu
+        function toggleMobile() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('open');
+        }
+
+        // Particle System Script for the background canvas
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        let mouseX = 0;
-        let mouseY = 0;
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
-            canvas.height = document.documentElement.scrollHeight;
+            canvas.height = window.innerHeight;
         }
-
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
@@ -1050,112 +1015,49 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.speedY = (Math.random() - 0.5) * 0.5;
-                this.opacity = Math.random() * 0.5 + 0.2;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 0.4 - 0.2;
+                this.speedY = Math.random() * 0.4 - 0.2;
+                this.alpha = Math.random() * 0.5 + 0.2;
             }
-
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
+
                 if (this.x > canvas.width) this.x = 0;
                 if (this.x < 0) this.x = canvas.width;
                 if (this.y > canvas.height) this.y = 0;
                 if (this.y < 0) this.y = canvas.height;
-
-                const dx = mouseX - this.x;
-                const dy = mouseY - this.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < 150) {
-                    const force = (150 - distance) / 150;
-                    this.x -= dx * force * 0.01;
-                    this.y -= dy * force * 0.01;
-                }
             }
-
             draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = '#8A6DE9';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(108, 60, 225, ${this.opacity})`;
                 ctx.fill();
-                ctx.shadowColor = 'rgba(108, 60, 225, 0.15)';
-                ctx.shadowBlur = 10;
+                ctx.restore();
             }
         }
 
-        function initParticles(count) {
+        function initParticles() {
             particles = [];
+            const count = Math.min(Math.floor(window.innerWidth / 15), 100);
             for (let i = 0; i < count; i++) {
                 particles.push(new Particle());
             }
         }
+        initParticles();
 
-        function connectParticles() {
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < 150) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(108, 60, 225, ${0.08 * (1 - distance / 150)})`;
-                        ctx.lineWidth = 1;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        function animateParticles() {
+        function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            connectParticles();
-            requestAnimationFrame(animateParticles);
-        }
-
-        initParticles(100);
-        animateParticles();
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY + window.scrollY;
-        });
-
-        document.addEventListener('scroll', resizeCanvas);
-
-        // ─── Mobile Toggle ───
-        function toggleMobile() {
-            document.getElementById('navLinks').classList.toggle('open');
-        }
-
-        document.querySelectorAll('.navbar-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('navLinks').classList.remove('open');
+            particles.forEach(p => {
+                p.update();
+                p.draw();
             });
-        });
-
-        // ─── Smooth Scroll ───
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href === '#') return;
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // ─── Console Welcome ───
-        console.log('%c🚀 EnderBot Dashboard', 'font-size: 24px; font-weight: bold; color: #6C3CE1;');
-        console.log('%cMade by yaduvanshi1816_', 'font-size: 14px; color: #A8A8C8;');
-        console.log('%c💻 Version 2.0.0', 'font-size: 12px; color: #6A6A8A;');
-        console.log('%c📊 17+ Servers • 4.7K+ Members • 24/7 Online', 'font-size: 12px; color: #6A6A8A;');
+            requestAnimationFrame(animate);
+        }
+        animate();
     </script>
-
 </body>
 </html>
