@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - EnderBot</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <canvas id="particles-canvas"></canvas>
+
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <div class="logo">E</div>
+            <div class="brand-text">Ender<span>Bot</span></div>
+        </a>
+
+        <button class="mobile-toggle" onclick="toggleMobile()" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="navbar-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="index.html#features">Features</a>
+            <a href="index.html#commands">Commands</a>
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html" class="active">Privacy</a>
+            <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support</a>
+            <div class="status-indicator">
+                <span class="dot"></span>
+                <span class="status-text">Online</span>
+            </div>
+            <a href="#" class="btn-login">
+                <i class="fab fa-discord"></i> Add Bot
+            </a>
+        </div>
+    </nav>
+
+    <section class="section">
+        <div class="section-header animate-in">
+            <h2>🔒 Privacy Policy</h2>
+            <p>How we handle and protect your data</p>
+        </div>
+
+        <div class="legal-content animate-in">
+            <a href="index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+
+            <h3>1. Information We Collect</h3>
+            <p>EnderBot collects and processes the following data:</p>
+            <ul>
+                <li><strong>Server Data:</strong> Server ID, name, channel IDs, role IDs</li>
+                <li><strong>User Data:</strong> User ID, username, discriminator, avatar URL</li>
+                <li><strong>Message Data:</strong> Temporarily cached for edit/delete logging</li>
+                <li><strong>Configuration Data:</strong> Server settings, moderation preferences</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>🔐 Privacy First:</strong> We only collect data essential for the Bot's functionality.
+            </div>
+
+            <h3>2. How We Use Your Data</h3>
+            <ul>
+                <li><strong>Service Delivery:</strong> To provide core features</li>
+                <li><strong>Moderation:</strong> To track warnings and actions</li>
+                <li><strong>Logging:</strong> To maintain audit logs</li>
+                <li><strong>Configuration:</strong> To store server settings</li>
+            </ul>
+
+            <h3>3. Data Storage & Security</h3>
+            <ul>
+                <li>Data is stored securely in MongoDB or in-memory (fallback)</li>
+                <li>We implement industry-standard security measures</li>
+                <li>We do not sell or share your data with third parties</li>
+            </ul>
+
+            <h3>4. Data Retention</h3>
+            <ul>
+                <li>Server configurations are stored until the Bot is removed</li>
+                <li>Moderation logs are stored for accountability</li>
+                <li>Message caches are automatically cleared (max 1000 messages)</li>
+            </ul>
+
+            <h3>5. Your Rights</h3>
+            <ul>
+                <li><strong>Access:</strong> View your server's configuration</li>
+                <li><strong>Modification:</strong> Modify your settings</li>
+                <li><strong>Deletion:</strong> Clear warnings and reset configurations</li>
+                <li><strong>Opt-out:</strong> Remove the Bot from your server</li>
+            </ul>
+
+            <h3>6. Data Removal</h3>
+            <p>If you want your data removed from EnderBot:</p>
+            <ul>
+                <li><strong>Server Admins:</strong> Remove the Bot from your server</li>
+                <li><strong>Individual Users:</strong> Contact a server admin to clear your warnings</li>
+                <li><strong>All Users:</strong> Contact us via the support server</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>📧 Contact:</strong> For privacy concerns, reach out through our <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support Server</a>.
+            </div>
+
+            <h3>7. Changes to Privacy Policy</h3>
+            <p>We may update this Privacy Policy from time to time. You are advised to review this policy periodically.</p>
+
+            <div class="last-updated">
+                <i class="fas fa-calendar-alt"></i> Last Updated: July 2026 • EnderBot v2.0.0
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#features">Features</a>
+            <a href="index.html#commands">Commands</a>
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support</a>
+        </div>
+        <div class="footer-text">
+            Made with <span class="heart">❤️</span> by <span>yaduvanshi1816_</span> • EnderBot v2.0.0
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
