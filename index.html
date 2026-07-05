@@ -29,13 +29,11 @@
             --text-muted: #6A6A8A;
             --border: #2A2A4A;
             --shadow: 0 8px 32px rgba(108, 60, 225, 0.3);
-            --shadow-glow: 0 0 60px rgba(108, 60, 225, 0.15);
             --radius: 16px;
             --radius-sm: 8px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* ─── Reset & Base ─── */
         * {
             margin: 0;
             padding: 0;
@@ -55,7 +53,6 @@
             position: relative;
         }
 
-        /* ─── Animated Background ─── */
         body::before {
             content: '';
             position: fixed;
@@ -71,7 +68,6 @@
             z-index: 0;
         }
 
-        /* ─── Particle Canvas ─── */
         #particles-canvas {
             position: fixed;
             top: 0;
@@ -82,7 +78,6 @@
             z-index: 0;
         }
 
-        /* ─── Scrollbar ─── */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -192,12 +187,6 @@
             background: var(--dark-hover);
         }
 
-        .navbar-links a.active {
-            color: var(--text-primary);
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            box-shadow: 0 0 30px var(--primary-glow);
-        }
-
         .navbar-links .btn-login {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
@@ -223,7 +212,6 @@
             cursor: pointer;
         }
 
-        /* ─── Status Indicator ─── */
         .status-indicator {
             display: flex;
             align-items: center;
@@ -255,7 +243,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* ─── Hero Section ─── */
+        /* ─── Hero ─── */
         .hero {
             padding: 100px 2rem 80px;
             text-align: center;
@@ -361,25 +349,7 @@
             box-shadow: 0 8px 50px var(--accent-glow);
         }
 
-        /* ─── Glow Effect ─── */
-        .glow-effect {
-            position: relative;
-        }
-
-        .glow-effect::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: var(--radius-sm);
-            padding: 2px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-        }
-
-        /* ─── Stats Section ─── */
+        /* ─── Stats ─── */
         .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -479,7 +449,7 @@
             margin: 0 auto;
         }
 
-        /* ─── Features Grid ─── */
+        /* ─── Features ─── */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -533,7 +503,7 @@
             line-height: 1.7;
         }
 
-        /* ─── Commands Grid ─── */
+        /* ─── Commands ─── */
         .commands-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -584,7 +554,7 @@
             font-family: 'Orbitron', sans-serif;
         }
 
-        /* ─── Legal Pages (Terms & Privacy) ─── */
+        /* ─── Legal Pages ─── */
         .legal-content {
             background: var(--dark-card);
             border-radius: var(--radius);
@@ -603,6 +573,12 @@
 
         .legal-content h3:first-of-type {
             margin-top: 0;
+        }
+
+        .legal-content h4 {
+            font-size: 17px;
+            color: var(--text-primary);
+            margin: 20px 0 10px;
         }
 
         .legal-content p {
@@ -644,7 +620,6 @@
             border-top: 1px solid var(--border);
         }
 
-        /* ─── Back Button ─── */
         .back-button {
             display: inline-flex;
             align-items: center;
@@ -659,6 +634,15 @@
 
         .back-button:hover {
             color: var(--text-primary);
+        }
+
+        .legal-content a {
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+
+        .legal-content a:hover {
+            text-decoration: underline;
         }
 
         /* ─── Footer ─── */
@@ -713,6 +697,103 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 700;
+        }
+
+        /* ─── Animations ─── */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .delay-2 { animation-delay: 0.2s; opacity: 0; }
+        .delay-3 { animation-delay: 0.3s; opacity: 0; }
+        .delay-4 { animation-delay: 0.4s; opacity: 0; }
+        .delay-5 { animation-delay: 0.5s; opacity: 0; }
+        .delay-6 { animation-delay: 0.6s; opacity: 0; }
+
+        .glitch {
+            position: relative;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .glitch::before {
+            color: var(--accent);
+            animation: glitch1 3s infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+        }
+
+        .glitch::after {
+            color: var(--secondary);
+            animation: glitch2 3s infinite;
+            clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+        }
+
+        @keyframes glitch1 {
+            0%, 90%, 100% { transform: translate(0); }
+            92% { transform: translate(-3px, 2px); }
+            94% { transform: translate(3px, -1px); }
+            96% { transform: translate(-2px, -2px); }
+        }
+
+        @keyframes glitch2 {
+            0%, 90%, 100% { transform: translate(0); }
+            92% { transform: translate(3px, -1px); }
+            94% { transform: translate(-2px, 2px); }
+            96% { transform: translate(2px, 1px); }
+        }
+
+        .neon-border {
+            position: relative;
+        }
+
+        .neon-border::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: var(--radius);
+            padding: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--accent), var(--secondary));
+            background-size: 300% 300%;
+            animation: gradientMove 3s ease infinite;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
 
         /* ─── Responsive ─── */
@@ -806,124 +887,6 @@
                 height: 40px;
                 font-size: 18px;
             }
-        }
-
-        /* ─── Animations ─── */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-in {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        .delay-1 {
-            animation-delay: 0.1s;
-            opacity: 0;
-        }
-        .delay-2 {
-            animation-delay: 0.2s;
-            opacity: 0;
-        }
-        .delay-3 {
-            animation-delay: 0.3s;
-            opacity: 0;
-        }
-        .delay-4 {
-            animation-delay: 0.4s;
-            opacity: 0;
-        }
-        .delay-5 {
-            animation-delay: 0.5s;
-            opacity: 0;
-        }
-        .delay-6 {
-            animation-delay: 0.6s;
-            opacity: 0;
-        }
-
-        /* ─── Glitch Text Effect ─── */
-        .glitch {
-            position: relative;
-        }
-
-        .glitch::before,
-        .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .glitch::before {
-            color: var(--accent);
-            animation: glitch1 3s infinite;
-            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-        }
-
-        .glitch::after {
-            color: var(--secondary);
-            animation: glitch2 3s infinite;
-            clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
-        }
-
-        @keyframes glitch1 {
-            0%, 90%, 100% { transform: translate(0); }
-            92% { transform: translate(-3px, 2px); }
-            94% { transform: translate(3px, -1px); }
-            96% { transform: translate(-2px, -2px); }
-        }
-
-        @keyframes glitch2 {
-            0%, 90%, 100% { transform: translate(0); }
-            92% { transform: translate(3px, -1px); }
-            94% { transform: translate(-2px, 2px); }
-            96% { transform: translate(2px, 1px); }
-        }
-
-        /* ─── Floating Elements ─── */
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        /* ─── Neon Border ─── */
-        .neon-border {
-            position: relative;
-        }
-
-        .neon-border::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: var(--radius);
-            padding: 2px;
-            background: linear-gradient(135deg, var(--primary), var(--accent), var(--secondary));
-            background-size: 300% 300%;
-            animation: gradientMove 3s ease infinite;
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-        }
-
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
     </style>
 </head>
@@ -1190,55 +1153,28 @@
                 <li>Attempt to exploit, hack, or disrupt the Bot's functionality</li>
                 <li>Use the Bot to harass, threaten, or harm others</li>
                 <li>Use the Bot to violate Discord's Terms of Service</li>
-                <li>Use the Bot to distribute spam, malware, or harmful content</li>
             </ul>
 
             <h3>4. Data Collection & Storage</h3>
-            <p>EnderBot may collect and store certain data to provide its services, including:</p>
-            <ul>
-                <li>Server IDs and channel IDs</li>
-                <li>User IDs and usernames</li>
-                <li>Moderation logs (warnings, mutes, bans)</li>
-                <li>Server configuration settings</li>
-                <li>Message content for moderation purposes</li>
-            </ul>
-            <p>For more details, please see our <a href="#privacy" style="color: var(--primary-light);">Privacy Policy</a>.</p>
+            <p>EnderBot may collect and store certain data to provide its services. For more details, please see our <a href="#privacy">Privacy Policy</a>.</p>
 
-            <h3>5. Bot Availability & Limitations</h3>
+            <h3>5. Bot Availability</h3>
             <ul>
                 <li>EnderBot is provided "as is" without warranties of any kind</li>
-                <li>We do not guarantee 100% uptime - the Bot may occasionally be offline for maintenance</li>
-                <li>We reserve the right to modify, suspend, or discontinue any feature at any time</li>
-                <li>We are not responsible for any damages resulting from the use of the Bot</li>
+                <li>We do not guarantee 100% uptime</li>
+                <li>We reserve the right to modify, suspend, or discontinue any feature</li>
             </ul>
 
-            <h3>6. User Conduct & Content</h3>
-            <ul>
-                <li>You are solely responsible for the content you create or share using the Bot</li>
-                <li>We reserve the right to remove any content that violates these terms</li>
-                <li>We may terminate your access to the Bot if you violate these terms</li>
-            </ul>
-
-            <h3>7. Intellectual Property</h3>
-            <ul>
-                <li>EnderBot and all associated code are the property of the developer (yaduvanshi1816_)</li>
-                <li>You may not copy, modify, or redistribute the Bot without permission</li>
-                <li>All logos, graphics, and branding are protected by copyright</li>
-            </ul>
-
-            <h3>8. Limitation of Liability</h3>
+            <h3>6. Limitation of Liability</h3>
             <div class="highlight-box">
                 <strong>⚠️ Disclaimer:</strong> EnderBot is provided "as is" without any warranties. We are not liable for any damages, losses, or issues that arise from using the Bot.
             </div>
 
-            <h3>9. Changes to Terms</h3>
-            <p>We reserve the right to update these Terms & Conditions at any time. It is your responsibility to review these terms periodically. Continued use of EnderBot after changes constitutes acceptance of the new terms.</p>
+            <h3>7. Changes to Terms</h3>
+            <p>We reserve the right to update these Terms & Conditions at any time. Continued use of EnderBot after changes constitutes acceptance of the new terms.</p>
 
-            <h3>10. Termination</h3>
-            <p>We reserve the right to terminate or suspend access to EnderBot for any user or server that violates these terms, without prior notice.</p>
-
-            <h3>11. Contact Information</h3>
-            <p>For questions about these Terms & Conditions, please contact us through our <a href="https://discord.gg/PGwbyWX3DS" target="_blank" style="color: var(--primary-light);">Support Server</a>.</p>
+            <h3>8. Contact</h3>
+            <p>For questions about these Terms, please contact us through our <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support Server</a>.</p>
 
             <div class="last-updated">
                 <i class="fas fa-calendar-alt"></i> Last Updated: July 2026 • EnderBot v2.0.0
@@ -1259,115 +1195,62 @@
             </a>
 
             <h3>1. Information We Collect</h3>
-            <p>EnderBot collects and processes the following data to provide its services:</p>
-            
-            <h4>1.1 Server Data</h4>
+            <p>EnderBot collects and processes the following data:</p>
             <ul>
-                <li><strong>Server ID:</strong> Used to identify and store settings for each server</li>
-                <li><strong>Server Name:</strong> Displayed in logs and dashboards</li>
-                <li><strong>Channel IDs:</strong> Used for logging and configuration</li>
-                <li><strong>Role IDs:</strong> Used for auto-role functionality</li>
-            </ul>
-
-            <h4>1.2 User Data</h4>
-            <ul>
-                <li><strong>User ID:</strong> Used to track moderation actions and warnings</li>
-                <li><strong>Username:</strong> Displayed in logs and command responses</li>
-                <li><strong>Discriminator:</strong> Displayed in logs and command responses</li>
-                <li><strong>Avatar URL:</strong> Displayed in user info commands</li>
-            </ul>
-
-            <h4>1.3 Message Data</h4>
-            <ul>
-                <li><strong>Message Content:</strong> Temporarily cached for edit/delete logging</li>
-                <li><strong>Message IDs:</strong> Used for logging and moderation</li>
-                <li><strong>Attachment URLs:</strong> Stored temporarily for logging purposes</li>
-            </ul>
-
-            <h4>1.4 Configuration Data</h4>
-            <ul>
-                <li>Server-specific settings (prefix, language, log channels)</li>
-                <li>Moderation settings (filters, auto-role settings)</li>
-                <li>Logging preferences</li>
+                <li><strong>Server Data:</strong> Server ID, name, channel IDs, role IDs</li>
+                <li><strong>User Data:</strong> User ID, username, discriminator, avatar URL</li>
+                <li><strong>Message Data:</strong> Temporarily cached for edit/delete logging</li>
+                <li><strong>Configuration Data:</strong> Server settings, moderation preferences</li>
             </ul>
 
             <div class="highlight-box">
-                <strong>🔐 Privacy First:</strong> We only collect data that is essential for the Bot's functionality. We do not collect sensitive personal information.
+                <strong>🔐 Privacy First:</strong> We only collect data essential for the Bot's functionality.
             </div>
 
             <h3>2. How We Use Your Data</h3>
             <ul>
-                <li><strong>Service Delivery:</strong> To provide the core features of the Bot</li>
-                <li><strong>Moderation:</strong> To track warnings, mutes, and other moderation actions</li>
-                <li><strong>Logging:</strong> To maintain audit logs of actions taken by the Bot</li>
-                <li><strong>Configuration:</strong> To store and retrieve server-specific settings</li>
-                <li><strong>Improvement:</strong> To analyze usage patterns and improve the Bot</li>
+                <li><strong>Service Delivery:</strong> To provide core features</li>
+                <li><strong>Moderation:</strong> To track warnings and actions</li>
+                <li><strong>Logging:</strong> To maintain audit logs</li>
+                <li><strong>Configuration:</strong> To store server settings</li>
             </ul>
 
             <h3>3. Data Storage & Security</h3>
             <ul>
                 <li>Data is stored securely in MongoDB or in-memory (fallback)</li>
                 <li>We implement industry-standard security measures</li>
-                <li>Data is only accessible to authorized personnel</li>
                 <li>We do not sell or share your data with third parties</li>
             </ul>
 
             <h3>4. Data Retention</h3>
             <ul>
-                <li>Server configurations are stored until the Bot is removed from the server</li>
-                <li>Moderation logs are stored for accountability and reference</li>
-                <li>Warnings are stored until manually cleared by administrators</li>
-                <li>Message caches are automatically cleared (max 1000 messages cached)</li>
+                <li>Server configurations are stored until the Bot is removed</li>
+                <li>Moderation logs are stored for accountability</li>
+                <li>Message caches are automatically cleared (max 1000 messages)</li>
             </ul>
 
             <h3>5. Your Rights</h3>
             <ul>
-                <li><strong>Access:</strong> You can view your server's configuration using the /config show command</li>
-                <li><strong>Modification:</strong> You can modify your settings using the appropriate commands</li>
-                <li><strong>Deletion:</strong> You can clear warnings and reset configurations</li>
-                <li><strong>Opt-out:</strong> You can remove the Bot from your server at any time</li>
+                <li><strong>Access:</strong> View your server's configuration</li>
+                <li><strong>Modification:</strong> Modify your settings</li>
+                <li><strong>Deletion:</strong> Clear warnings and reset configurations</li>
+                <li><strong>Opt-out:</strong> Remove the Bot from your server</li>
             </ul>
 
-            <h3>6. Data Security</h3>
-            <p>We take data security seriously and implement the following measures:</p>
-            <ul>
-                <li>Encrypted connections (HTTPS for web dashboard)</li>
-                <li>Secure environment variables for sensitive data</li>
-                <li>Regular security updates and patches</li>
-                <li>Access controls for data management</li>
-            </ul>
-
-            <h3>7. Third-Party Services</h3>
-            <ul>
-                <li><strong>Discord:</strong> The Bot interacts with Discord's API</li>
-                <li><strong>MongoDB:</strong> Optional database for storing data (if enabled)</li>
-                <li><strong>FastAPI:</strong> Used for the web dashboard (if deployed)</li>
-            </ul>
-            <p>These services have their own privacy policies that you should review.</p>
-
-            <h3>8. Children's Privacy</h3>
-            <p>EnderBot is not directed at children under 13 years of age. We do not knowingly collect personal information from children. If you believe we have collected such information, please contact us.</p>
-
-            <h3>9. Changes to Privacy Policy</h3>
-            <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on our website. You are advised to review this policy periodically.</p>
-
-            <h3>10. Data Removal</h3>
+            <h3>6. Data Removal</h3>
             <p>If you want your data removed from EnderBot:</p>
             <ul>
-                <li><strong>Server Admins:</strong> Remove the Bot from your server, and all server data will be deleted</li>
+                <li><strong>Server Admins:</strong> Remove the Bot from your server</li>
                 <li><strong>Individual Users:</strong> Contact a server admin to clear your warnings</li>
-                <li><strong>All Users:</strong> Contact us via the support server for data removal requests</li>
+                <li><strong>All Users:</strong> Contact us via the support server</li>
             </ul>
 
             <div class="highlight-box">
-                <strong>📧 Contact:</strong> For privacy concerns, please reach out through our <a href="https://discord.gg/PGwbyWX3DS" target="_blank" style="color: var(--primary-light);">Support Server</a>.
+                <strong>📧 Contact:</strong> For privacy concerns, reach out through our <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support Server</a>.
             </div>
 
-            <h3>11. International Data Transfers</h3>
-            <p>Your data may be transferred to and maintained on servers located outside of your country of residence. By using EnderBot, you consent to this transfer.</p>
-
-            <h3>12. Cookies</h3>
-            <p>EnderBot does not use cookies directly. However, the web dashboard may use session data for authentication purposes.</p>
+            <h3>7. Changes to Privacy Policy</h3>
+            <p>We may update this Privacy Policy from time to time. You are advised to review this policy periodically.</p>
 
             <div class="last-updated">
                 <i class="fas fa-calendar-alt"></i> Last Updated: July 2026 • EnderBot v2.0.0
@@ -1381,8 +1264,8 @@
             <a href="#home">Home</a>
             <a href="#features">Features</a>
             <a href="#commands">Commands</a>
-            <a href="#terms">Terms & Conditions</a>
-            <a href="#privacy">Privacy Policy</a>
+            <a href="#terms">Terms</a>
+            <a href="#privacy">Privacy</a>
             <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support</a>
         </div>
         <div class="footer-text">
@@ -1478,12 +1361,7 @@
 
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            particles.forEach(particle => {
-                particle.update();
-                particle.draw();
-            });
-
+            particles.forEach(particle => { particle.update(); particle.draw(); });
             connectParticles();
             requestAnimationFrame(animateParticles);
         }
@@ -1496,14 +1374,11 @@
             mouseY = e.clientY + window.scrollY;
         });
 
-        document.addEventListener('scroll', () => {
-            resizeCanvas();
-        });
+        document.addEventListener('scroll', () => { resizeCanvas(); });
 
         // ─── Mobile Toggle ───
         function toggleMobile() {
-            const nav = document.getElementById('navLinks');
-            nav.classList.toggle('open');
+            document.getElementById('navLinks').classList.toggle('open');
         }
 
         document.querySelectorAll('.navbar-links a').forEach(link => {
@@ -1520,21 +1395,13 @@
                 e.preventDefault();
                 const target = document.querySelector(href);
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
 
         // ─── Animate Stats ───
         const stats = document.querySelectorAll('.stat-number');
-        const observerOptions = {
-            threshold: 0.5,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1561,15 +1428,13 @@
                     observer.unobserve(el);
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.5 });
 
         stats.forEach(stat => observer.observe(stat));
 
-        // ─── Console Welcome ───
         console.log('%c🚀 EnderBot Dashboard', 'font-size: 28px; font-weight: bold; color: #6C3CE1; font-family: Orbitron, sans-serif;');
         console.log('%cMade by yaduvanshi1816_', 'font-size: 16px; color: #A8A8C8;');
         console.log('%c💻 Version 2.0.0', 'font-size: 14px; color: #6A6A8A;');
-        console.log('%c🔗 Built with ❤️ for the Discord community', 'font-size: 14px; color: #6A6A8A;');
     </script>
 
 </body>
