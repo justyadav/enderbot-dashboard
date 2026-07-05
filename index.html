@@ -537,6 +537,102 @@
             margin-top: 32px;
         }
 
+        /* ─── Legal Pages Styles ─── */
+        .legal-content {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .legal-content h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            color: var(--primary-light);
+            margin: 30px 0 12px;
+        }
+
+        .legal-content h3:first-of-type {
+            margin-top: 0;
+        }
+
+        .legal-content h4 {
+            font-size: 17px;
+            color: var(--text-white);
+            margin: 20px 0 10px;
+        }
+
+        .legal-content p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .legal-content ul {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin: 8px 0 16px 24px;
+            font-size: 15px;
+        }
+
+        .legal-content ul li {
+            margin-bottom: 8px;
+        }
+
+        .legal-content .highlight-box {
+            background: rgba(108, 60, 225, 0.08);
+            border-left: 3px solid var(--primary);
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            margin: 16px 0;
+        }
+
+        .legal-content .highlight-box strong {
+            color: var(--text-white);
+        }
+
+        .legal-content .highlight-box.warning {
+            border-left-color: var(--accent);
+            background: rgba(255, 45, 149, 0.08);
+        }
+
+        .legal-content .last-updated {
+            color: var(--text-muted);
+            font-size: 13px;
+            text-align: right;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .legal-content a {
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+
+        .legal-content a:hover {
+            text-decoration: underline;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-bottom: 24px;
+        }
+
+        .back-button:hover {
+            color: var(--text-white);
+        }
+
         /* ─── Footer ─── */
         .footer {
             background: var(--card-bg);
@@ -753,6 +849,10 @@
                 height: 36px;
                 font-size: 17px;
             }
+
+            .legal-content {
+                padding: 24px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -789,8 +889,9 @@
 
     <canvas id="particles-canvas"></canvas>
 
+    <!-- ─── Navigation ─── -->
     <nav class="navbar">
-        <a href="#" class="navbar-brand">
+        <a href="#home" class="navbar-brand">
             <div class="logo">E</div>
             <div class="brand-text">Ender<span>Bot</span></div>
         </a>
@@ -800,9 +901,11 @@
         </button>
 
         <div class="navbar-links" id="navLinks">
-            <a href="#" class="active">Home</a>
+            <a href="#home" class="active">Home</a>
             <a href="#features">Features</a>
             <a href="#commands">Commands</a>
+            <a href="#terms">Terms</a>
+            <a href="#privacy">Privacy</a>
             <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support</a>
             <div class="status-indicator">
                 <span class="dot"></span>
@@ -814,6 +917,7 @@
         </div>
     </nav>
 
+    <!-- ─── Hero ─── -->
     <section class="hero" id="home">
         <div class="badge animate-in">🚀 Next-Gen Discord Bot</div>
         <h1 class="glitch animate-in delay-1" data-text="The Ultimate Discord Bot">The Ultimate <br>Discord Bot</h1>
@@ -834,6 +938,7 @@
         </div>
     </section>
 
+    <!-- ─── Stats ─── -->
     <div class="stats">
         <div class="stat-card animate-in delay-1">
             <div class="stat-icon"><i class="fas fa-server"></i></div>
@@ -867,6 +972,7 @@
         </div>
     </div>
 
+    <!-- ─── Features ─── -->
     <section class="section" id="features">
         <div class="section-header animate-in">
             <h2>⚡ Powerful Features</h2>
@@ -907,6 +1013,7 @@
         </div>
     </section>
 
+    <!-- ─── Commands ─── -->
     <section class="section" id="commands">
         <div class="section-header animate-in">
             <h2>📋 Command List</h2>
@@ -979,35 +1086,227 @@
                 <span class="cmd-desc">Bot statistics</span>
                 <span class="cmd-perm">None</span>
             </div>
+            <div class="command-card animate-in delay-2">
+                <span class="cmd-name">/help</span>
+                <span class="cmd-desc">Get help</span>
+                <span class="cmd-perm">None</span>
+            </div>
+            <div class="command-card animate-in delay-3">
+                <span class="cmd-name">/poll</span>
+                <span class="cmd-desc">Create a poll</span>
+                <span class="cmd-perm">None</span>
+            </div>
+            <div class="command-card animate-in delay-4">
+                <span class="cmd-name">/ai</span>
+                <span class="cmd-desc">AI response</span>
+                <span class="cmd-perm">None</span>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a href="#" class="btn btn-secondary">
+                <i class="fas fa-list"></i> View All 77 Commands
+            </a>
         </div>
     </section>
 
+    <!-- ─── Terms & Conditions ─── -->
+    <section class="section" id="terms">
+        <div class="section-header animate-in">
+            <h2>📜 Terms & Conditions</h2>
+            <p>Please read these terms carefully before using EnderBot</p>
+        </div>
+
+        <div class="legal-content animate-in">
+            <a href="#home" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+
+            <div class="highlight-box">
+                <strong>📌 Important:</strong> By inviting EnderBot to your Discord server or using any of its features, you agree to be bound by these Terms & Conditions. If you do not agree with any part of these terms, you must not use the Bot.
+            </div>
+
+            <h3>1. Acceptance of Terms</h3>
+            <p>By inviting EnderBot ("the Bot") to your Discord server or using any of its features, you agree to be bound by these Terms & Conditions. If you do not agree with any part of these terms, you must not use the Bot.</p>
+
+            <h3>2. Description of Service</h3>
+            <p>EnderBot is a Discord bot that provides various features including but not limited to:</p>
+            <ul>
+                <li>Server moderation (kicking, banning, muting, warning members)</li>
+                <li>Auto-role management</li>
+                <li>Server logging</li>
+                <li>Auto-moderation (spam protection, invite filtering)</li>
+                <li>Fun and utility commands</li>
+                <li>Server configuration</li>
+            </ul>
+
+            <h3>3. User Responsibilities</h3>
+            <p>You agree to use EnderBot responsibly and in accordance with Discord's Terms of Service. You shall not:</p>
+            <ul>
+                <li>Use the Bot for illegal or malicious purposes</li>
+                <li>Attempt to exploit, hack, or disrupt the Bot's functionality</li>
+                <li>Use the Bot to harass, threaten, or harm others</li>
+                <li>Use the Bot to violate Discord's Terms of Service</li>
+            </ul>
+
+            <h3>4. Data Collection & Storage</h3>
+            <p>EnderBot may collect and store certain data to provide its services. For more details, please see our <a href="#privacy">Privacy Policy</a>.</p>
+
+            <h3>5. Bot Availability</h3>
+            <ul>
+                <li>EnderBot is provided "as is" without warranties of any kind</li>
+                <li>We do not guarantee 100% uptime</li>
+                <li>We reserve the right to modify, suspend, or discontinue any feature</li>
+            </ul>
+
+            <h3>6. Limitation of Liability</h3>
+            <div class="highlight-box warning">
+                <strong>⚠️ Disclaimer:</strong> EnderBot is provided "as is" without any warranties. We are not liable for any damages, losses, or issues that arise from using the Bot.
+            </div>
+
+            <h3>7. Changes to Terms</h3>
+            <p>We reserve the right to update these Terms & Conditions at any time. Continued use of EnderBot after changes constitutes acceptance of the new terms.</p>
+
+            <h3>8. Contact</h3>
+            <p>For questions about these Terms, please contact us through our <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support Server</a>.</p>
+
+            <div class="last-updated">
+                <i class="fas fa-calendar-alt"></i> Last Updated: July 2026 • EnderBot v2.0.0
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Privacy Policy ─── -->
+    <section class="section" id="privacy">
+        <div class="section-header animate-in">
+            <h2>🔒 Privacy Policy</h2>
+            <p>How we handle and protect your data</p>
+        </div>
+
+        <div class="legal-content animate-in">
+            <a href="#home" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+
+            <div class="highlight-box">
+                <strong>🔐 Privacy First:</strong> We only collect data essential for the Bot's functionality. We do not sell or share your data with third parties.
+            </div>
+
+            <h3>1. Information We Collect</h3>
+            <p>EnderBot collects and processes the following data to provide its services:</p>
+            <ul>
+                <li><strong>Server Data:</strong> Server ID, name, channel IDs, role IDs</li>
+                <li><strong>User Data:</strong> User ID, username, discriminator, avatar URL</li>
+                <li><strong>Message Data:</strong> Temporarily cached for edit/delete logging</li>
+                <li><strong>Configuration Data:</strong> Server settings, moderation preferences</li>
+            </ul>
+
+            <h3>2. How We Use Your Data</h3>
+            <ul>
+                <li><strong>Service Delivery:</strong> To provide core features</li>
+                <li><strong>Moderation:</strong> To track warnings and actions</li>
+                <li><strong>Logging:</strong> To maintain audit logs</li>
+                <li><strong>Configuration:</strong> To store server settings</li>
+            </ul>
+
+            <h3>3. Data Storage & Security</h3>
+            <ul>
+                <li>Data is stored securely in MongoDB or in-memory (fallback)</li>
+                <li>We implement industry-standard security measures</li>
+                <li>We do not sell or share your data with third parties</li>
+            </ul>
+
+            <h3>4. Data Retention</h3>
+            <ul>
+                <li>Server configurations are stored until the Bot is removed</li>
+                <li>Moderation logs are stored for accountability</li>
+                <li>Message caches are automatically cleared (max 1000 messages)</li>
+            </ul>
+
+            <h3>5. Your Rights</h3>
+            <ul>
+                <li><strong>Access:</strong> View your server's configuration</li>
+                <li><strong>Modification:</strong> Modify your settings</li>
+                <li><strong>Deletion:</strong> Clear warnings and reset configurations</li>
+                <li><strong>Opt-out:</strong> Remove the Bot from your server</li>
+            </ul>
+
+            <h3>6. Data Removal</h3>
+            <p>If you want your data removed from EnderBot:</p>
+            <ul>
+                <li><strong>Server Admins:</strong> Remove the Bot from your server</li>
+                <li><strong>Individual Users:</strong> Contact a server admin to clear your warnings</li>
+                <li><strong>All Users:</strong> Contact us via the support server</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>📧 Contact:</strong> For privacy concerns, reach out through our <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support Server</a>.
+            </div>
+
+            <h3>7. Changes to Privacy Policy</h3>
+            <p>We may update this Privacy Policy from time to time. You are advised to review this policy periodically.</p>
+
+            <div class="last-updated">
+                <i class="fas fa-calendar-alt"></i> Last Updated: July 2026 • EnderBot v2.0.0
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Footer ─── -->
     <footer class="footer">
         <div class="footer-links">
             <a href="#home">Home</a>
             <a href="#features">Features</a>
             <a href="#commands">Commands</a>
-            <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support Server</a>
+            <a href="#terms">Terms</a>
+            <a href="#privacy">Privacy</a>
+            <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support</a>
         </div>
-        <p class="footer-text">Made with <span class="heart">❤️</span> by the EnderBot Team. All Rights Reserved.</p>
+        <div class="footer-text">
+            Made with <span class="heart">❤️</span> by <span>yaduvanshi1816_</span> • EnderBot v2.0.0
+        </div>
+        <div class="footer-text" style="margin-top: 6px; font-size: 12px;">
+            <i class="fas fa-code"></i> Built with Python & discord.py
+        </div>
     </footer>
 
     <script>
-        // Toggle mobile responsive navigation menu
+        // ─── Mobile Toggle ───
         function toggleMobile() {
-            const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('open');
+            document.getElementById('navLinks').classList.toggle('open');
         }
 
-        // Particle System Script for the background canvas
+        document.querySelectorAll('.navbar-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('open');
+            });
+        });
+
+        // ─── Smooth Scroll ───
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ─── Particles Background ───
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
+        let mouseX = 0;
+        let mouseY = 0;
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            canvas.height = document.documentElement.scrollHeight;
         }
+
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
@@ -1015,49 +1314,88 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = Math.random() * 0.4 - 0.2;
-                this.speedY = Math.random() * 0.4 - 0.2;
-                this.alpha = Math.random() * 0.5 + 0.2;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.2;
             }
+
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
-
                 if (this.x > canvas.width) this.x = 0;
                 if (this.x < 0) this.x = canvas.width;
                 if (this.y > canvas.height) this.y = 0;
                 if (this.y < 0) this.y = canvas.height;
+
+                const dx = mouseX - this.x;
+                const dy = mouseY - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 150) {
+                    const force = (150 - distance) / 150;
+                    this.x -= dx * force * 0.01;
+                    this.y -= dy * force * 0.01;
+                }
             }
+
             draw() {
-                ctx.save();
-                ctx.globalAlpha = this.alpha;
-                ctx.fillStyle = '#8A6DE9';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(108, 60, 225, ${this.opacity})`;
                 ctx.fill();
-                ctx.restore();
+                ctx.shadowColor = 'rgba(108, 60, 225, 0.15)';
+                ctx.shadowBlur = 10;
             }
         }
 
-        function initParticles() {
+        function initParticles(count) {
             particles = [];
-            const count = Math.min(Math.floor(window.innerWidth / 15), 100);
             for (let i = 0; i < count; i++) {
                 particles.push(new Particle());
             }
         }
-        initParticles();
 
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animate);
+        function connectParticles() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(108, 60, 225, ${0.08 * (1 - distance / 150)})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
         }
-        animate();
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            connectParticles();
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles(100);
+        animateParticles();
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY + window.scrollY;
+        });
+
+        document.addEventListener('scroll', resizeCanvas);
+
+        // ─── Console Welcome ───
+        console.log('%c🚀 EnderBot Dashboard', 'font-size: 24px; font-weight: bold; color: #6C3CE1;');
+        console.log('%cMade by yaduvanshi1816_', 'font-size: 14px; color: #A8A8C8;');
+        console.log('%c💻 Version 2.0.0', 'font-size: 12px; color: #6A6A8A;');
+        console.log('%c📊 17+ Servers • 4.7K+ Members • 24/7 Online', 'font-size: 12px; color: #6A6A8A;');
     </script>
+
 </body>
 </html>
