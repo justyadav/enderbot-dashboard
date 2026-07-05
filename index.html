@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
     <style>
-        /* ===== ROOT VARIABLES ===== */
+        /* ─── CSS Variables ─── */
         :root {
             --primary: #6C3CE1;
             --primary-dark: #4A1FAB;
@@ -38,7 +38,7 @@
             --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* ===== RESET ===== */
+        /* ─── Reset & Base ─── */
         * {
             margin: 0;
             padding: 0;
@@ -71,7 +71,7 @@
             z-index: 0;
         }
 
-        /* ===== PARTICLES CANVAS ===== */
+        /* ─── Particles Canvas ─── */
         #particles-canvas {
             position: fixed;
             inset: 0;
@@ -79,7 +79,7 @@
             z-index: 0;
         }
 
-        /* ===== SCROLLBAR ===== */
+        /* ─── Scrollbar ─── */
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -94,7 +94,7 @@
             background: var(--primary-light);
         }
 
-        /* ===== NAVIGATION ===== */
+        /* ─── Navigation ─── */
         .navbar {
             position: sticky;
             top: 0;
@@ -243,7 +243,7 @@
             cursor: pointer;
         }
 
-        /* ===== HERO ===== */
+        /* ─── Hero ─── */
         .hero {
             padding: 80px 2rem 60px;
             text-align: center;
@@ -297,7 +297,7 @@
             flex-wrap: wrap;
         }
 
-        /* ===== BUTTONS ===== */
+        /* ─── Buttons ─── */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -346,7 +346,7 @@
             box-shadow: 0 8px 50px var(--accent-glow);
         }
 
-        /* ===== STATS ===== */
+        /* ─── Stats ─── */
         .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -413,7 +413,7 @@
             margin-top: 2px;
         }
 
-        /* ===== SECTIONS ===== */
+        /* ─── Sections ─── */
         .section {
             padding: 50px 2rem;
             max-width: 1100px;
@@ -443,7 +443,7 @@
             margin: 8px auto 0;
         }
 
-        /* ===== FEATURES ===== */
+        /* ─── Features ─── */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -485,7 +485,7 @@
             line-height: 1.6;
         }
 
-        /* ===== COMMANDS ===== */
+        /* ─── Commands ─── */
         .commands-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -539,7 +539,7 @@
             margin-top: 32px;
         }
 
-        /* ===== FOOTER ===== */
+        /* ─── Footer ─── */
         .footer {
             background: var(--card-bg);
             border-top: 1px solid var(--border-color);
@@ -593,7 +593,7 @@
             font-weight: 700;
         }
 
-        /* ===== ANIMATIONS ===== */
+        /* ─── Animations ─── */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -610,7 +610,7 @@
         .delay-5 { animation-delay: 0.5s; opacity: 0; }
         .delay-6 { animation-delay: 0.6s; opacity: 0; }
 
-        /* ===== GLITCH ===== */
+        /* ─── Glitch Effect ─── */
         .glitch {
             position: relative;
         }
@@ -652,7 +652,7 @@
             96% { transform: translate(2px, 1px); }
         }
 
-        /* ===== NEON BORDER ===== */
+        /* ─── Neon Border ─── */
         .neon-border {
             position: relative;
         }
@@ -678,7 +678,7 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* ===== RESPONSIVE ===== */
+        /* ─── Responsive ─── */
         @media (max-width: 768px) {
             .mobile-toggle {
                 display: block;
@@ -789,10 +789,10 @@
 </head>
 <body>
 
-    <!-- ===== PARTICLES CANVAS ===== -->
+    <!-- ─── Particles Canvas ─── -->
     <canvas id="particles-canvas"></canvas>
 
-    <!-- ===== NAVIGATION ===== -->
+    <!-- ─── Navigation ─── -->
     <nav class="navbar">
         <a href="#" class="navbar-brand">
             <div class="logo">E</div>
@@ -812,22 +812,22 @@
                 <span class="dot"></span>
                 <span class="status-text">Online</span>
             </div>
-            <a href="#" class="btn-login">
+            <a href="https://discord.com/oauth2/authorize?client_id=1244893095326388325" target="_blank" class="btn-login">
                 <i class="fab fa-discord"></i> Add Bot
             </a>
         </div>
     </nav>
 
-    <!-- ===== HERO ===== -->
+    <!-- ─── Hero ─── -->
     <section class="hero" id="home">
         <div class="badge animate-in">🚀 Next-Gen Discord Bot</div>
         <h1 class="glitch animate-in delay-1" data-text="The Ultimate Discord Bot">The Ultimate <br>Discord Bot</h1>
         <p class="subtitle animate-in delay-2">
             Advanced moderation, auto-roles, logging, and more — all in one powerful bot.<br>
-            Trusted by <strong>500+</strong> servers and <strong>50K+</strong> users.
+            Trusted by <strong>17+</strong> servers and <strong>4,700+</strong> members.
         </p>
         <div class="btn-group animate-in delay-3">
-            <a href="#" class="btn btn-primary">
+            <a href="https://discord.com/oauth2/authorize?client_id=1244893095326388325" target="_blank" class="btn btn-primary">
                 <i class="fab fa-discord"></i> Add to Server
             </a>
             <a href="#features" class="btn btn-secondary">
@@ -839,17 +839,17 @@
         </div>
     </section>
 
-    <!-- ===== STATS ===== -->
+    <!-- ─── Stats ─── -->
     <div class="stats">
         <div class="stat-card animate-in delay-1">
             <div class="stat-icon"><i class="fas fa-server"></i></div>
-            <div class="stat-number">500+</div>
+            <div class="stat-number">17+</div>
             <div class="stat-label">Servers</div>
         </div>
         <div class="stat-card animate-in delay-2">
             <div class="stat-icon"><i class="fas fa-users"></i></div>
-            <div class="stat-number">50K+</div>
-            <div class="stat-label">Users</div>
+            <div class="stat-number">4.7K+</div>
+            <div class="stat-label">Members</div>
         </div>
         <div class="stat-card animate-in delay-3">
             <div class="stat-icon"><i class="fas fa-terminal"></i></div>
@@ -858,12 +858,12 @@
         </div>
         <div class="stat-card animate-in delay-4">
             <div class="stat-icon"><i class="fas fa-clock"></i></div>
-            <div class="stat-number">99.9%</div>
-            <div class="stat-label">Uptime</div>
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Online</div>
         </div>
         <div class="stat-card animate-in delay-5">
             <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
-            <div class="stat-number">24/7</div>
+            <div class="stat-number">100%</div>
             <div class="stat-label">Protection</div>
         </div>
         <div class="stat-card animate-in delay-6">
@@ -873,7 +873,7 @@
         </div>
     </div>
 
-    <!-- ===== FEATURES ===== -->
+    <!-- ─── Features ─── -->
     <section class="section" id="features">
         <div class="section-header animate-in">
             <h2>⚡ Powerful Features</h2>
@@ -914,7 +914,7 @@
         </div>
     </section>
 
-    <!-- ===== COMMANDS ===== -->
+    <!-- ─── Commands ─── -->
     <section class="section" id="commands">
         <div class="section-header animate-in">
             <h2>📋 Command List</h2>
@@ -1011,7 +1011,7 @@
         </div>
     </section>
 
-    <!-- ===== FOOTER ===== -->
+    <!-- ─── Footer ─── -->
     <footer class="footer">
         <div class="footer-links">
             <a href="#">Home</a>
@@ -1029,7 +1029,7 @@
         </div>
     </footer>
 
-    <!-- ===== JAVASCRIPT ===== -->
+    <!-- ─── JavaScript ─── -->
     <script>
         // ─── Particles Background ───
         const canvas = document.getElementById('particles-canvas');
@@ -1154,6 +1154,8 @@
         console.log('%c🚀 EnderBot Dashboard', 'font-size: 24px; font-weight: bold; color: #6C3CE1;');
         console.log('%cMade by yaduvanshi1816_', 'font-size: 14px; color: #A8A8C8;');
         console.log('%c💻 Version 2.0.0', 'font-size: 12px; color: #6A6A8A;');
+        console.log('%c📊 17+ Servers • 4.7K+ Members • 24/7 Online', 'font-size: 12px; color: #6A6A8A;');
     </script>
+
 </body>
 </html>
