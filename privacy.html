@@ -1,18 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Privacy Policy - EnderBot</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+        /* Additional styles specific to privacy page */
+        .privacy-section {
+            padding: 40px 0;
+        }
+
+        .privacy-section .highlight-box {
+            background: rgba(108, 60, 225, 0.08);
+            border-left: 3px solid var(--primary);
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            margin: 16px 0;
+        }
+
+        .privacy-section .highlight-box strong {
+            color: var(--text-white);
+        }
+
+        .privacy-section ul {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin: 8px 0 16px 24px;
+            font-size: 15px;
+        }
+
+        .privacy-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .privacy-section .last-updated {
+            color: var(--text-muted);
+            font-size: 13px;
+            text-align: right;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .privacy-section a {
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+
+        .privacy-section a:hover {
+            text-decoration: underline;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-bottom: 24px;
+        }
+
+        .back-button:hover {
+            color: var(--text-white);
+        }
+    </style>
 </head>
 <body>
 
+    <!-- ─── Particles Canvas ─── -->
     <canvas id="particles-canvas"></canvas>
 
+    <!-- ─── Navigation ─── -->
     <nav class="navbar">
         <a href="index.html" class="navbar-brand">
             <div class="logo">E</div>
@@ -40,7 +113,8 @@
         </div>
     </nav>
 
-    <section class="section">
+    <!-- ─── Privacy Policy Content ─── -->
+    <section class="section privacy-section">
         <div class="section-header animate-in">
             <h2>🔒 Privacy Policy</h2>
             <p>How we handle and protect your data</p>
@@ -52,62 +126,115 @@
             </a>
 
             <h3>1. Information We Collect</h3>
-            <p>EnderBot collects and processes the following data:</p>
+            <p>EnderBot collects and processes the following data to provide its services:</p>
+
+            <h4>1.1 Server Data</h4>
             <ul>
-                <li><strong>Server Data:</strong> Server ID, name, channel IDs, role IDs</li>
-                <li><strong>User Data:</strong> User ID, username, discriminator, avatar URL</li>
-                <li><strong>Message Data:</strong> Temporarily cached for edit/delete logging</li>
-                <li><strong>Configuration Data:</strong> Server settings, moderation preferences</li>
+                <li><strong>Server ID:</strong> Used to identify and store settings for each server</li>
+                <li><strong>Server Name:</strong> Displayed in logs and dashboards</li>
+                <li><strong>Channel IDs:</strong> Used for logging and configuration</li>
+                <li><strong>Role IDs:</strong> Used for auto-role functionality</li>
+            </ul>
+
+            <h4>1.2 User Data</h4>
+            <ul>
+                <li><strong>User ID:</strong> Used to track moderation actions and warnings</li>
+                <li><strong>Username:</strong> Displayed in logs and command responses</li>
+                <li><strong>Discriminator:</strong> Displayed in logs and command responses</li>
+                <li><strong>Avatar URL:</strong> Displayed in user info commands</li>
+            </ul>
+
+            <h4>1.3 Message Data</h4>
+            <ul>
+                <li><strong>Message Content:</strong> Temporarily cached for edit/delete logging</li>
+                <li><strong>Message IDs:</strong> Used for logging and moderation</li>
+                <li><strong>Attachment URLs:</strong> Stored temporarily for logging purposes</li>
+            </ul>
+
+            <h4>1.4 Configuration Data</h4>
+            <ul>
+                <li>Server-specific settings (prefix, language, log channels)</li>
+                <li>Moderation settings (filters, auto-role settings)</li>
+                <li>Logging preferences</li>
             </ul>
 
             <div class="highlight-box">
-                <strong>🔐 Privacy First:</strong> We only collect data essential for the Bot's functionality.
+                <strong>🔐 Privacy First:</strong> We only collect data that is essential for the Bot's functionality. We do not collect sensitive personal information.
             </div>
 
             <h3>2. How We Use Your Data</h3>
             <ul>
-                <li><strong>Service Delivery:</strong> To provide core features</li>
-                <li><strong>Moderation:</strong> To track warnings and actions</li>
-                <li><strong>Logging:</strong> To maintain audit logs</li>
-                <li><strong>Configuration:</strong> To store server settings</li>
+                <li><strong>Service Delivery:</strong> To provide the core features of the Bot</li>
+                <li><strong>Moderation:</strong> To track warnings, mutes, and other moderation actions</li>
+                <li><strong>Logging:</strong> To maintain audit logs of actions taken by the Bot</li>
+                <li><strong>Configuration:</strong> To store and retrieve server-specific settings</li>
+                <li><strong>Improvement:</strong> To analyze usage patterns and improve the Bot</li>
             </ul>
 
             <h3>3. Data Storage & Security</h3>
             <ul>
                 <li>Data is stored securely in MongoDB or in-memory (fallback)</li>
                 <li>We implement industry-standard security measures</li>
+                <li>Data is only accessible to authorized personnel</li>
                 <li>We do not sell or share your data with third parties</li>
             </ul>
 
             <h3>4. Data Retention</h3>
             <ul>
-                <li>Server configurations are stored until the Bot is removed</li>
-                <li>Moderation logs are stored for accountability</li>
-                <li>Message caches are automatically cleared (max 1000 messages)</li>
+                <li>Server configurations are stored until the Bot is removed from the server</li>
+                <li>Moderation logs are stored for accountability and reference</li>
+                <li>Warnings are stored until manually cleared by administrators</li>
+                <li>Message caches are automatically cleared (max 1000 messages cached)</li>
             </ul>
 
             <h3>5. Your Rights</h3>
             <ul>
-                <li><strong>Access:</strong> View your server's configuration</li>
-                <li><strong>Modification:</strong> Modify your settings</li>
-                <li><strong>Deletion:</strong> Clear warnings and reset configurations</li>
-                <li><strong>Opt-out:</strong> Remove the Bot from your server</li>
+                <li><strong>Access:</strong> You can view your server's configuration using the /config show command</li>
+                <li><strong>Modification:</strong> You can modify your settings using the appropriate commands</li>
+                <li><strong>Deletion:</strong> You can clear warnings and reset configurations</li>
+                <li><strong>Opt-out:</strong> You can remove the Bot from your server at any time</li>
             </ul>
 
-            <h3>6. Data Removal</h3>
+            <h3>6. Data Security</h3>
+            <p>We take data security seriously and implement the following measures:</p>
+            <ul>
+                <li>Encrypted connections (HTTPS for web dashboard)</li>
+                <li>Secure environment variables for sensitive data</li>
+                <li>Regular security updates and patches</li>
+                <li>Access controls for data management</li>
+            </ul>
+
+            <h3>7. Third-Party Services</h3>
+            <ul>
+                <li><strong>Discord:</strong> The Bot interacts with Discord's API</li>
+                <li><strong>MongoDB:</strong> Optional database for storing data (if enabled)</li>
+                <li><strong>FastAPI:</strong> Used for the web dashboard (if deployed)</li>
+            </ul>
+            <p>These services have their own privacy policies that you should review.</p>
+
+            <h3>8. Children's Privacy</h3>
+            <p>EnderBot is not directed at children under 13 years of age. We do not knowingly collect personal information from children. If you believe we have collected such information, please contact us.</p>
+
+            <h3>9. Changes to Privacy Policy</h3>
+            <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on our website. You are advised to review this policy periodically.</p>
+
+            <h3>10. Data Removal</h3>
             <p>If you want your data removed from EnderBot:</p>
             <ul>
-                <li><strong>Server Admins:</strong> Remove the Bot from your server</li>
+                <li><strong>Server Admins:</strong> Remove the Bot from your server, and all server data will be deleted</li>
                 <li><strong>Individual Users:</strong> Contact a server admin to clear your warnings</li>
-                <li><strong>All Users:</strong> Contact us via the support server</li>
+                <li><strong>All Users:</strong> Contact us via the support server for data removal requests</li>
             </ul>
 
             <div class="highlight-box">
-                <strong>📧 Contact:</strong> For privacy concerns, reach out through our <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support Server</a>.
+                <strong>📧 Contact:</strong> For privacy concerns, please reach out through our <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support Server</a>.
             </div>
 
-            <h3>7. Changes to Privacy Policy</h3>
-            <p>We may update this Privacy Policy from time to time. You are advised to review this policy periodically.</p>
+            <h3>11. International Data Transfers</h3>
+            <p>Your data may be transferred to and maintained on servers located outside of your country of residence. By using EnderBot, you consent to this transfer.</p>
+
+            <h3>12. Cookies</h3>
+            <p>EnderBot does not use cookies directly. However, the web dashboard may use session data for authentication purposes.</p>
 
             <div class="last-updated">
                 <i class="fas fa-calendar-alt"></i> Last Updated: July 2026 • EnderBot v2.0.0
@@ -115,20 +242,150 @@
         </div>
     </section>
 
+    <!-- ─── Footer ─── -->
     <footer class="footer">
         <div class="footer-links">
             <a href="index.html">Home</a>
             <a href="index.html#features">Features</a>
             <a href="index.html#commands">Commands</a>
-            <a href="terms.html">Terms</a>
-            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms & Conditions</a>
+            <a href="privacy.html">Privacy Policy</a>
             <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support</a>
         </div>
         <div class="footer-text">
             Made with <span class="heart">❤️</span> by <span>yaduvanshi1816_</span> • EnderBot v2.0.0
         </div>
+        <div class="footer-text" style="margin-top: 8px; font-size: 12px;">
+            <i class="fas fa-code"></i> Built with Python & discord.py
+        </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- ─── JavaScript ─── -->
+    <script>
+        // ─── Particles Background ───
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouseX = 0;
+        let mouseY = 0;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = document.documentElement.scrollHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+
+                const dx = mouseX - this.x;
+                const dy = mouseY - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 150) {
+                    const force = (150 - distance) / 150;
+                    this.x -= dx * force * 0.01;
+                    this.y -= dy * force * 0.01;
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(108, 60, 225, ${this.opacity})`;
+                ctx.fill();
+                ctx.shadowColor = 'rgba(108, 60, 225, 0.15)';
+                ctx.shadowBlur = 10;
+            }
+        }
+
+        function initParticles(count) {
+            particles = [];
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function connectParticles() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(108, 60, 225, ${0.08 * (1 - distance / 150)})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            connectParticles();
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles(100);
+        animateParticles();
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY + window.scrollY;
+        });
+
+        document.addEventListener('scroll', resizeCanvas);
+
+        // ─── Mobile Toggle ───
+        function toggleMobile() {
+            document.getElementById('navLinks').classList.toggle('open');
+        }
+
+        document.querySelectorAll('.navbar-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('open');
+            });
+        });
+
+        // ─── Smooth Scroll ───
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ─── Console Welcome ───
+        console.log('%c🔒 EnderBot - Privacy Policy', 'font-size: 24px; font-weight: bold; color: #6C3CE1;');
+        console.log('%cMade by yaduvanshi1816_', 'font-size: 14px; color: #A8A8C8;');
+        console.log('%c💻 Version 2.0.0', 'font-size: 12px; color: #6A6A8A;');
+    </script>
+
 </body>
 </html>
