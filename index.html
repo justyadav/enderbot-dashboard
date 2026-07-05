@@ -448,7 +448,7 @@
             letter-spacing: 1px;
         }
 
-        /* ─── Features Section ─── */
+        /* ─── Sections ─── */
         .section {
             padding: 60px 2rem;
             max-width: 1200px;
@@ -479,6 +479,7 @@
             margin: 0 auto;
         }
 
+        /* ─── Features Grid ─── */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -532,7 +533,7 @@
             line-height: 1.7;
         }
 
-        /* ─── Commands Section ─── */
+        /* ─── Commands Grid ─── */
         .commands-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -581,6 +582,83 @@
             font-weight: 600;
             white-space: nowrap;
             font-family: 'Orbitron', sans-serif;
+        }
+
+        /* ─── Legal Pages (Terms & Privacy) ─── */
+        .legal-content {
+            background: var(--dark-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .legal-content h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            color: var(--primary-light);
+            margin: 30px 0 12px;
+        }
+
+        .legal-content h3:first-of-type {
+            margin-top: 0;
+        }
+
+        .legal-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .legal-content ul {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin: 8px 0 16px 24px;
+            font-size: 15px;
+        }
+
+        .legal-content ul li {
+            margin-bottom: 8px;
+        }
+
+        .legal-content .highlight-box {
+            background: rgba(108, 60, 225, 0.08);
+            border-left: 3px solid var(--primary);
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            margin: 16px 0;
+        }
+
+        .legal-content .highlight-box strong {
+            color: var(--text-primary);
+        }
+
+        .legal-content .last-updated {
+            color: var(--text-muted);
+            font-size: 13px;
+            text-align: right;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* ─── Back Button ─── */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-bottom: 24px;
+        }
+
+        .back-button:hover {
+            color: var(--text-primary);
         }
 
         /* ─── Footer ─── */
@@ -693,6 +771,10 @@
 
             .section-header h2 {
                 font-size: 1.8rem;
+            }
+
+            .legal-content {
+                padding: 24px;
             }
         }
 
@@ -852,7 +934,7 @@
 
     <!-- ─── Navigation ─── -->
     <nav class="navbar">
-        <a href="#" class="navbar-brand">
+        <a href="#home" class="navbar-brand">
             <div class="logo">E</div>
             <div class="brand-text">Ender<span>Bot</span></div>
         </a>
@@ -862,10 +944,11 @@
         </button>
 
         <div class="navbar-links" id="navLinks">
-            <a href="#" class="active">Home</a>
+            <a href="#home">Home</a>
             <a href="#features">Features</a>
             <a href="#commands">Commands</a>
-            <a href="#about">About</a>
+            <a href="#terms">Terms</a>
+            <a href="#privacy">Privacy</a>
             <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support</a>
             <div class="status-indicator">
                 <span class="dot"></span>
@@ -1070,41 +1153,224 @@
         </div>
     </section>
 
-    <!-- ─── About Section ─── -->
-    <section class="section" id="about">
+    <!-- ─── Terms & Conditions ─── -->
+    <section class="section" id="terms">
         <div class="section-header animate-in">
-            <h2>About EnderBot</h2>
-            <p>Built with passion for the Discord community</p>
+            <h2>📜 Terms & Conditions</h2>
+            <p>Please read these terms carefully before using EnderBot</p>
         </div>
 
-        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-            <div class="feature-card neon-border animate-in" style="text-align: left;">
-                <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
-                    <div style="font-size: 48px;">👑</div>
-                    <div>
-                        <h3 style="font-family: 'Orbitron', sans-serif; font-size: 20px;">Created by yaduvanshi1816_</h3>
-                        <p style="color: var(--text-secondary);">A passionate developer dedicated to creating the best Discord bot experience.</p>
-                    </div>
-                </div>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 16px;">
-                    <div style="background: var(--dark-hover); padding: 16px; border-radius: var(--radius-sm); text-align: center;">
-                        <div style="font-size: 24px; font-family: 'Orbitron', sans-serif; color: var(--primary-light);">77+</div>
-                        <div style="color: var(--text-muted); font-size: 13px;">Commands</div>
-                    </div>
-                    <div style="background: var(--dark-hover); padding: 16px; border-radius: var(--radius-sm); text-align: center;">
-                        <div style="font-size: 24px; font-family: 'Orbitron', sans-serif; color: var(--primary-light);">500+</div>
-                        <div style="color: var(--text-muted); font-size: 13px;">Servers</div>
-                    </div>
-                    <div style="background: var(--dark-hover); padding: 16px; border-radius: var(--radius-sm); text-align: center;">
-                        <div style="font-size: 24px; font-family: 'Orbitron', sans-serif; color: var(--primary-light);">50K+</div>
-                        <div style="color: var(--text-muted); font-size: 13px;">Users</div>
-                    </div>
-                    <div style="background: var(--dark-hover); padding: 16px; border-radius: var(--radius-sm); text-align: center;">
-                        <div style="font-size: 24px; font-family: 'Orbitron', sans-serif; color: var(--primary-light);">24/7</div>
-                        <div style="color: var(--text-muted); font-size: 13px;">Uptime</div>
-                    </div>
-                </div>
+        <div class="legal-content animate-in">
+            <a href="#home" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+
+            <h3>1. Acceptance of Terms</h3>
+            <p>By inviting EnderBot ("the Bot") to your Discord server or using any of its features, you agree to be bound by these Terms & Conditions. If you do not agree with any part of these terms, you must not use the Bot.</p>
+
+            <div class="highlight-box">
+                <strong>📌 Important:</strong> These terms apply to all users, server administrators, and anyone interacting with EnderBot.
+            </div>
+
+            <h3>2. Description of Service</h3>
+            <p>EnderBot is a Discord bot that provides various features including but not limited to:</p>
+            <ul>
+                <li>Server moderation (kicking, banning, muting, warning members)</li>
+                <li>Auto-role management</li>
+                <li>Server logging</li>
+                <li>Auto-moderation (spam protection, invite filtering)</li>
+                <li>Fun and utility commands</li>
+                <li>Server configuration</li>
+            </ul>
+
+            <h3>3. User Responsibilities</h3>
+            <p>You agree to use EnderBot responsibly and in accordance with Discord's Terms of Service. You shall not:</p>
+            <ul>
+                <li>Use the Bot for illegal or malicious purposes</li>
+                <li>Attempt to exploit, hack, or disrupt the Bot's functionality</li>
+                <li>Use the Bot to harass, threaten, or harm others</li>
+                <li>Use the Bot to violate Discord's Terms of Service</li>
+                <li>Use the Bot to distribute spam, malware, or harmful content</li>
+            </ul>
+
+            <h3>4. Data Collection & Storage</h3>
+            <p>EnderBot may collect and store certain data to provide its services, including:</p>
+            <ul>
+                <li>Server IDs and channel IDs</li>
+                <li>User IDs and usernames</li>
+                <li>Moderation logs (warnings, mutes, bans)</li>
+                <li>Server configuration settings</li>
+                <li>Message content for moderation purposes</li>
+            </ul>
+            <p>For more details, please see our <a href="#privacy" style="color: var(--primary-light);">Privacy Policy</a>.</p>
+
+            <h3>5. Bot Availability & Limitations</h3>
+            <ul>
+                <li>EnderBot is provided "as is" without warranties of any kind</li>
+                <li>We do not guarantee 100% uptime - the Bot may occasionally be offline for maintenance</li>
+                <li>We reserve the right to modify, suspend, or discontinue any feature at any time</li>
+                <li>We are not responsible for any damages resulting from the use of the Bot</li>
+            </ul>
+
+            <h3>6. User Conduct & Content</h3>
+            <ul>
+                <li>You are solely responsible for the content you create or share using the Bot</li>
+                <li>We reserve the right to remove any content that violates these terms</li>
+                <li>We may terminate your access to the Bot if you violate these terms</li>
+            </ul>
+
+            <h3>7. Intellectual Property</h3>
+            <ul>
+                <li>EnderBot and all associated code are the property of the developer (yaduvanshi1816_)</li>
+                <li>You may not copy, modify, or redistribute the Bot without permission</li>
+                <li>All logos, graphics, and branding are protected by copyright</li>
+            </ul>
+
+            <h3>8. Limitation of Liability</h3>
+            <div class="highlight-box">
+                <strong>⚠️ Disclaimer:</strong> EnderBot is provided "as is" without any warranties. We are not liable for any damages, losses, or issues that arise from using the Bot.
+            </div>
+
+            <h3>9. Changes to Terms</h3>
+            <p>We reserve the right to update these Terms & Conditions at any time. It is your responsibility to review these terms periodically. Continued use of EnderBot after changes constitutes acceptance of the new terms.</p>
+
+            <h3>10. Termination</h3>
+            <p>We reserve the right to terminate or suspend access to EnderBot for any user or server that violates these terms, without prior notice.</p>
+
+            <h3>11. Contact Information</h3>
+            <p>For questions about these Terms & Conditions, please contact us through our <a href="https://discord.gg/PGwbyWX3DS" target="_blank" style="color: var(--primary-light);">Support Server</a>.</p>
+
+            <div class="last-updated">
+                <i class="fas fa-calendar-alt"></i> Last Updated: July 2026 • EnderBot v2.0.0
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Privacy Policy ─── -->
+    <section class="section" id="privacy">
+        <div class="section-header animate-in">
+            <h2>🔒 Privacy Policy</h2>
+            <p>How we handle and protect your data</p>
+        </div>
+
+        <div class="legal-content animate-in">
+            <a href="#home" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+
+            <h3>1. Information We Collect</h3>
+            <p>EnderBot collects and processes the following data to provide its services:</p>
+            
+            <h4>1.1 Server Data</h4>
+            <ul>
+                <li><strong>Server ID:</strong> Used to identify and store settings for each server</li>
+                <li><strong>Server Name:</strong> Displayed in logs and dashboards</li>
+                <li><strong>Channel IDs:</strong> Used for logging and configuration</li>
+                <li><strong>Role IDs:</strong> Used for auto-role functionality</li>
+            </ul>
+
+            <h4>1.2 User Data</h4>
+            <ul>
+                <li><strong>User ID:</strong> Used to track moderation actions and warnings</li>
+                <li><strong>Username:</strong> Displayed in logs and command responses</li>
+                <li><strong>Discriminator:</strong> Displayed in logs and command responses</li>
+                <li><strong>Avatar URL:</strong> Displayed in user info commands</li>
+            </ul>
+
+            <h4>1.3 Message Data</h4>
+            <ul>
+                <li><strong>Message Content:</strong> Temporarily cached for edit/delete logging</li>
+                <li><strong>Message IDs:</strong> Used for logging and moderation</li>
+                <li><strong>Attachment URLs:</strong> Stored temporarily for logging purposes</li>
+            </ul>
+
+            <h4>1.4 Configuration Data</h4>
+            <ul>
+                <li>Server-specific settings (prefix, language, log channels)</li>
+                <li>Moderation settings (filters, auto-role settings)</li>
+                <li>Logging preferences</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>🔐 Privacy First:</strong> We only collect data that is essential for the Bot's functionality. We do not collect sensitive personal information.
+            </div>
+
+            <h3>2. How We Use Your Data</h3>
+            <ul>
+                <li><strong>Service Delivery:</strong> To provide the core features of the Bot</li>
+                <li><strong>Moderation:</strong> To track warnings, mutes, and other moderation actions</li>
+                <li><strong>Logging:</strong> To maintain audit logs of actions taken by the Bot</li>
+                <li><strong>Configuration:</strong> To store and retrieve server-specific settings</li>
+                <li><strong>Improvement:</strong> To analyze usage patterns and improve the Bot</li>
+            </ul>
+
+            <h3>3. Data Storage & Security</h3>
+            <ul>
+                <li>Data is stored securely in MongoDB or in-memory (fallback)</li>
+                <li>We implement industry-standard security measures</li>
+                <li>Data is only accessible to authorized personnel</li>
+                <li>We do not sell or share your data with third parties</li>
+            </ul>
+
+            <h3>4. Data Retention</h3>
+            <ul>
+                <li>Server configurations are stored until the Bot is removed from the server</li>
+                <li>Moderation logs are stored for accountability and reference</li>
+                <li>Warnings are stored until manually cleared by administrators</li>
+                <li>Message caches are automatically cleared (max 1000 messages cached)</li>
+            </ul>
+
+            <h3>5. Your Rights</h3>
+            <ul>
+                <li><strong>Access:</strong> You can view your server's configuration using the /config show command</li>
+                <li><strong>Modification:</strong> You can modify your settings using the appropriate commands</li>
+                <li><strong>Deletion:</strong> You can clear warnings and reset configurations</li>
+                <li><strong>Opt-out:</strong> You can remove the Bot from your server at any time</li>
+            </ul>
+
+            <h3>6. Data Security</h3>
+            <p>We take data security seriously and implement the following measures:</p>
+            <ul>
+                <li>Encrypted connections (HTTPS for web dashboard)</li>
+                <li>Secure environment variables for sensitive data</li>
+                <li>Regular security updates and patches</li>
+                <li>Access controls for data management</li>
+            </ul>
+
+            <h3>7. Third-Party Services</h3>
+            <ul>
+                <li><strong>Discord:</strong> The Bot interacts with Discord's API</li>
+                <li><strong>MongoDB:</strong> Optional database for storing data (if enabled)</li>
+                <li><strong>FastAPI:</strong> Used for the web dashboard (if deployed)</li>
+            </ul>
+            <p>These services have their own privacy policies that you should review.</p>
+
+            <h3>8. Children's Privacy</h3>
+            <p>EnderBot is not directed at children under 13 years of age. We do not knowingly collect personal information from children. If you believe we have collected such information, please contact us.</p>
+
+            <h3>9. Changes to Privacy Policy</h3>
+            <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on our website. You are advised to review this policy periodically.</p>
+
+            <h3>10. Data Removal</h3>
+            <p>If you want your data removed from EnderBot:</p>
+            <ul>
+                <li><strong>Server Admins:</strong> Remove the Bot from your server, and all server data will be deleted</li>
+                <li><strong>Individual Users:</strong> Contact a server admin to clear your warnings</li>
+                <li><strong>All Users:</strong> Contact us via the support server for data removal requests</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>📧 Contact:</strong> For privacy concerns, please reach out through our <a href="https://discord.gg/PGwbyWX3DS" target="_blank" style="color: var(--primary-light);">Support Server</a>.
+            </div>
+
+            <h3>11. International Data Transfers</h3>
+            <p>Your data may be transferred to and maintained on servers located outside of your country of residence. By using EnderBot, you consent to this transfer.</p>
+
+            <h3>12. Cookies</h3>
+            <p>EnderBot does not use cookies directly. However, the web dashboard may use session data for authentication purposes.</p>
+
+            <div class="last-updated">
+                <i class="fas fa-calendar-alt"></i> Last Updated: July 2026 • EnderBot v2.0.0
             </div>
         </div>
     </section>
@@ -1115,10 +1381,9 @@
             <a href="#home">Home</a>
             <a href="#features">Features</a>
             <a href="#commands">Commands</a>
-            <a href="#about">About</a>
+            <a href="#terms">Terms & Conditions</a>
+            <a href="#privacy">Privacy Policy</a>
             <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
         </div>
         <div class="footer-text">
             Made with <span class="heart">❤️</span> by <span>yaduvanshi1816_</span> • EnderBot v2.0.0
@@ -1165,7 +1430,6 @@
                 if (this.y > canvas.height) this.y = 0;
                 if (this.y < 0) this.y = canvas.height;
 
-                // Mouse interaction
                 const dx = mouseX - this.x;
                 const dy = mouseY - this.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
@@ -1181,8 +1445,6 @@
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(108, 60, 225, ${this.opacity})`;
                 ctx.fill();
-
-                // Glow
                 ctx.shadowColor = 'rgba(108, 60, 225, 0.2)';
                 ctx.shadowBlur = 10;
             }
