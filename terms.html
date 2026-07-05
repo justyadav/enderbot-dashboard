@@ -1,18 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Terms & Conditions - EnderBot</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+        /* Additional styles specific to terms page */
+        .terms-section {
+            padding: 40px 0;
+        }
+
+        .terms-section .highlight-box {
+            background: rgba(108, 60, 225, 0.08);
+            border-left: 3px solid var(--primary);
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            margin: 16px 0;
+        }
+
+        .terms-section .highlight-box strong {
+            color: var(--text-white);
+        }
+
+        .terms-section .highlight-box.warning {
+            border-left-color: var(--accent);
+            background: rgba(255, 45, 149, 0.08);
+        }
+
+        .terms-section ul {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin: 8px 0 16px 24px;
+            font-size: 15px;
+        }
+
+        .terms-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .terms-section .last-updated {
+            color: var(--text-muted);
+            font-size: 13px;
+            text-align: right;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .terms-section a {
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+
+        .terms-section a:hover {
+            text-decoration: underline;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-bottom: 24px;
+        }
+
+        .back-button:hover {
+            color: var(--text-white);
+        }
+
+        .terms-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .terms-card {
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .terms-card:hover {
+            border-color: var(--primary);
+            transform: translateX(4px);
+        }
+
+        .terms-card .terms-number {
+            display: inline-block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary-light);
+            margin-bottom: 8px;
+        }
+
+        .terms-card h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 17px;
+            color: var(--text-white);
+            margin-bottom: 8px;
+        }
+
+        .terms-card p {
+            color: var(--text-gray);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .terms-card ul {
+            color: var(--text-gray);
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 8px 0 0 20px;
+        }
+
+        .terms-card ul li {
+            margin-bottom: 4px;
+        }
+    </style>
 </head>
 <body>
 
+    <!-- ─── Particles Canvas ─── -->
     <canvas id="particles-canvas"></canvas>
 
+    <!-- ─── Navigation ─── -->
     <nav class="navbar">
         <a href="index.html" class="navbar-brand">
             <div class="logo">E</div>
@@ -40,7 +170,8 @@
         </div>
     </nav>
 
-    <section class="section">
+    <!-- ─── Terms & Conditions Content ─── -->
+    <section class="section terms-section">
         <div class="section-header animate-in">
             <h2>📜 Terms & Conditions</h2>
             <p>Please read these terms carefully before using EnderBot</p>
@@ -51,53 +182,145 @@
                 <i class="fas fa-arrow-left"></i> Back to Home
             </a>
 
-            <h3>1. Acceptance of Terms</h3>
-            <p>By inviting EnderBot ("the Bot") to your Discord server or using any of its features, you agree to be bound by these Terms & Conditions. If you do not agree with any part of these terms, you must not use the Bot.</p>
-
             <div class="highlight-box">
-                <strong>📌 Important:</strong> These terms apply to all users, server administrators, and anyone interacting with EnderBot.
+                <strong>📌 Important:</strong> By inviting EnderBot to your Discord server or using any of its features, you agree to be bound by these Terms & Conditions. If you do not agree with any part of these terms, you must not use the Bot.
             </div>
 
-            <h3>2. Description of Service</h3>
-            <p>EnderBot is a Discord bot that provides various features including but not limited to:</p>
-            <ul>
-                <li>Server moderation (kicking, banning, muting, warning members)</li>
-                <li>Auto-role management</li>
-                <li>Server logging</li>
-                <li>Auto-moderation (spam protection, invite filtering)</li>
-                <li>Fun and utility commands</li>
-                <li>Server configuration</li>
-            </ul>
+            <div class="terms-grid">
+                <!-- Section 1 -->
+                <div class="terms-card">
+                    <div class="terms-number">Section 1</div>
+                    <h4>Acceptance of Terms</h4>
+                    <p>By inviting EnderBot ("the Bot") to your Discord server or using any of its features, you agree to be bound by these Terms & Conditions. If you do not agree with any part of these terms, you must not use the Bot.</p>
+                    <p style="margin-top: 8px;">These terms apply to all users, server administrators, and anyone interacting with EnderBot.</p>
+                </div>
 
-            <h3>3. User Responsibilities</h3>
-            <p>You agree to use EnderBot responsibly and in accordance with Discord's Terms of Service. You shall not:</p>
-            <ul>
-                <li>Use the Bot for illegal or malicious purposes</li>
-                <li>Attempt to exploit, hack, or disrupt the Bot's functionality</li>
-                <li>Use the Bot to harass, threaten, or harm others</li>
-                <li>Use the Bot to violate Discord's Terms of Service</li>
-            </ul>
+                <!-- Section 2 -->
+                <div class="terms-card">
+                    <div class="terms-number">Section 2</div>
+                    <h4>Description of Service</h4>
+                    <p>EnderBot is a Discord bot that provides various features including but not limited to:</p>
+                    <ul>
+                        <li>Server moderation (kicking, banning, muting, warning members)</li>
+                        <li>Auto-role management</li>
+                        <li>Server logging</li>
+                        <li>Auto-moderation (spam protection, invite filtering)</li>
+                        <li>Fun and utility commands</li>
+                        <li>Server configuration</li>
+                    </ul>
+                </div>
 
-            <h3>4. Data Collection & Storage</h3>
-            <p>EnderBot may collect and store certain data to provide its services. For more details, please see our <a href="privacy.html">Privacy Policy</a>.</p>
+                <!-- Section 3 -->
+                <div class="terms-card">
+                    <div class="terms-number">Section 3</div>
+                    <h4>User Responsibilities</h4>
+                    <p>You agree to use EnderBot responsibly and in accordance with Discord's Terms of Service. You shall not:</p>
+                    <ul>
+                        <li>Use the Bot for illegal or malicious purposes</li>
+                        <li>Attempt to exploit, hack, or disrupt the Bot's functionality</li>
+                        <li>Use the Bot to harass, threaten, or harm others</li>
+                        <li>Use the Bot to violate Discord's Terms of Service</li>
+                        <li>Use the Bot to distribute spam, malware, or harmful content</li>
+                    </ul>
+                </div>
 
-            <h3>5. Bot Availability</h3>
-            <ul>
-                <li>EnderBot is provided "as is" without warranties of any kind</li>
-                <li>We do not guarantee 100% uptime</li>
-                <li>We reserve the right to modify, suspend, or discontinue any feature</li>
-            </ul>
+                <!-- Section 4 -->
+                <div class="terms-card">
+                    <div class="terms-number">Section 4</div>
+                    <h4>Data Collection & Storage</h4>
+                    <p>EnderBot may collect and store certain data to provide its services, including:</p>
+                    <ul>
+                        <li>Server IDs and channel IDs</li>
+                        <li>User IDs and usernames</li>
+                        <li>Moderation logs (warnings, mutes, bans)</li>
+                        <li>Server configuration settings</li>
+                        <li>Message content for moderation purposes</li>
+                    </ul>
+                    <p style="margin-top: 8px;">For more details, please see our <a href="privacy.html">Privacy Policy</a>.</p>
+                </div>
 
-            <h3>6. Limitation of Liability</h3>
-            <div class="highlight-box">
-                <strong>⚠️ Disclaimer:</strong> EnderBot is provided "as is" without any warranties. We are not liable for any damages, losses, or issues that arise from using the Bot.
+                <!-- Section 5 -->
+                <div class="terms-card">
+                    <div class="terms-number">Section 5</div>
+                    <h4>Bot Availability & Limitations</h4>
+                    <ul>
+                        <li>EnderBot is provided "as is" without warranties of any kind</li>
+                        <li>We do not guarantee 100% uptime - the Bot may occasionally be offline for maintenance</li>
+                        <li>We reserve the right to modify, suspend, or discontinue any feature at any time</li>
+                        <li>We are not responsible for any damages resulting from the use of the Bot</li>
+                    </ul>
+                </div>
+
+                <!-- Section 6 -->
+                <div class="terms-card">
+                    <div class="terms-number">Section 6</div>
+                    <h4>User Conduct & Content</h4>
+                    <ul>
+                        <li>You are solely responsible for the content you create or share using the Bot</li>
+                        <li>We reserve the right to remove any content that violates these terms</li>
+                        <li>We may terminate your access to the Bot if you violate these terms</li>
+                    </ul>
+                </div>
+
+                <!-- Section 7 -->
+                <div class="terms-card">
+                    <div class="terms-number">Section 7</div>
+                    <h4>Intellectual Property</h4>
+                    <ul>
+                        <li>EnderBot and all associated code are the property of the developer (yaduvanshi1816_)</li>
+                        <li>You may not copy, modify, or redistribute the Bot without permission</li>
+                        <li>All logos, graphics, and branding are protected by copyright</li>
+                    </ul>
+                </div>
+
+                <!-- Section 8 -->
+                <div class="terms-card">
+                    <div class="terms-number">Section 8</div>
+                    <h4>Limitation of Liability</h4>
+                    <div class="highlight-box warning">
+                        <strong>⚠️ Disclaimer:</strong> EnderBot is provided "as is" without any warranties. We are not liable for any damages, losses, or issues that arise from using the Bot. By using EnderBot, you accept all risks associated with its use.
+                    </div>
+                </div>
+
+                <!-- Section 9 -->
+                <div class="terms-card">
+                    <div class="terms-number">Section 9</div>
+                    <h4>Indemnification</h4>
+                    <p>You agree to indemnify and hold harmless the developers of EnderBot from any claims, damages, losses, or expenses arising from your use of the Bot or violation of these terms.</p>
+                </div>
+
+                <!-- Section 10 -->
+                <div class="terms-card">
+                    <div class="terms-number">Section 10</div>
+                    <h4>Changes to Terms</h4>
+                    <p>We reserve the right to update these Terms & Conditions at any time. It is your responsibility to review these terms periodically. Continued use of EnderBot after changes constitutes acceptance of the new terms.</p>
+                </div>
+
+                <!-- Section 11 -->
+                <div class="terms-card">
+                    <div class="terms-number">Section 11</div>
+                    <h4>Termination</h4>
+                    <p>We reserve the right to terminate or suspend access to EnderBot for any user or server that violates these terms, without prior notice. Upon termination, all data associated with the violating server or user may be deleted.</p>
+                </div>
+
+                <!-- Section 12 -->
+                <div class="terms-card">
+                    <div class="terms-number">Section 12</div>
+                    <h4>Governing Law</h4>
+                    <p>These Terms & Conditions shall be governed by and construed in accordance with the laws of the jurisdiction in which the developer resides. Any disputes arising from these terms shall be resolved in the appropriate courts of that jurisdiction.</p>
+                </div>
+
+                <!-- Section 13 -->
+                <div class="terms-card">
+                    <div class="terms-number">Section 13</div>
+                    <h4>Contact Information</h4>
+                    <p>For questions about these Terms & Conditions, please contact us through our <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support Server</a>.</p>
+                </div>
             </div>
 
-            <h3>7. Changes to Terms</h3>
-            <p>We reserve the right to update these Terms & Conditions at any time. Continued use of EnderBot after changes constitutes acceptance of the new terms.</p>
-
-            <h3>8. Contact</h3>
-            <p>For questions about these Terms, please contact us through our <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support Server</a>.</p>
+            <div class="highlight-box" style="margin-top: 20px;">
+                <strong>📧 Need Help?</strong> If you have any questions about these Terms & Conditions, feel free to reach out to us on our <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support Server</a>. We're here to help!
+            </div>
 
             <div class="last-updated">
                 <i class="fas fa-calendar-alt"></i> Last Updated: July 2026 • EnderBot v2.0.0
@@ -105,20 +328,150 @@
         </div>
     </section>
 
+    <!-- ─── Footer ─── -->
     <footer class="footer">
         <div class="footer-links">
             <a href="index.html">Home</a>
             <a href="index.html#features">Features</a>
             <a href="index.html#commands">Commands</a>
-            <a href="terms.html">Terms</a>
-            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms & Conditions</a>
+            <a href="privacy.html">Privacy Policy</a>
             <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support</a>
         </div>
         <div class="footer-text">
             Made with <span class="heart">❤️</span> by <span>yaduvanshi1816_</span> • EnderBot v2.0.0
         </div>
+        <div class="footer-text" style="margin-top: 8px; font-size: 12px;">
+            <i class="fas fa-code"></i> Built with Python & discord.py
+        </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- ─── JavaScript ─── -->
+    <script>
+        // ─── Particles Background ───
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouseX = 0;
+        let mouseY = 0;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = document.documentElement.scrollHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+
+                const dx = mouseX - this.x;
+                const dy = mouseY - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 150) {
+                    const force = (150 - distance) / 150;
+                    this.x -= dx * force * 0.01;
+                    this.y -= dy * force * 0.01;
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(108, 60, 225, ${this.opacity})`;
+                ctx.fill();
+                ctx.shadowColor = 'rgba(108, 60, 225, 0.15)';
+                ctx.shadowBlur = 10;
+            }
+        }
+
+        function initParticles(count) {
+            particles = [];
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function connectParticles() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(108, 60, 225, ${0.08 * (1 - distance / 150)})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            connectParticles();
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles(100);
+        animateParticles();
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY + window.scrollY;
+        });
+
+        document.addEventListener('scroll', resizeCanvas);
+
+        // ─── Mobile Toggle ───
+        function toggleMobile() {
+            document.getElementById('navLinks').classList.toggle('open');
+        }
+
+        document.querySelectorAll('.navbar-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('open');
+            });
+        });
+
+        // ─── Smooth Scroll ───
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ─── Console Welcome ───
+        console.log('%c📜 EnderBot - Terms & Conditions', 'font-size: 24px; font-weight: bold; color: #6C3CE1;');
+        console.log('%cMade by yaduvanshi1816_', 'font-size: 14px; color: #A8A8C8;');
+        console.log('%c💻 Version 2.0.0', 'font-size: 12px; color: #6A6A8A;');
+    </script>
+
 </body>
 </html>
