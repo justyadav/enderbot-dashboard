@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EnderBot – Ultimate Discord Bot</title>
+    <title>EnderBot – Admin Dashboard</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -36,6 +36,8 @@
             --radius-sm: 8px;
             --shadow: 0 8px 32px rgba(108, 60, 225, 0.25);
             --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --danger: #ED4245;
+            --success: #57F287;
         }
 
         * {
@@ -174,6 +176,7 @@
             transition: var(--transition);
             font-family: 'Rajdhani', sans-serif;
             letter-spacing: 0.3px;
+            cursor: pointer;
         }
 
         .navbar-links a:hover {
@@ -263,9 +266,42 @@
             cursor: pointer;
         }
 
+        /* ─── User Badge ─── */
+        .user-badge {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 12px;
+            background: var(--card-hover);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+        }
+
+        .user-badge .user-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .user-badge .user-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-white);
+        }
+
+        .user-badge.show {
+            display: flex;
+        }
+
         /* ─── Hero ─── */
         .hero {
-            padding: 80px 2rem 60px;
+            padding: 60px 2rem 40px;
             text-align: center;
             position: relative;
             z-index: 1;
@@ -288,7 +324,7 @@
 
         .hero h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2.2rem, 5.5vw, 4.6rem);
+            font-size: clamp(2rem, 4.5vw, 3.8rem);
             font-weight: 900;
             line-height: 1.1;
             margin-bottom: 16px;
@@ -299,7 +335,7 @@
         }
 
         .hero .subtitle {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--text-gray);
             max-width: 580px;
             margin: 0 auto 32px;
@@ -310,143 +346,21 @@
             color: var(--text-white);
         }
 
-        .hero .btn-group {
-            display: flex;
-            gap: 14px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 13px 32px;
-            border-radius: var(--radius-sm);
-            font-size: 15px;
-            font-weight: 700;
-            font-family: 'Rajdhani', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: #fff;
-            box-shadow: 0 0 40px var(--primary-glow);
-        }
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 50px var(--primary-glow);
-        }
-
-        .btn-secondary {
-            background: var(--card-bg);
-            color: var(--text-white);
-            border: 1px solid var(--border-color);
-        }
-        .btn-secondary:hover {
-            background: var(--card-hover);
-            transform: translateY(-3px);
-            border-color: var(--primary);
-        }
-
-        .btn-accent {
-            background: linear-gradient(135deg, var(--accent), #cc0066);
-            color: #fff;
-            box-shadow: 0 0 40px var(--accent-glow);
-        }
-        .btn-accent:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 50px var(--accent-glow);
-        }
-
-        /* ─── Stats ─── */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 18px;
-            max-width: 1100px;
-            margin: -30px auto 50px;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 10;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            padding: 22px 16px;
-            border-radius: var(--radius);
-            text-align: center;
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            inset: 0 0 auto 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .stat-card:hover::before {
-            opacity: 1;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--primary);
-            box-shadow: var(--shadow);
-        }
-
-        .stat-card .stat-icon {
-            font-size: 28px;
-            margin-bottom: 6px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .stat-card .stat-number {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 28px;
-            font-weight: 800;
-            color: var(--text-white);
-        }
-
-        .stat-card .stat-label {
-            color: var(--text-muted);
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            margin-top: 2px;
-        }
-
-        /* ─── Dashboard Section ─── */
-        .dashboard-section {
-            padding: 30px 2rem 60px;
+        /* ─── Dashboard Container ─── */
+        .dashboard-container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 20px 2rem 60px;
             position: relative;
             z-index: 1;
         }
 
-        .dashboard-section .section-header {
+        .dashboard-header {
             text-align: center;
             margin-bottom: 40px;
         }
 
-        .dashboard-section .section-header h2 {
+        .dashboard-header h2 {
             font-family: 'Orbitron', sans-serif;
             font-size: 2rem;
             font-weight: 800;
@@ -455,7 +369,7 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .dashboard-section .section-header p {
+        .dashboard-header p {
             color: var(--text-gray);
             font-size: 1.05rem;
             max-width: 500px;
@@ -530,6 +444,37 @@
             color: var(--text-muted);
         }
 
+        .login-card .demo-login {
+            margin-top: 12px;
+            padding: 10px;
+            background: rgba(108, 60, 225, 0.1);
+            border-radius: var(--radius-sm);
+            border: 1px dashed var(--border-color);
+        }
+
+        .login-card .demo-login p {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .login-card .demo-login .btn-demo {
+            padding: 6px 20px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .login-card .demo-login .btn-demo:hover {
+            background: var(--primary-dark);
+        }
+
         /* ─── Dashboard Content ─── */
         .dashboard-content {
             display: none;
@@ -539,53 +484,112 @@
             display: block;
         }
 
-        .dashboard-grid {
+        /* ─── Quick Actions ─── */
+        .quick-actions {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
             margin-bottom: 30px;
         }
 
-        .dashboard-card {
+        .action-card {
             background: var(--card-bg);
             padding: 24px;
             border-radius: var(--radius);
             border: 1px solid var(--border-color);
+            text-align: center;
             transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text-white);
         }
 
-        .dashboard-card:hover {
+        .action-card:hover {
             border-color: var(--primary);
             transform: translateY(-4px);
             box-shadow: var(--shadow);
         }
 
-        .dashboard-card .card-title {
+        .action-card .action-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .action-card .action-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 14px;
+            font-weight: 600;
+        }
+
+        .action-card .action-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* ─── Stats Cards ─── */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card-dash {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .stat-card-dash:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
+        .stat-card-dash .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 8px;
         }
 
-        .dashboard-card .card-value {
+        .stat-card-dash .stat-value {
             font-family: 'Orbitron', sans-serif;
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 800;
             color: var(--text-white);
+            margin-top: 4px;
         }
 
-        .dashboard-card .card-change {
-            font-size: 13px;
+        .stat-card-dash .stat-change {
+            font-size: 12px;
             color: var(--secondary);
             margin-top: 4px;
         }
 
         /* ─── Server List ─── */
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
         .server-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 12px;
         }
 
@@ -648,7 +652,7 @@
             padding: 2px 12px;
             border-radius: 12px;
             background: rgba(87, 242, 135, 0.15);
-            color: var(--secondary);
+            color: var(--success);
             font-weight: 600;
             white-space: nowrap;
         }
@@ -658,129 +662,22 @@
             color: var(--danger);
         }
 
-        /* ─── Features ─── */
-        .section {
-            padding: 50px 2rem;
-            max-width: 1100px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .section-header {
+        /* ─── Loading ─── */
+        .loading-spinner {
             text-align: center;
-            margin-bottom: 40px;
+            padding: 40px;
+            color: var(--text-muted);
         }
 
-        .section-header h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #fff, var(--primary-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .loading-spinner i {
+            font-size: 32px;
+            color: var(--primary);
+            animation: spin 1s linear infinite;
         }
 
-        .section-header p {
-            color: var(--text-gray);
-            font-size: 1.05rem;
-            max-width: 500px;
-            margin: 8px auto 0;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-        }
-
-        .feature-card {
-            background: var(--card-bg);
-            padding: 28px 24px;
-            border-radius: var(--radius);
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .feature-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow);
-        }
-
-        .feature-card .feature-icon {
-            font-size: 36px;
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        .feature-card h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 17px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--text-white);
-        }
-
-        .feature-card p {
-            color: var(--text-gray);
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        /* ─── Commands ─── */
-        .commands-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 10px;
-        }
-
-        .command-card {
-            background: var(--card-bg);
-            padding: 12px 16px;
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: var(--transition);
-        }
-
-        .command-card:hover {
-            border-color: var(--primary);
-            background: var(--card-hover);
-            transform: translateX(4px);
-        }
-
-        .command-card .cmd-name {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 600;
-            color: var(--secondary);
-            font-size: 13px;
-            min-width: 90px;
-        }
-
-        .command-card .cmd-desc {
-            color: var(--text-gray);
-            font-size: 13px;
-            flex: 1;
-        }
-
-        .command-card .cmd-perm {
-            font-size: 10px;
-            padding: 2px 12px;
-            border-radius: 12px;
-            background: rgba(108, 60, 225, 0.18);
-            color: var(--primary-light);
-            font-weight: 600;
-            white-space: nowrap;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .text-center {
-            text-align: center;
-            margin-top: 32px;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* ─── Footer ─── */
@@ -852,8 +749,102 @@
         .delay-3 { animation-delay: 0.3s; opacity: 0; }
         .delay-4 { animation-delay: 0.4s; opacity: 0; }
         .delay-5 { animation-delay: 0.5s; opacity: 0; }
-        .delay-6 { animation-delay: 0.6s; opacity: 0; }
 
+        /* ─── Responsive ─── */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .navbar-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: var(--dark);
+                padding: 16px 20px;
+                border-bottom: 1px solid var(--border-color);
+                gap: 4px;
+            }
+
+            .navbar-links.open {
+                display: flex;
+            }
+
+            .navbar-links a {
+                width: 100%;
+                text-align: center;
+                padding: 12px;
+            }
+
+            .navbar-links .btn-login,
+            .navbar-links .btn-logout {
+                width: 100%;
+                text-align: center;
+            }
+
+            .status-indicator {
+                display: none;
+            }
+
+            .user-badge {
+                display: none !important;
+            }
+
+            .hero {
+                padding: 40px 1.5rem 30px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1rem;
+            }
+
+            .dashboard-container {
+                padding: 20px 1.5rem 40px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .server-list {
+                grid-template-columns: 1fr;
+            }
+
+            .login-card {
+                padding: 24px;
+            }
+
+            .dashboard-header h2 {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-card-dash .stat-value {
+                font-size: 22px;
+            }
+        }
+
+        /* ─── Glitch Effect ─── */
         .glitch {
             position: relative;
         }
@@ -919,144 +910,6 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
-        /* ─── Responsive ─── */
-        @media (max-width: 768px) {
-            .mobile-toggle {
-                display: block;
-            }
-
-            .navbar-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 72px;
-                left: 0;
-                right: 0;
-                background: var(--dark);
-                padding: 16px 20px;
-                border-bottom: 1px solid var(--border-color);
-                gap: 4px;
-            }
-
-            .navbar-links.open {
-                display: flex;
-            }
-
-            .navbar-links a {
-                width: 100%;
-                text-align: center;
-                padding: 12px;
-            }
-
-            .navbar-links .btn-login,
-            .navbar-links .btn-logout {
-                width: 100%;
-                text-align: center;
-            }
-
-            .status-indicator {
-                display: none;
-            }
-
-            .hero {
-                padding: 60px 1.5rem 40px;
-            }
-
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-                margin-top: -20px;
-                gap: 12px;
-            }
-
-            .stat-card .stat-number {
-                font-size: 22px;
-            }
-
-            .section {
-                padding: 30px 1.5rem;
-            }
-
-            .section-header h2 {
-                font-size: 1.6rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .commands-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .btn {
-                padding: 11px 24px;
-                font-size: 13px;
-            }
-
-            .navbar-brand .brand-text {
-                font-size: 18px;
-            }
-
-            .navbar-brand .logo {
-                width: 36px;
-                height: 36px;
-                font-size: 17px;
-            }
-
-            .dashboard-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .server-list {
-                grid-template-columns: 1fr;
-            }
-
-            .login-card {
-                padding: 24px;
-            }
-
-            .dashboard-section {
-                padding: 20px 1.5rem 40px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stats {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-
-            .stat-card {
-                padding: 16px 12px;
-            }
-
-            .stat-card .stat-number {
-                font-size: 20px;
-            }
-
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1rem;
-            }
-
-            .btn {
-                padding: 10px 18px;
-                font-size: 12px;
-                gap: 6px;
-            }
-
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .server-item .server-name {
-                font-size: 13px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -1065,7 +918,7 @@
 
     <!-- ─── Navigation ─── -->
     <nav class="navbar">
-        <a href="#home" class="navbar-brand">
+        <a href="#" class="navbar-brand" onclick="showHome()">
             <div class="logo">E</div>
             <div class="brand-text">Ender<span>Bot</span></div>
         </a>
@@ -1075,16 +928,18 @@
         </button>
 
         <div class="navbar-links" id="navLinks">
-            <a href="#home" class="active">Home</a>
-            <a href="#features">Features</a>
-            <a href="#commands">Commands</a>
-            <a href="#dashboard-section">Dashboard</a>
+            <a href="#" class="active" onclick="showHome()">Home</a>
+            <a href="#" onclick="showDashboard()">Dashboard</a>
             <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support</a>
             <div class="status-indicator">
                 <span class="dot"></span>
                 <span class="status-text">Online</span>
             </div>
-            <button class="btn-login" id="loginBtn" onclick="loginWithDiscord()">
+            <div class="user-badge" id="userBadge">
+                <div class="user-avatar" id="userAvatar">U</div>
+                <span class="user-name" id="userName">User</span>
+            </div>
+            <button class="btn-login" id="loginBtn" onclick="showLogin()">
                 <i class="fab fa-discord"></i> Login
             </button>
             <button class="btn-logout" id="logoutBtn" onclick="logout()">
@@ -1093,204 +948,32 @@
         </div>
     </nav>
 
-    <!-- ─── Hero ─── -->
-    <section class="hero" id="home">
+    <!-- ─── Hero Section ─── -->
+    <section class="hero" id="homeSection">
         <div class="badge animate-in">🚀 Next-Gen Discord Bot</div>
-        <h1 class="glitch animate-in delay-1" data-text="The Ultimate Discord Bot">The Ultimate <br>Discord Bot</h1>
+        <h1 class="glitch animate-in delay-1" data-text="Welcome to EnderBot">Welcome to <br>EnderBot</h1>
         <p class="subtitle animate-in delay-2">
             Advanced moderation, auto-roles, logging, and more — all in one powerful bot.<br>
-            Trusted by <strong id="serverCountDisplay">17+</strong> servers and <strong id="userCountDisplay">4,700+</strong> members.
+            <strong id="serverCountDisplay">17+</strong> servers • <strong id="userCountDisplay">4,700+</strong> members • <strong>77</strong> commands
         </p>
         <div class="btn-group animate-in delay-3">
-            <a href="https://discord.com/oauth2/authorize?client_id=1244893095326388325&permissions=8" target="_blank" class="btn btn-primary">
+            <a href="https://discord.com/oauth2/authorize?client_id=1244893095326388325&permissions=8" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 10px; padding: 13px 32px; border-radius: var(--radius-sm); font-size: 15px; font-weight: 700; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; letter-spacing: 0.5px; border: none; cursor: pointer; text-decoration: none; transition: var(--transition); background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; box-shadow: 0 0 40px var(--primary-glow);">
                 <i class="fab fa-discord"></i> Add to Server
             </a>
-            <a href="#features" class="btn btn-secondary">
-                <i class="fas fa-arrow-down"></i> Explore Features
-            </a>
-            <a href="https://discord.gg/PGwbyWX3DS" target="_blank" class="btn btn-accent">
+            <button onclick="showDashboard()" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 10px; padding: 13px 32px; border-radius: var(--radius-sm); font-size: 15px; font-weight: 700; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; letter-spacing: 0.5px; border: none; cursor: pointer; text-decoration: none; transition: var(--transition); background: var(--card-bg); color: var(--text-white); border: 1px solid var(--border-color);">
+                <i class="fas fa-arrow-down"></i> Go to Dashboard
+            </button>
+            <a href="https://discord.gg/PGwbyWX3DS" target="_blank" class="btn btn-accent" style="display: inline-flex; align-items: center; gap: 10px; padding: 13px 32px; border-radius: var(--radius-sm); font-size: 15px; font-weight: 700; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; letter-spacing: 0.5px; border: none; cursor: pointer; text-decoration: none; transition: var(--transition); background: linear-gradient(135deg, var(--accent), #cc0066); color: #fff; box-shadow: 0 0 40px var(--accent-glow);">
                 <i class="fas fa-headset"></i> Support Server
             </a>
         </div>
     </section>
 
-    <!-- ─── Stats ─── -->
-    <div class="stats">
-        <div class="stat-card animate-in delay-1">
-            <div class="stat-icon"><i class="fas fa-server"></i></div>
-            <div class="stat-number" id="serverCount">17+</div>
-            <div class="stat-label">Servers</div>
-        </div>
-        <div class="stat-card animate-in delay-2">
-            <div class="stat-icon"><i class="fas fa-users"></i></div>
-            <div class="stat-number" id="userCount">4.7K+</div>
-            <div class="stat-label">Members</div>
-        </div>
-        <div class="stat-card animate-in delay-3">
-            <div class="stat-icon"><i class="fas fa-terminal"></i></div>
-            <div class="stat-number">77</div>
-            <div class="stat-label">Commands</div>
-        </div>
-        <div class="stat-card animate-in delay-4">
-            <div class="stat-icon"><i class="fas fa-clock"></i></div>
-            <div class="stat-number" id="uptimeDisplay">24/7</div>
-            <div class="stat-label">Online</div>
-        </div>
-        <div class="stat-card animate-in delay-5">
-            <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
-            <div class="stat-number">100%</div>
-            <div class="stat-label">Protection</div>
-        </div>
-        <div class="stat-card animate-in delay-6">
-            <div class="stat-icon"><i class="fas fa-robot"></i></div>
-            <div class="stat-number">v2.0</div>
-            <div class="stat-label">Version</div>
-        </div>
-    </div>
-
-    <!-- ─── Features ─── -->
-    <section class="section" id="features">
-        <div class="section-header animate-in">
-            <h2>⚡ Powerful Features</h2>
-            <p>Everything you need to manage and grow your Discord server</p>
-        </div>
-
-        <div class="features-grid">
-            <div class="feature-card neon-border animate-in delay-1">
-                <span class="feature-icon">🔨</span>
-                <h3>Advanced Moderation</h3>
-                <p>Kick, ban, mute, warn, and more with automated moderation tools including spam protection and content filtering.</p>
-            </div>
-            <div class="feature-card neon-border animate-in delay-2">
-                <span class="feature-icon">🎭</span>
-                <h3>Auto-Role System</h3>
-                <p>Automatically assign roles to new members, boosters, bots, and verified users with customizable conditions and delays.</p>
-            </div>
-            <div class="feature-card neon-border animate-in delay-3">
-                <span class="feature-icon">📋</span>
-                <h3>Comprehensive Logging</h3>
-                <p>Track every action with detailed logs for moderation, messages, voice, members, server events, and auto-mod actions.</p>
-            </div>
-            <div class="feature-card neon-border animate-in delay-4">
-                <span class="feature-icon">🛡️</span>
-                <h3>Auto-Moderation</h3>
-                <p>Protect your server with invite filters, link filters, spam detection, and profanity filtering — all configurable.</p>
-            </div>
-            <div class="feature-card neon-border animate-in delay-5">
-                <span class="feature-icon">⚙️</span>
-                <h3>Full Configuration</h3>
-                <p>Customize every aspect of the bot with per-server configuration, multi-language support, and easy setup commands.</p>
-            </div>
-            <div class="feature-card neon-border animate-in delay-6">
-                <span class="feature-icon">🎮</span>
-                <h3>Fun & Utility</h3>
-                <p>Engage your community with polls, random generators, AI responses, motivation quotes, and fun commands.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ─── Commands ─── -->
-    <section class="section" id="commands">
-        <div class="section-header animate-in">
-            <h2>📋 Command List</h2>
-            <p>All 77 commands available at your fingertips</p>
-        </div>
-
-        <div class="commands-grid">
-            <div class="command-card animate-in delay-1">
-                <span class="cmd-name">/kick</span>
-                <span class="cmd-desc">Kick a member</span>
-                <span class="cmd-perm">Kick</span>
-            </div>
-            <div class="command-card animate-in delay-2">
-                <span class="cmd-name">/ban</span>
-                <span class="cmd-desc">Ban a member</span>
-                <span class="cmd-perm">Ban</span>
-            </div>
-            <div class="command-card animate-in delay-3">
-                <span class="cmd-name">/mute</span>
-                <span class="cmd-desc">Timeout a member</span>
-                <span class="cmd-perm">Moderate</span>
-            </div>
-            <div class="command-card animate-in delay-4">
-                <span class="cmd-name">/warn</span>
-                <span class="cmd-desc">Warn a member</span>
-                <span class="cmd-perm">Kick</span>
-            </div>
-            <div class="command-card animate-in delay-5">
-                <span class="cmd-name">/clear</span>
-                <span class="cmd-desc">Delete messages</span>
-                <span class="cmd-perm">Manage Msg</span>
-            </div>
-            <div class="command-card animate-in delay-6">
-                <span class="cmd-name">/lock</span>
-                <span class="cmd-desc">Lock channel</span>
-                <span class="cmd-perm">Manage Chnl</span>
-            </div>
-            <div class="command-card animate-in delay-1">
-                <span class="cmd-name">/nuke</span>
-                <span class="cmd-desc">Nuke channel</span>
-                <span class="cmd-perm">Admin</span>
-            </div>
-            <div class="command-card animate-in delay-2">
-                <span class="cmd-name">/setlog</span>
-                <span class="cmd-desc">Set log channel</span>
-                <span class="cmd-perm">Admin</span>
-            </div>
-            <div class="command-card animate-in delay-3">
-                <span class="cmd-name">/autorole</span>
-                <span class="cmd-desc">Auto-role config</span>
-                <span class="cmd-perm">Admin</span>
-            </div>
-            <div class="command-card animate-in delay-4">
-                <span class="cmd-name">/config</span>
-                <span class="cmd-desc">Server config</span>
-                <span class="cmd-perm">Admin</span>
-            </div>
-            <div class="command-card animate-in delay-5">
-                <span class="cmd-name">/filter-invites</span>
-                <span class="cmd-desc">Toggle invite filter</span>
-                <span class="cmd-perm">Manage Guild</span>
-            </div>
-            <div class="command-card animate-in delay-6">
-                <span class="cmd-name">/ping</span>
-                <span class="cmd-desc">Check latency</span>
-                <span class="cmd-perm">None</span>
-            </div>
-            <div class="command-card animate-in delay-1">
-                <span class="cmd-name">/stats</span>
-                <span class="cmd-desc">Bot statistics</span>
-                <span class="cmd-perm">None</span>
-            </div>
-            <div class="command-card animate-in delay-2">
-                <span class="cmd-name">/help</span>
-                <span class="cmd-desc">Get help</span>
-                <span class="cmd-perm">None</span>
-            </div>
-            <div class="command-card animate-in delay-3">
-                <span class="cmd-name">/poll</span>
-                <span class="cmd-desc">Create a poll</span>
-                <span class="cmd-perm">None</span>
-            </div>
-            <div class="command-card animate-in delay-4">
-                <span class="cmd-name">/ai</span>
-                <span class="cmd-desc">AI response</span>
-                <span class="cmd-perm">None</span>
-            </div>
-        </div>
-
-        <div class="text-center">
-            <a href="#" class="btn btn-secondary">
-                <i class="fas fa-list"></i> View All 77 Commands
-            </a>
-        </div>
-    </section>
-
-    <!-- ─── Dashboard Section ─── -->
-    <section class="dashboard-section" id="dashboard-section">
-        <div class="section-header animate-in">
-            <h2>🛡️ Server Admin Dashboard</h2>
-            <p>Manage your servers, view statistics, and configure settings</p>
+    <!-- ─── Dashboard ─── -->
+    <div class="dashboard-container" id="dashboardSection" style="display: none;">
+        <div class="dashboard-header">
+            <h2>🛡️ Admin Dashboard</h2>
+            <p>Manage your servers, invite the bot, and get support</p>
         </div>
 
         <!-- Login Container -->
@@ -1305,56 +988,81 @@
                     <i class="fab fa-discord"></i> Login with Discord
                 </button>
                 <p class="login-note">You must be a server administrator to access this dashboard</p>
+                
+                <div class="demo-login">
+                    <p>🔑 Demo Mode (for testing)</p>
+                    <button class="btn-demo" onclick="demoLogin()">
+                        <i class="fas fa-user"></i> Quick Demo Login
+                    </button>
+                </div>
             </div>
         </div>
 
         <!-- Dashboard Content -->
         <div class="dashboard-content" id="dashboardContent">
-            <!-- Stats Cards -->
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <a href="https://discord.com/oauth2/authorize?client_id=1244893095326388325&permissions=8" target="_blank" class="action-card">
+                    <span class="action-icon">🤖</span>
+                    <div class="action-title">Invite Bot</div>
+                    <div class="action-desc">Add EnderBot to your server</div>
+                </a>
+                <a href="https://discord.gg/PGwbyWX3DS" target="_blank" class="action-card">
+                    <span class="action-icon">💬</span>
+                    <div class="action-title">Support Server</div>
+                    <div class="action-desc">Get help from the community</div>
+                </a>
+                <a href="#" class="action-card" onclick="refreshDashboard()">
+                    <span class="action-icon">🔄</span>
+                    <div class="action-title">Refresh</div>
+                    <div class="action-desc">Update dashboard data</div>
+                </a>
+            </div>
+
+            <!-- Stats -->
             <div class="dashboard-grid">
-                <div class="dashboard-card">
-                    <div class="card-title">Total Servers</div>
-                    <div class="card-value" id="dashServerCount">0</div>
-                    <div class="card-change">🟢 Online</div>
+                <div class="stat-card-dash">
+                    <div class="stat-label">Total Servers</div>
+                    <div class="stat-value" id="dashServerCount">0</div>
+                    <div class="stat-change">🟢 Online</div>
                 </div>
-                <div class="dashboard-card">
-                    <div class="card-title">Total Members</div>
-                    <div class="card-value" id="dashMemberCount">0</div>
-                    <div class="card-change">👥 Active users</div>
+                <div class="stat-card-dash">
+                    <div class="stat-label">Total Members</div>
+                    <div class="stat-value" id="dashMemberCount">0</div>
+                    <div class="stat-change">👥 Active users</div>
                 </div>
-                <div class="dashboard-card">
-                    <div class="card-title">Bot Latency</div>
-                    <div class="card-value" id="dashLatency">0ms</div>
-                    <div class="card-change">⚡ Fast response</div>
+                <div class="stat-card-dash">
+                    <div class="stat-label">Your Servers</div>
+                    <div class="stat-value" id="dashAdminServers">0</div>
+                    <div class="stat-change">🛡️ You manage these</div>
                 </div>
-                <div class="dashboard-card">
-                    <div class="card-title">Admin Servers</div>
-                    <div class="card-value" id="dashAdminServers">0</div>
-                    <div class="card-change">🛡️ You manage these</div>
+                <div class="stat-card-dash">
+                    <div class="stat-label">Bot Latency</div>
+                    <div class="stat-value" id="dashLatency">0ms</div>
+                    <div class="stat-change">⚡ Fast response</div>
                 </div>
             </div>
 
             <!-- Server List -->
-            <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.2rem; margin-bottom: 16px; color: var(--text-white);">
-                <i class="fas fa-server" style="color: var(--primary);"></i> Your Servers
-            </h2>
+            <div class="section-title">
+                <i class="fas fa-server"></i> Your Servers
+                <span style="font-size: 12px; color: var(--text-muted); font-weight: 400;">(servers you can manage)</span>
+            </div>
             <div class="server-list" id="serverList">
-                <!-- Servers will be loaded here -->
                 <div class="server-item" style="justify-content: center; color: var(--text-muted);">
                     <span>Loading your servers...</span>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- ─── Footer ─── -->
     <footer class="footer">
         <div class="footer-links">
-            <a href="#home">Home</a>
-            <a href="#features">Features</a>
-            <a href="#commands">Commands</a>
-            <a href="#dashboard-section">Dashboard</a>
+            <a href="#" onclick="showHome()">Home</a>
+            <a href="#" onclick="showDashboard()">Dashboard</a>
             <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support</a>
+            <a href="https://discord.com/oauth2/authorize?client_id=1244893095326388325&permissions=8" target="_blank">Invite Bot</a>
         </div>
         <div class="footer-text">
             Made with <span class="heart">❤️</span> by <span>yaduvanshi1816_</span> • EnderBot v2.0.0
@@ -1365,29 +1073,40 @@
     </footer>
 
     <script>
+        // ─── Constants ───
+        const API_URL = 'https://enderbot-backend.onrender.com';
+        const INVITE_URL = 'https://discord.com/oauth2/authorize?client_id=1244893095326388325&permissions=8';
+        const SUPPORT_URL = 'https://discord.gg/PGwbyWX3DS';
+
         // ─── Mobile Toggle ───
         function toggleMobile() {
             document.getElementById('navLinks').classList.toggle('open');
         }
 
-        document.querySelectorAll('.navbar-links a').forEach(link => {
-            link.addEventListener('click', () => {
+        document.querySelectorAll('.navbar-links a, .navbar-links button').forEach(el => {
+            el.addEventListener('click', () => {
                 document.getElementById('navLinks').classList.remove('open');
             });
         });
 
-        // ─── Smooth Scroll ───
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href === '#') return;
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
+        // ─── Navigation ───
+        function showHome() {
+            document.getElementById('homeSection').style.display = 'block';
+            document.getElementById('dashboardSection').style.display = 'none';
+            document.querySelectorAll('.navbar-links a').forEach(a => a.classList.remove('active'));
+            document.querySelector('.navbar-links a[onclick="showHome()"]').classList.add('active');
+        }
+
+        function showDashboard() {
+            document.getElementById('homeSection').style.display = 'none';
+            document.getElementById('dashboardSection').style.display = 'block';
+            document.querySelectorAll('.navbar-links a').forEach(a => a.classList.remove('active'));
+            document.querySelector('.navbar-links a[onclick="showDashboard()"]').classList.add('active');
+            
+            if (isLoggedIn()) {
+                loadDashboardData();
+            }
+        }
 
         // ─── Particles Background ───
         const canvas = document.getElementById('particles-canvas');
@@ -1489,15 +1208,11 @@
         console.log('%cMade by yaduvanshi1816_', 'font-size: 14px; color: #A8A8C8;');
         console.log('%c💻 Version 2.0.0', 'font-size: 12px; color: #6A6A8A;');
 
-        // ─── Dashboard Logic ───
-        const API_URL = 'https://enderbot-backend.onrender.com';
-
-        // Check if user is logged in
+        // ─── Auth Functions ───
         function isLoggedIn() {
             return localStorage.getItem('enderbot_user') !== null;
         }
 
-        // Get user data
         function getUser() {
             try {
                 return JSON.parse(localStorage.getItem('enderbot_user'));
@@ -1506,138 +1221,188 @@
             }
         }
 
-        // Login with Discord
         function loginWithDiscord() {
             // In production, this would redirect to Discord OAuth
-            // For demo, we'll simulate login with a prompt
+            // For demo, we'll simulate login
             const userId = prompt('Enter your Discord User ID (for demo):');
-            if (userId) {
+            if (userId && userId.length > 0) {
                 const user = {
                     id: userId,
                     username: 'Admin_' + userId.slice(0, 4),
                     avatar: null,
-                    discriminator: '0000'
+                    discriminator: '0000',
+                    admin: true
                 };
                 localStorage.setItem('enderbot_user', JSON.stringify(user));
                 updateUI();
                 loadDashboardData();
+                showDashboard();
             }
         }
 
-        // Logout
+        function demoLogin() {
+            const user = {
+                id: '123456789012345678',
+                username: 'Demo_Admin',
+                avatar: null,
+                discriminator: '0000',
+                admin: true
+            };
+            localStorage.setItem('enderbot_user', JSON.stringify(user));
+            updateUI();
+            loadDashboardData();
+            showDashboard();
+        }
+
         function logout() {
             localStorage.removeItem('enderbot_user');
             updateUI();
+            showHome();
         }
 
-        // Update UI based on login state
+        // ─── UI Updates ───
         function updateUI() {
             const loginBtn = document.getElementById('loginBtn');
             const logoutBtn = document.getElementById('logoutBtn');
             const loginContainer = document.getElementById('loginContainer');
             const dashboardContent = document.getElementById('dashboardContent');
+            const userBadge = document.getElementById('userBadge');
+            const userName = document.getElementById('userName');
+            const userAvatar = document.getElementById('userAvatar');
 
             if (isLoggedIn()) {
+                const user = getUser();
                 loginBtn.style.display = 'none';
                 logoutBtn.style.display = 'inline-block';
                 loginContainer.style.display = 'none';
                 dashboardContent.classList.add('active');
+                userBadge.classList.add('show');
+                userName.textContent = user ? user.username : 'User';
+                userAvatar.textContent = user ? user.username.charAt(0).toUpperCase() : 'U';
             } else {
                 loginBtn.style.display = 'inline-block';
                 logoutBtn.style.display = 'none';
                 loginContainer.style.display = 'block';
                 dashboardContent.classList.remove('active');
+                userBadge.classList.remove('show');
             }
         }
 
-        // Load dashboard data
+        // ─── Dashboard Data ───
         async function loadDashboardData() {
+            if (!isLoggedIn()) return;
+
+            const serverList = document.getElementById('serverList');
+            serverList.innerHTML = `
+                <div class="server-item" style="justify-content: center; color: var(--text-muted);">
+                    <span><i class="fas fa-spinner fa-spin"></i> Loading your servers...</span>
+                </div>
+            `;
+
             try {
                 // Fetch bot status
                 const statusRes = await fetch(`${API_URL}/api/status`);
-                const statusData = await statusRes.json();
-
-                if (statusData.status === 'online') {
-                    document.getElementById('dashServerCount').textContent = statusData.stats.guilds || 0;
-                    document.getElementById('dashMemberCount').textContent = (statusData.stats.users || 0).toLocaleString();
-                    document.getElementById('dashLatency').textContent = statusData.stats.latency_ms + 'ms';
+                if (statusRes.ok) {
+                    const statusData = await statusRes.json();
+                    if (statusData.status === 'online') {
+                        document.getElementById('dashServerCount').textContent = statusData.stats.guilds || 0;
+                        document.getElementById('dashMemberCount').textContent = (statusData.stats.users || 0).toLocaleString();
+                        document.getElementById('dashLatency').textContent = statusData.stats.latency_ms + 'ms';
+                    }
                 }
 
                 // Fetch guilds
                 const guildsRes = await fetch(`${API_URL}/api/guilds`);
-                const guilds = await guildsRes.json();
-
-                if (Array.isArray(guilds)) {
-                    const serverList = document.getElementById('serverList');
-                    serverList.innerHTML = '';
-
-                    // Count admin servers (in demo, all are shown)
-                    document.getElementById('dashAdminServers').textContent = guilds.length;
-
-                    guilds.forEach(guild => {
-                        const item = document.createElement('div');
-                        item.className = 'server-item';
+                if (guildsRes.ok) {
+                    const guilds = await guildsRes.json();
+                    if (Array.isArray(guilds)) {
+                        document.getElementById('dashAdminServers').textContent = guilds.length;
                         
-                        const iconInitial = guild.name.charAt(0).toUpperCase();
-                        const iconHtml = guild.icon 
-                            ? `<img src="${guild.icon}" alt="${guild.name}" />` 
-                            : iconInitial;
+                        serverList.innerHTML = '';
+                        if (guilds.length === 0) {
+                            serverList.innerHTML = `
+                                <div class="server-item" style="justify-content: center; color: var(--text-muted);">
+                                    <span>You don't manage any servers yet. <a href="${INVITE_URL}" target="_blank" style="color: var(--primary);">Invite the bot</a> to get started!</span>
+                                </div>
+                            `;
+                        } else {
+                            guilds.forEach(guild => {
+                                const item = document.createElement('div');
+                                item.className = 'server-item';
+                                
+                                const iconInitial = guild.name.charAt(0).toUpperCase();
+                                const iconHtml = guild.icon 
+                                    ? `<img src="${guild.icon}" alt="${guild.name}" />` 
+                                    : iconInitial;
 
-                        item.innerHTML = `
-                            <div class="server-icon">${iconHtml}</div>
-                            <div class="server-info">
-                                <div class="server-name">${guild.name}</div>
-                                <div class="server-members">👥 ${guild.member_count} members</div>
-                            </div>
-                            <span class="server-status">🟢 Online</span>
-                        `;
-                        serverList.appendChild(item);
-                    });
+                                item.innerHTML = `
+                                    <div class="server-icon">${iconHtml}</div>
+                                    <div class="server-info">
+                                        <div class="server-name">${guild.name}</div>
+                                        <div class="server-members">👥 ${guild.member_count || 0} members</div>
+                                    </div>
+                                    <span class="server-status">🟢 Online</span>
+                                `;
+                                serverList.appendChild(item);
+                            });
+                        }
+                    }
+                } else {
+                    throw new Error('Failed to fetch guilds');
                 }
 
             } catch (error) {
                 console.log('Could not fetch dashboard data:', error);
-                // Show fallback message
-                const serverList = document.getElementById('serverList');
                 serverList.innerHTML = `
                     <div class="server-item" style="justify-content: center; color: var(--text-muted);">
                         <span>⚠️ Could not load servers. Make sure the backend is running.</span>
                     </div>
                 `;
+                // Show fallback data
+                document.getElementById('dashServerCount').textContent = '17+';
+                document.getElementById('dashMemberCount').textContent = '4.7K+';
+                document.getElementById('dashAdminServers').textContent = '?';
+                document.getElementById('dashLatency').textContent = '--ms';
             }
         }
 
-        // ─── Fetch Live Stats from Render Backend ───
+        function refreshDashboard() {
+            if (isLoggedIn()) {
+                loadDashboardData();
+            }
+        }
+
+        // ─── Fetch Live Stats ───
         async function fetchBotStats() {
             try {
-                console.log('📡 Fetching live bot stats...');
                 const response = await fetch(`${API_URL}/api/status`);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                console.log('✅ Stats received:', data);
-                
-                if (data.status === 'online') {
-                    const servers = data.stats.guilds || 0;
-                    const users = data.stats.users || 0;
-                    const formattedUsers = users >= 1000 ? (users / 1000).toFixed(1) + 'K' : users;
-                    
-                    document.getElementById('serverCount').textContent = servers + '+';
-                    document.getElementById('serverCountDisplay').textContent = servers + '+';
-                    document.getElementById('userCount').textContent = formattedUsers + '+';
-                    document.getElementById('userCountDisplay').textContent = formattedUsers + '+';
-                    
-                    if (data.stats.uptime_formatted) {
-                        document.getElementById('uptimeDisplay').textContent = data.stats.uptime_formatted;
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.status === 'online') {
+                        const servers = data.stats.guilds || 0;
+                        const users = data.stats.users || 0;
+                        const formattedUsers = users >= 1000 ? (users / 1000).toFixed(1) + 'K' : users;
+                        
+                        document.getElementById('serverCountDisplay').textContent = servers + '+';
                     }
                 }
             } catch (error) {
-                console.log('❌ Could not fetch live stats:', error.message);
+                console.log('Could not fetch live stats:', error.message);
             }
         }
+
+        // ─── Smooth Scroll ───
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
 
         // ─── Initialize ───
         document.addEventListener('DOMContentLoaded', () => {
@@ -1645,9 +1410,9 @@
             setTimeout(fetchBotStats, 1000);
             setInterval(fetchBotStats, 60000);
 
-            // If logged in, load dashboard data
-            if (isLoggedIn()) {
-                setTimeout(loadDashboardData, 1500);
+            // Check if dashboard should be shown
+            if (window.location.hash === '#dashboard') {
+                showDashboard();
             }
         });
     </script>
