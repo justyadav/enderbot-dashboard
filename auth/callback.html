@@ -82,9 +82,9 @@
                 spinner.style.display = 'none';
                 successDiv.style.display = 'block';
 
-                // ─── FORCE REDIRECT TO DASHBOARD ───
+                // ─── REDIRECT TO DASHBOARD (NOT INDEX) ───
                 setTimeout(function() {
-                    window.location.href = '/dashboard.html?code=' + code + '&state=' + state;
+                    window.location.href = '/dashboard.html';
                 }, 1500);
             } else {
                 statusText.textContent = 'No Authorization Code';
@@ -92,6 +92,7 @@
                 spinner.style.display = 'none';
                 errorDiv.style.display = 'block';
                 
+                // ─── If no code, redirect to home ───
                 setTimeout(function() {
                     window.location.href = '/index.html';
                 }, 3000);
