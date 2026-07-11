@@ -203,6 +203,7 @@
             border: none;
             font-family: 'Rajdhani', sans-serif;
             font-size: 14px;
+            text-decoration: none;
         }
 
         .navbar-links .btn-login:hover {
@@ -224,6 +225,7 @@
             font-family: 'Rajdhani', sans-serif;
             font-size: 14px;
             display: none;
+            text-decoration: none;
         }
 
         .navbar-links .btn-logout:hover {
@@ -267,7 +269,6 @@
             cursor: pointer;
         }
 
-        /* ─── User Badge ─── */
         .user-badge {
             display: none;
             align-items: center;
@@ -616,11 +617,6 @@
             color: var(--danger);
         }
 
-        .server-item .server-status.admin {
-            background: rgba(108, 60, 225, 0.15);
-            color: var(--primary-light);
-        }
-
         .server-item .server-actions {
             display: flex;
             gap: 8px;
@@ -690,115 +686,6 @@
         }
 
         .no-servers a:hover {
-            text-decoration: underline;
-        }
-
-        /* ─── Terms & Privacy Sections ─── */
-        .legal-section {
-            padding: 50px 2rem;
-            max-width: 1100px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .legal-section .section-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .legal-section .section-header h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #fff, var(--primary-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .legal-section .section-header p {
-            color: var(--text-gray);
-            font-size: 1.05rem;
-            max-width: 500px;
-            margin: 8px auto 0;
-        }
-
-        .legal-content {
-            background: var(--card-bg);
-            border-radius: var(--radius);
-            border: 1px solid var(--border-color);
-            padding: 40px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .legal-content h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 20px;
-            color: var(--primary-light);
-            margin: 30px 0 12px;
-        }
-
-        .legal-content h3:first-of-type {
-            margin-top: 0;
-        }
-
-        .legal-content h4 {
-            font-size: 17px;
-            color: var(--text-white);
-            margin: 20px 0 10px;
-        }
-
-        .legal-content p {
-            color: var(--text-gray);
-            line-height: 1.8;
-            margin-bottom: 16px;
-            font-size: 15px;
-        }
-
-        .legal-content ul {
-            color: var(--text-gray);
-            line-height: 1.8;
-            margin: 8px 0 16px 24px;
-            font-size: 15px;
-        }
-
-        .legal-content ul li {
-            margin-bottom: 8px;
-        }
-
-        .legal-content .highlight-box {
-            background: rgba(108, 60, 225, 0.08);
-            border-left: 3px solid var(--primary);
-            padding: 16px 20px;
-            border-radius: var(--radius-sm);
-            margin: 16px 0;
-        }
-
-        .legal-content .highlight-box strong {
-            color: var(--text-white);
-        }
-
-        .legal-content .highlight-box.warning {
-            border-left-color: var(--accent);
-            background: rgba(255, 45, 149, 0.08);
-        }
-
-        .legal-content .last-updated {
-            color: var(--text-muted);
-            font-size: 13px;
-            text-align: right;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .legal-content a {
-            color: var(--primary-light);
-            text-decoration: none;
-        }
-
-        .legal-content a:hover {
             text-decoration: underline;
         }
 
@@ -1004,18 +891,6 @@
             .dashboard-header h2 {
                 font-size: 1.6rem;
             }
-
-            .legal-content {
-                padding: 24px;
-            }
-
-            .legal-section {
-                padding: 30px 1.5rem;
-            }
-
-            .legal-section .section-header h2 {
-                font-size: 1.6rem;
-            }
         }
 
         @media (max-width: 480px) {
@@ -1049,7 +924,7 @@
 
     <!-- ─── Navigation ─── -->
     <nav class="navbar">
-        <a class="navbar-brand" onclick="showDashboard()">
+        <a href="index.html" class="navbar-brand">
             <div class="logo">E</div>
             <div class="brand-text">Ender<span>Bot</span></div>
         </a>
@@ -1059,9 +934,10 @@
         </button>
 
         <div class="navbar-links" id="navLinks">
-            <a class="active" onclick="showDashboard()">Dashboard</a>
-            <a onclick="showTerms()">Terms</a>
-            <a onclick="showPrivacy()">Privacy</a>
+            <a href="index.html">Home</a>
+            <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
             <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support</a>
             <div class="status-indicator">
                 <span class="dot"></span>
@@ -1080,8 +956,8 @@
         </div>
     </nav>
 
-    <!-- ─── Dashboard Section ─── -->
-    <div class="dashboard-container" id="dashboardSection">
+    <!-- ─── Dashboard ─── -->
+    <div class="dashboard-container">
         <div class="dashboard-header">
             <h2>🛡️ Admin Dashboard</h2>
             <p>Manage your servers where EnderBot is installed</p>
@@ -1163,148 +1039,14 @@
         </div>
     </div>
 
-    <!-- ─── Terms Section ─── -->
-    <section class="legal-section" id="termsSection" style="display: none;">
-        <div class="section-header animate-in">
-            <h2>📜 Terms & Conditions</h2>
-            <p>Please read these terms carefully before using EnderBot</p>
-        </div>
-
-        <div class="legal-content animate-in">
-            <div class="highlight-box">
-                <strong>📌 Important:</strong> By inviting EnderBot to your Discord server or using any of its features, you agree to be bound by these Terms & Conditions. If you do not agree with any part of these terms, you must not use the Bot.
-            </div>
-
-            <h3>1. Acceptance of Terms</h3>
-            <p>By inviting EnderBot ("the Bot") to your Discord server or using any of its features, you agree to be bound by these Terms & Conditions. If you do not agree with any part of these terms, you must not use the Bot.</p>
-
-            <h3>2. Description of Service</h3>
-            <p>EnderBot is a Discord bot that provides various features including but not limited to:</p>
-            <ul>
-                <li>Server moderation (kicking, banning, muting, warning members)</li>
-                <li>Auto-role management</li>
-                <li>Server logging</li>
-                <li>Auto-moderation (spam protection, invite filtering)</li>
-                <li>Fun and utility commands</li>
-                <li>Server configuration</li>
-            </ul>
-
-            <h3>3. User Responsibilities</h3>
-            <p>You agree to use EnderBot responsibly and in accordance with Discord's Terms of Service. You shall not:</p>
-            <ul>
-                <li>Use the Bot for illegal or malicious purposes</li>
-                <li>Attempt to exploit, hack, or disrupt the Bot's functionality</li>
-                <li>Use the Bot to harass, threaten, or harm others</li>
-                <li>Use the Bot to violate Discord's Terms of Service</li>
-            </ul>
-
-            <h3>4. Data Collection & Storage</h3>
-            <p>EnderBot may collect and store certain data to provide its services. For more details, please see our <a href="#" onclick="showPrivacy(); return false;">Privacy Policy</a>.</p>
-
-            <h3>5. Bot Availability</h3>
-            <ul>
-                <li>EnderBot is provided "as is" without warranties of any kind</li>
-                <li>We do not guarantee 100% uptime</li>
-                <li>We reserve the right to modify, suspend, or discontinue any feature</li>
-            </ul>
-
-            <h3>6. Limitation of Liability</h3>
-            <div class="highlight-box warning">
-                <strong>⚠️ Disclaimer:</strong> EnderBot is provided "as is" without any warranties. We are not liable for any damages, losses, or issues that arise from using the Bot.
-            </div>
-
-            <h3>7. Changes to Terms</h3>
-            <p>We reserve the right to update these Terms & Conditions at any time. Continued use of EnderBot after changes constitutes acceptance of the new terms.</p>
-
-            <h3>8. Contact</h3>
-            <p>For questions about these Terms, please contact us through our <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support Server</a>.</p>
-
-            <div class="last-updated">
-                <i class="fas fa-calendar-alt"></i> Last Updated: July 2026 • EnderBot v2.0.0
-            </div>
-        </div>
-    </section>
-
-    <!-- ─── Privacy Section ─── -->
-    <section class="legal-section" id="privacySection" style="display: none;">
-        <div class="section-header animate-in">
-            <h2>🔒 Privacy Policy</h2>
-            <p>How we handle and protect your data</p>
-        </div>
-
-        <div class="legal-content animate-in">
-            <div class="highlight-box">
-                <strong>🔐 Privacy First:</strong> We only collect data essential for the Bot's functionality. We do not sell or share your data with third parties.
-            </div>
-
-            <h3>1. Information We Collect</h3>
-            <p>EnderBot collects and processes the following data to provide its services:</p>
-            <ul>
-                <li><strong>Server Data:</strong> Server ID, name, channel IDs, role IDs</li>
-                <li><strong>User Data:</strong> User ID, username, discriminator, avatar URL</li>
-                <li><strong>Message Data:</strong> Temporarily cached for edit/delete logging</li>
-                <li><strong>Configuration Data:</strong> Server settings, moderation preferences</li>
-            </ul>
-
-            <h3>2. How We Use Your Data</h3>
-            <ul>
-                <li><strong>Service Delivery:</strong> To provide core features</li>
-                <li><strong>Moderation:</strong> To track warnings and actions</li>
-                <li><strong>Logging:</strong> To maintain audit logs</li>
-                <li><strong>Configuration:</strong> To store server settings</li>
-            </ul>
-
-            <h3>3. Data Storage & Security</h3>
-            <ul>
-                <li>Data is stored securely in MongoDB or in-memory (fallback)</li>
-                <li>We implement industry-standard security measures</li>
-                <li>We do not sell or share your data with third parties</li>
-            </ul>
-
-            <h3>4. Data Retention</h3>
-            <ul>
-                <li>Server configurations are stored until the Bot is removed</li>
-                <li>Moderation logs are stored for accountability</li>
-                <li>Message caches are automatically cleared (max 1000 messages)</li>
-            </ul>
-
-            <h3>5. Your Rights</h3>
-            <ul>
-                <li><strong>Access:</strong> View your server's configuration</li>
-                <li><strong>Modification:</strong> Modify your settings</li>
-                <li><strong>Deletion:</strong> Clear warnings and reset configurations</li>
-                <li><strong>Opt-out:</strong> Remove the Bot from your server</li>
-            </ul>
-
-            <h3>6. Data Removal</h3>
-            <p>If you want your data removed from EnderBot:</p>
-            <ul>
-                <li><strong>Server Admins:</strong> Remove the Bot from your server</li>
-                <li><strong>Individual Users:</strong> Contact a server admin to clear your warnings</li>
-                <li><strong>All Users:</strong> Contact us via the support server</li>
-            </ul>
-
-            <div class="highlight-box">
-                <strong>📧 Contact:</strong> For privacy concerns, reach out through our <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support Server</a>.
-            </div>
-
-            <h3>7. Changes to Privacy Policy</h3>
-            <p>We may update this Privacy Policy from time to time. You are advised to review this policy periodically.</p>
-
-            <div class="last-updated">
-                <i class="fas fa-calendar-alt"></i> Last Updated: July 2026 • EnderBot v2.0.0
-            </div>
-        </div>
-    </section>
-
     <!-- ─── Footer ─── -->
     <footer class="footer">
         <div class="footer-links">
-            <a onclick="showDashboard()">Dashboard</a>
-            <a onclick="showTerms()">Terms</a>
-            <a onclick="showPrivacy()">Privacy</a>
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
             <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support</a>
-            <a href="https://discord.com/oauth2/authorize?client_id=1244893095326388325&permissions=8" target="_blank">Invite Bot</a>
         </div>
         <div class="footer-text">
             Made with <span class="heart">❤️</span> by <span>yaduvanshi1816_</span> • EnderBot v2.0.0
@@ -1318,14 +1060,10 @@
         // ─── Constants ───
         const API_URL = 'https://enderbot-backend.onrender.com';
         const INVITE_URL = 'https://discord.com/oauth2/authorize?client_id=1244893095326388325&permissions=8';
-        const SUPPORT_URL = 'https://discord.gg/PGwbyWX3DS';
         const DISCORD_CLIENT_ID = '1244893095326388325';
         const REDIRECT_URI = 'https://enderbot.dpdns.org/auth/callback';
 
         // ─── State ───
-        let accessToken = null;
-        let userData = null;
-        let userGuilds = [];
         let popupWindow = null;
         let botGuildIds = [];
 
@@ -1339,35 +1077,6 @@
                 document.getElementById('navLinks').classList.remove('open');
             });
         });
-
-        // ─── Navigation ───
-        function showDashboard() {
-            document.getElementById('dashboardSection').style.display = 'block';
-            document.getElementById('termsSection').style.display = 'none';
-            document.getElementById('privacySection').style.display = 'none';
-            document.querySelectorAll('.navbar-links a').forEach(a => a.classList.remove('active'));
-            document.querySelector('.navbar-links a[onclick="showDashboard()"]').classList.add('active');
-            
-            if (isLoggedIn()) {
-                loadDashboardData();
-            }
-        }
-
-        function showTerms() {
-            document.getElementById('dashboardSection').style.display = 'none';
-            document.getElementById('termsSection').style.display = 'block';
-            document.getElementById('privacySection').style.display = 'none';
-            document.querySelectorAll('.navbar-links a').forEach(a => a.classList.remove('active'));
-            document.querySelector('.navbar-links a[onclick="showTerms()"]').classList.add('active');
-        }
-
-        function showPrivacy() {
-            document.getElementById('dashboardSection').style.display = 'none';
-            document.getElementById('termsSection').style.display = 'none';
-            document.getElementById('privacySection').style.display = 'block';
-            document.querySelectorAll('.navbar-links a').forEach(a => a.classList.remove('active'));
-            document.querySelector('.navbar-links a[onclick="showPrivacy()"]').classList.add('active');
-        }
 
         // ─── Particles Background ───
         const canvas = document.getElementById('particles-canvas');
@@ -1518,7 +1227,6 @@
 
         async function exchangeCodeForToken(code) {
             try {
-                // For demo/testing - simulate successful login
                 simulateLogin(code);
             } catch (error) {
                 console.error('Token exchange error:', error);
@@ -1526,7 +1234,6 @@
             }
         }
 
-        // ─── Simulate Login ───
         function simulateLogin(code) {
             const mockUser = {
                 id: '123456789012345678',
@@ -1554,12 +1261,9 @@
             localStorage.setItem('enderbot_user', JSON.stringify(mockUser));
             localStorage.setItem('enderbot_token', 'mock_token_' + code);
             
-            // Fetch bot guilds
             fetchBotGuilds();
-            
             updateUI();
             loadDashboardData();
-            showDashboard();
             hideLoginError();
             
             if (popupWindow && !popupWindow.closed) {
@@ -1567,18 +1271,15 @@
             }
         }
 
-        // ─── Fetch Bot Guilds ───
         async function fetchBotGuilds() {
             try {
                 const response = await fetch(`${API_URL}/api/guilds`);
                 if (response.ok) {
                     const guilds = await response.json();
                     botGuildIds = guilds.map(g => g.id);
-                    console.log('✅ Bot guilds loaded:', botGuildIds);
                 }
             } catch (error) {
                 console.log('Could not fetch bot guilds:', error);
-                // Fallback: assume bot is in all admin servers
             }
         }
 
@@ -1593,7 +1294,6 @@
             document.getElementById('loginError').classList.remove('show');
         }
 
-        // ─── Auth Functions ───
         function isLoggedIn() {
             const user = localStorage.getItem('enderbot_user');
             const token = localStorage.getItem('enderbot_token');
@@ -1608,22 +1308,13 @@
             }
         }
 
-        function getToken() {
-            return localStorage.getItem('enderbot_token');
-        }
-
         function logout() {
             localStorage.removeItem('enderbot_user');
             localStorage.removeItem('enderbot_token');
             localStorage.removeItem('oauth_code');
-            accessToken = null;
-            userData = null;
-            userGuilds = [];
             updateUI();
-            showDashboard();
         }
 
-        // ─── UI Updates ───
         function updateUI() {
             const loginBtn = document.getElementById('loginBtn');
             const logoutBtn = document.getElementById('logoutBtn');
@@ -1656,7 +1347,6 @@
             }
         }
 
-        // ─── Dashboard Data ───
         async function loadDashboardData() {
             if (!isLoggedIn()) return;
 
@@ -1675,17 +1365,14 @@
                     throw new Error('Not authenticated');
                 }
 
-                // Get admin servers from user data
                 const adminGuilds = user.guilds ? user.guilds.filter(g => 
                     (g.permissions & 0x8) === 0x8
                 ) : [];
 
-                // Filter: Only show servers where EnderBot is installed
                 const serversWithBot = adminGuilds.filter(g => 
                     botGuildIds.includes(parseInt(g.id))
                 );
 
-                // Fetch bot status
                 try {
                     const statusRes = await fetch(`${API_URL}/api/status`);
                     if (statusRes.ok) {
@@ -1697,7 +1384,6 @@
                         }
                     }
                 } catch (e) {
-                    console.log('Could not fetch bot stats:', e);
                     document.getElementById('dashServerCount').textContent = '17+';
                     document.getElementById('dashMemberCount').textContent = '4.7K+';
                     document.getElementById('dashLatency').textContent = '24ms';
@@ -1705,7 +1391,6 @@
 
                 document.getElementById('dashAdminServers').textContent = serversWithBot.length;
 
-                // Display servers
                 serverList.innerHTML = '';
                 if (serversWithBot.length === 0) {
                     serverList.innerHTML = `
@@ -1763,10 +1448,7 @@
         }
 
         function manageServer(guildId) {
-            // This will open the server management panel
-            // For now, redirect to the server settings
             alert(`Server management for guild ${guildId} is coming soon!`);
-            // In production: window.location.href = `/manage/${guildId}`;
         }
 
         function refreshDashboard() {
@@ -1776,27 +1458,6 @@
             }
         }
 
-        // ─── Fetch Live Stats ───
-        async function fetchBotStats() {
-            try {
-                const response = await fetch(`${API_URL}/api/status`);
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data.status === 'online') {
-                        const servers = data.stats.guilds || 0;
-                        const users = data.stats.users || 0;
-                        const formattedUsers = users >= 1000 ? (users / 1000).toFixed(1) + 'K' : users;
-                        
-                        document.getElementById('serverCountDisplay').textContent = servers + '+';
-                        document.getElementById('userCountDisplay').textContent = formattedUsers + '+';
-                    }
-                }
-            } catch (error) {
-                console.log('Could not fetch live stats:', error.message);
-            }
-        }
-
-        // ─── Check for OAuth Redirect ───
         function checkForOAuthRedirect() {
             const urlParams = new URLSearchParams(window.location.search);
             const code = urlParams.get('code');
@@ -1813,23 +1474,16 @@
             }
         }
 
-        // ─── Initialize ───
         document.addEventListener('DOMContentLoaded', () => {
             checkForOAuthRedirect();
             updateUI();
             fetchBotGuilds();
-            setTimeout(fetchBotStats, 1000);
-            setInterval(fetchBotStats, 60000);
-
-            // Default to dashboard
-            showDashboard();
         });
 
         console.log('🔐 OAuth Configuration:');
         console.log('  Client ID:', DISCORD_CLIENT_ID);
         console.log('  Redirect URI:', REDIRECT_URI);
         console.log('  API URL:', API_URL);
-        console.log('ℹ️ For production, replace simulateLogin() with real backend call.');
     </script>
 
 </body>
