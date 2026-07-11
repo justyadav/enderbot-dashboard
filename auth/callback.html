@@ -98,21 +98,26 @@
                     }
                 }
 
-                // ─── Redirect to dashboard ───
+                // ─── FORCE REDIRECT TO DASHBOARD ───
                 setTimeout(function() {
-                    // Store the code in localStorage for dashboard to use
+                    // Store the code in localStorage
                     localStorage.setItem('oauth_code', code);
                     localStorage.setItem('oauth_state', state);
                     
-                    // Redirect to dashboard
-                    window.location.href = 'dashboard.html';
-                }, 2000);
+                    // FORCE redirect to dashboard.html
+                    window.location.href = '/dashboard.html';
+                }, 1500);
             } else {
                 // ─── No Code Found ───
                 statusText.textContent = 'No Authorization Code';
                 statusSubtext.textContent = 'No authorization code was received. Please try again.';
                 spinner.style.display = 'none';
                 errorDiv.style.display = 'block';
+                
+                // Redirect to home after 3 seconds
+                setTimeout(function() {
+                    window.location.href = '/index.html';
+                }, 3000);
             }
         })();
     </script>
