@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <title>EnderBot - Logging in...</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -46,12 +46,8 @@
         <p id="statusText">Logging you in...</p>
         <div class="spinner" id="spinner"></div>
         <p style="font-size: 12px; color: #6A6A8A;">Please wait while we authenticate you</p>
-        <div class="error" id="errorMessage">
-            <p style="color: #ED4245;">⚠️ Authentication failed. Please try again.</p>
-        </div>
-        <div class="success" id="successMessage">
-            <p style="color: #57F287;">✅ Login successful! Closing this window...</p>
-        </div>
+        <div class="error" id="errorMessage">⚠️ Authentication failed</div>
+        <div class="success" id="successMessage">✅ Login successful!</div>
     </div>
 
     <script>
@@ -61,43 +57,33 @@
         const state = urlParams.get('state');
         const error = urlParams.get('error');
 
-        // Get elements
-        const statusText = document.getElementById('statusText');
-        const spinner = document.getElementById('spinner');
-        const errorDiv = document.getElementById('errorMessage');
-        const successDiv = document.getElementById('successMessage');
-
         if (error) {
-            statusText.textContent = 'Authentication failed';
-            spinner.style.display = 'none';
-            errorDiv.style.display = 'block';
+            document.getElementById('statusText').textContent = 'Authentication failed';
+            document.getElementById('spinner').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'block';
             return;
         }
 
         if (code && state) {
-            // Send code to parent window and close
+            document.getElementById('statusText').textContent = 'Login successful!';
+            document.getElementById('spinner').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+            
             if (window.opener) {
-                statusText.textContent = 'Login successful!';
-                spinner.style.display = 'none';
-                successDiv.style.display = 'block';
-                
                 window.opener.postMessage({
                     type: 'discord_oauth',
                     success: true,
                     code: code,
                     state: state
                 }, window.opener.location.origin);
-                
-                // Close popup after delay
                 setTimeout(() => window.close(), 2000);
             } else {
-                // If opened directly, redirect to home with code
-                window.location.href = `/?code=${code}&state=${state}`;
+                window.location.href = '/?code=' + code + '&state=' + state;
             }
         } else {
-            statusText.textContent = 'No authorization code found';
-            spinner.style.display = 'none';
-            errorDiv.style.display = 'block';
+            document.getElementById('statusText').textContent = 'No authorization code found';
+            document.getElementById('spinner').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'block';
         }
     </script>
 </body>
