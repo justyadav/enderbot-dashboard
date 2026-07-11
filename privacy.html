@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Privacy Policy - EnderBot</title>
+    <title>EnderBot – Privacy Policy</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,16 +13,314 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
-    <!-- Main Styles -->
-    <link rel="stylesheet" href="style.css" />
-
     <style>
-        /* Additional styles specific to privacy page */
-        .privacy-section {
-            padding: 40px 0;
+        /* ─── CSS Variables ─── */
+        :root {
+            --primary: #6C3CE1;
+            --primary-dark: #4A1FAB;
+            --primary-light: #8A6DE9;
+            --primary-glow: rgba(108, 60, 225, 0.35);
+            --secondary: #00F5FF;
+            --secondary-glow: rgba(0, 245, 255, 0.2);
+            --accent: #FF2D95;
+            --accent-glow: rgba(255, 45, 149, 0.3);
+            --dark: #0A0A0F;
+            --darker: #050508;
+            --card-bg: #12121A;
+            --card-hover: #1A1A2E;
+            --text-white: #FFFFFF;
+            --text-gray: #A8A8C8;
+            --text-muted: #6A6A8A;
+            --border-color: #2A2A4A;
+            --radius: 16px;
+            --radius-sm: 8px;
+            --shadow: 0 8px 32px rgba(108, 60, 225, 0.25);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .privacy-section .highlight-box {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Rajdhani', 'Inter', sans-serif;
+            background: var(--darker);
+            color: var(--text-white);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(108, 60, 225, 0.07) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(0, 245, 255, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 100%, rgba(255, 45, 149, 0.03) 0%, transparent 30%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        #particles-canvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-light);
+        }
+
+        /* ─── Navigation ─── */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+            padding: 0 2rem;
+            background: rgba(10, 10, 15, 0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .navbar-brand .logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            font-weight: 900;
+            color: #fff;
+            box-shadow: 0 0 30px var(--primary-glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .navbar-brand .logo::after {
+            content: '';
+            position: absolute;
+            inset: -50%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 4s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .navbar-brand .brand-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: var(--text-white);
+        }
+
+        .navbar-brand .brand-text span {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .navbar-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 600;
+            transition: var(--transition);
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 0.3px;
+            cursor: pointer;
+        }
+
+        .navbar-links a:hover {
+            color: var(--text-white);
+            background: var(--card-hover);
+        }
+
+        .navbar-links a.active {
+            color: var(--text-white);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            box-shadow: 0 0 30px var(--primary-glow);
+        }
+
+        .navbar-links .btn-login {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
+            padding: 8px 22px;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            box-shadow: 0 0 30px var(--primary-glow);
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .navbar-links .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px var(--primary-glow);
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 14px;
+            border-radius: 20px;
+            background: rgba(0, 245, 255, 0.08);
+            border: 1px solid rgba(0, 245, 255, 0.15);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .status-indicator .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--secondary);
+            animation: pulse-dot 2s infinite;
+            box-shadow: 0 0 16px var(--secondary-glow);
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.8); }
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-white);
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        /* ─── Legal Section ─── */
+        .legal-section {
+            padding: 50px 2rem 60px;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .legal-section .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .legal-section .section-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .legal-section .section-header p {
+            color: var(--text-gray);
+            font-size: 1.05rem;
+            max-width: 500px;
+            margin: 8px auto 0;
+        }
+
+        .legal-content {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .legal-content h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            color: var(--primary-light);
+            margin: 30px 0 12px;
+        }
+
+        .legal-content h3:first-of-type {
+            margin-top: 0;
+        }
+
+        .legal-content h4 {
+            font-size: 17px;
+            color: var(--text-white);
+            margin: 20px 0 10px;
+        }
+
+        .legal-content p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .legal-content ul {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin: 8px 0 16px 24px;
+            font-size: 15px;
+        }
+
+        .legal-content ul li {
+            margin-bottom: 8px;
+        }
+
+        .legal-content .highlight-box {
             background: rgba(108, 60, 225, 0.08);
             border-left: 3px solid var(--primary);
             padding: 16px 20px;
@@ -30,22 +328,11 @@
             margin: 16px 0;
         }
 
-        .privacy-section .highlight-box strong {
+        .legal-content .highlight-box strong {
             color: var(--text-white);
         }
 
-        .privacy-section ul {
-            color: var(--text-gray);
-            line-height: 1.8;
-            margin: 8px 0 16px 24px;
-            font-size: 15px;
-        }
-
-        .privacy-section ul li {
-            margin-bottom: 8px;
-        }
-
-        .privacy-section .last-updated {
+        .legal-content .last-updated {
             color: var(--text-muted);
             font-size: 13px;
             text-align: right;
@@ -54,35 +341,145 @@
             border-top: 1px solid var(--border-color);
         }
 
-        .privacy-section a {
+        .legal-content a {
             color: var(--primary-light);
             text-decoration: none;
         }
 
-        .privacy-section a:hover {
+        .legal-content a:hover {
             text-decoration: underline;
         }
 
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-gray);
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 600;
-            transition: var(--transition);
-            margin-bottom: 24px;
+        /* ─── Footer ─── */
+        .footer {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 40px 2rem;
+            text-align: center;
+            margin-top: 40px;
+            position: relative;
+            z-index: 1;
         }
 
-        .back-button:hover {
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
             color: var(--text-white);
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .footer-text .heart {
+            color: var(--accent);
+            display: inline-block;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .footer-text span {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        /* ─── Animations ─── */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .delay-2 { animation-delay: 0.2s; opacity: 0; }
+        .delay-3 { animation-delay: 0.3s; opacity: 0; }
+        .delay-4 { animation-delay: 0.4s; opacity: 0; }
+        .delay-5 { animation-delay: 0.5s; opacity: 0; }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .navbar-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: var(--dark);
+                padding: 16px 20px;
+                border-bottom: 1px solid var(--border-color);
+                gap: 4px;
+            }
+
+            .navbar-links.open {
+                display: flex;
+            }
+
+            .navbar-links a {
+                width: 100%;
+                text-align: center;
+                padding: 12px;
+            }
+
+            .navbar-links .btn-login {
+                width: 100%;
+                text-align: center;
+            }
+
+            .status-indicator {
+                display: none;
+            }
+
+            .legal-section {
+                padding: 30px 1.5rem 40px;
+            }
+
+            .legal-section .section-header h2 {
+                font-size: 1.6rem;
+            }
+
+            .legal-content {
+                padding: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .legal-content h3 {
+                font-size: 17px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- ─── Particles Canvas ─── -->
     <canvas id="particles-canvas"></canvas>
 
     <!-- ─── Navigation ─── -->
@@ -92,14 +489,13 @@
             <div class="brand-text">Ender<span>Bot</span></div>
         </a>
 
-        <button class="mobile-toggle" onclick="toggleMobile()" aria-label="Toggle menu">
+        <button class="mobile-toggle" onclick="toggleMobile()">
             <i class="fas fa-bars"></i>
         </button>
 
         <div class="navbar-links" id="navLinks">
             <a href="index.html">Home</a>
-            <a href="index.html#features">Features</a>
-            <a href="index.html#commands">Commands</a>
+            <a href="dashboard.html">Dashboard</a>
             <a href="terms.html">Terms</a>
             <a href="privacy.html" class="active">Privacy</a>
             <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support</a>
@@ -107,134 +503,77 @@
                 <span class="dot"></span>
                 <span class="status-text">Online</span>
             </div>
-            <a href="#" class="btn-login">
-                <i class="fab fa-discord"></i> Add Bot
+            <a href="dashboard.html" class="btn-login">
+                <i class="fab fa-discord"></i> Login
             </a>
         </div>
     </nav>
 
-    <!-- ─── Privacy Policy Content ─── -->
-    <section class="section privacy-section">
+    <!-- ─── Privacy Section ─── -->
+    <section class="legal-section">
         <div class="section-header animate-in">
             <h2>🔒 Privacy Policy</h2>
             <p>How we handle and protect your data</p>
         </div>
 
         <div class="legal-content animate-in">
-            <a href="index.html" class="back-button">
-                <i class="fas fa-arrow-left"></i> Back to Home
-            </a>
+            <div class="highlight-box">
+                <strong>🔐 Privacy First:</strong> We only collect data essential for the Bot's functionality. We do not sell or share your data with third parties.
+            </div>
 
             <h3>1. Information We Collect</h3>
             <p>EnderBot collects and processes the following data to provide its services:</p>
-
-            <h4>1.1 Server Data</h4>
             <ul>
-                <li><strong>Server ID:</strong> Used to identify and store settings for each server</li>
-                <li><strong>Server Name:</strong> Displayed in logs and dashboards</li>
-                <li><strong>Channel IDs:</strong> Used for logging and configuration</li>
-                <li><strong>Role IDs:</strong> Used for auto-role functionality</li>
+                <li><strong>Server Data:</strong> Server ID, name, channel IDs, role IDs</li>
+                <li><strong>User Data:</strong> User ID, username, discriminator, avatar URL</li>
+                <li><strong>Message Data:</strong> Temporarily cached for edit/delete logging</li>
+                <li><strong>Configuration Data:</strong> Server settings, moderation preferences</li>
             </ul>
-
-            <h4>1.2 User Data</h4>
-            <ul>
-                <li><strong>User ID:</strong> Used to track moderation actions and warnings</li>
-                <li><strong>Username:</strong> Displayed in logs and command responses</li>
-                <li><strong>Discriminator:</strong> Displayed in logs and command responses</li>
-                <li><strong>Avatar URL:</strong> Displayed in user info commands</li>
-            </ul>
-
-            <h4>1.3 Message Data</h4>
-            <ul>
-                <li><strong>Message Content:</strong> Temporarily cached for edit/delete logging</li>
-                <li><strong>Message IDs:</strong> Used for logging and moderation</li>
-                <li><strong>Attachment URLs:</strong> Stored temporarily for logging purposes</li>
-            </ul>
-
-            <h4>1.4 Configuration Data</h4>
-            <ul>
-                <li>Server-specific settings (prefix, language, log channels)</li>
-                <li>Moderation settings (filters, auto-role settings)</li>
-                <li>Logging preferences</li>
-            </ul>
-
-            <div class="highlight-box">
-                <strong>🔐 Privacy First:</strong> We only collect data that is essential for the Bot's functionality. We do not collect sensitive personal information.
-            </div>
 
             <h3>2. How We Use Your Data</h3>
             <ul>
-                <li><strong>Service Delivery:</strong> To provide the core features of the Bot</li>
-                <li><strong>Moderation:</strong> To track warnings, mutes, and other moderation actions</li>
-                <li><strong>Logging:</strong> To maintain audit logs of actions taken by the Bot</li>
-                <li><strong>Configuration:</strong> To store and retrieve server-specific settings</li>
-                <li><strong>Improvement:</strong> To analyze usage patterns and improve the Bot</li>
+                <li><strong>Service Delivery:</strong> To provide core features</li>
+                <li><strong>Moderation:</strong> To track warnings and actions</li>
+                <li><strong>Logging:</strong> To maintain audit logs</li>
+                <li><strong>Configuration:</strong> To store server settings</li>
             </ul>
 
             <h3>3. Data Storage & Security</h3>
             <ul>
                 <li>Data is stored securely in MongoDB or in-memory (fallback)</li>
                 <li>We implement industry-standard security measures</li>
-                <li>Data is only accessible to authorized personnel</li>
                 <li>We do not sell or share your data with third parties</li>
             </ul>
 
             <h3>4. Data Retention</h3>
             <ul>
-                <li>Server configurations are stored until the Bot is removed from the server</li>
-                <li>Moderation logs are stored for accountability and reference</li>
-                <li>Warnings are stored until manually cleared by administrators</li>
-                <li>Message caches are automatically cleared (max 1000 messages cached)</li>
+                <li>Server configurations are stored until the Bot is removed</li>
+                <li>Moderation logs are stored for accountability</li>
+                <li>Message caches are automatically cleared (max 1000 messages)</li>
             </ul>
 
             <h3>5. Your Rights</h3>
             <ul>
-                <li><strong>Access:</strong> You can view your server's configuration using the /config show command</li>
-                <li><strong>Modification:</strong> You can modify your settings using the appropriate commands</li>
-                <li><strong>Deletion:</strong> You can clear warnings and reset configurations</li>
-                <li><strong>Opt-out:</strong> You can remove the Bot from your server at any time</li>
+                <li><strong>Access:</strong> View your server's configuration</li>
+                <li><strong>Modification:</strong> Modify your settings</li>
+                <li><strong>Deletion:</strong> Clear warnings and reset configurations</li>
+                <li><strong>Opt-out:</strong> Remove the Bot from your server</li>
             </ul>
 
-            <h3>6. Data Security</h3>
-            <p>We take data security seriously and implement the following measures:</p>
-            <ul>
-                <li>Encrypted connections (HTTPS for web dashboard)</li>
-                <li>Secure environment variables for sensitive data</li>
-                <li>Regular security updates and patches</li>
-                <li>Access controls for data management</li>
-            </ul>
-
-            <h3>7. Third-Party Services</h3>
-            <ul>
-                <li><strong>Discord:</strong> The Bot interacts with Discord's API</li>
-                <li><strong>MongoDB:</strong> Optional database for storing data (if enabled)</li>
-                <li><strong>FastAPI:</strong> Used for the web dashboard (if deployed)</li>
-            </ul>
-            <p>These services have their own privacy policies that you should review.</p>
-
-            <h3>8. Children's Privacy</h3>
-            <p>EnderBot is not directed at children under 13 years of age. We do not knowingly collect personal information from children. If you believe we have collected such information, please contact us.</p>
-
-            <h3>9. Changes to Privacy Policy</h3>
-            <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on our website. You are advised to review this policy periodically.</p>
-
-            <h3>10. Data Removal</h3>
+            <h3>6. Data Removal</h3>
             <p>If you want your data removed from EnderBot:</p>
             <ul>
-                <li><strong>Server Admins:</strong> Remove the Bot from your server, and all server data will be deleted</li>
+                <li><strong>Server Admins:</strong> Remove the Bot from your server</li>
                 <li><strong>Individual Users:</strong> Contact a server admin to clear your warnings</li>
-                <li><strong>All Users:</strong> Contact us via the support server for data removal requests</li>
+                <li><strong>All Users:</strong> Contact us via the support server</li>
             </ul>
 
             <div class="highlight-box">
-                <strong>📧 Contact:</strong> For privacy concerns, please reach out through our <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support Server</a>.
+                <strong>📧 Contact:</strong> For privacy concerns, reach out through our <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support Server</a>.
             </div>
 
-            <h3>11. International Data Transfers</h3>
-            <p>Your data may be transferred to and maintained on servers located outside of your country of residence. By using EnderBot, you consent to this transfer.</p>
-
-            <h3>12. Cookies</h3>
-            <p>EnderBot does not use cookies directly. However, the web dashboard may use session data for authentication purposes.</p>
+            <h3>7. Changes to Privacy Policy</h3>
+            <p>We may update this Privacy Policy from time to time. You are advised to review this policy periodically.</p>
 
             <div class="last-updated">
                 <i class="fas fa-calendar-alt"></i> Last Updated: July 2026 • EnderBot v2.0.0
@@ -246,22 +585,30 @@
     <footer class="footer">
         <div class="footer-links">
             <a href="index.html">Home</a>
-            <a href="index.html#features">Features</a>
-            <a href="index.html#commands">Commands</a>
-            <a href="terms.html">Terms & Conditions</a>
-            <a href="privacy.html">Privacy Policy</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
             <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support</a>
         </div>
         <div class="footer-text">
             Made with <span class="heart">❤️</span> by <span>yaduvanshi1816_</span> • EnderBot v2.0.0
         </div>
-        <div class="footer-text" style="margin-top: 8px; font-size: 12px;">
+        <div class="footer-text" style="margin-top: 6px; font-size: 12px;">
             <i class="fas fa-code"></i> Built with Python & discord.py
         </div>
     </footer>
 
-    <!-- ─── JavaScript ─── -->
     <script>
+        function toggleMobile() {
+            document.getElementById('navLinks').classList.toggle('open');
+        }
+
+        document.querySelectorAll('.navbar-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('open');
+            });
+        });
+
         // ─── Particles Background ───
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
@@ -357,34 +704,8 @@
 
         document.addEventListener('scroll', resizeCanvas);
 
-        // ─── Mobile Toggle ───
-        function toggleMobile() {
-            document.getElementById('navLinks').classList.toggle('open');
-        }
-
-        document.querySelectorAll('.navbar-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('navLinks').classList.remove('open');
-            });
-        });
-
-        // ─── Smooth Scroll ───
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href === '#') return;
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // ─── Console Welcome ───
-        console.log('%c🔒 EnderBot - Privacy Policy', 'font-size: 24px; font-weight: bold; color: #6C3CE1;');
+        console.log('%c🔒 EnderBot - Privacy Policy', 'font-size: 20px; font-weight: bold; color: #6C3CE1;');
         console.log('%cMade by yaduvanshi1816_', 'font-size: 14px; color: #A8A8C8;');
-        console.log('%c💻 Version 2.0.0', 'font-size: 12px; color: #6A6A8A;');
     </script>
 
 </body>
