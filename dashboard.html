@@ -1064,8 +1064,11 @@
         const REDIRECT_URI = 'https://enderbot.dpdns.org/auth/callback';
 
         // ─── State ───
-        let popupWindow = null;
+        let accessToken = null;
+        let userData = null;
+        let userGuilds = [];
         let botGuildIds = [];
+        let popupWindow = null;
 
         // ─── Mobile Toggle ───
         function toggleMobile() {
@@ -1225,16 +1228,42 @@
             }
         }
 
+        // ─── Exchange Code for Token ───
         async function exchangeCodeForToken(code) {
             try {
+                // For demo/testing - simulate successful login
+                // In production, replace with real backend call:
+                /*
+                const response = await fetch(`${API_URL}/api/auth/discord/callback`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ code: code, redirect_uri: REDIRECT_URI })
+                });
+                const data = await response.json();
+                if (data.access_token) {
+                    accessToken = data.access_token;
+                    localStorage.setItem('enderbot_token', accessToken);
+                    await fetchUserData();
+                    await fetchUserGuilds();
+                    await fetchBotGuilds();
+                    completeLogin();
+                }
+                */
+                
+                // For demo - simulate login with mock data
                 simulateLogin(code);
+                
             } catch (error) {
                 console.error('Token exchange error:', error);
                 showLoginError('Authentication failed. Please try again.');
             }
         }
 
+        // ─── Simulate Login (for demo/testing) ───
         function simulateLogin(code) {
+            // This simulates a successful login with mock data
+            // Replace with real API calls in production
+            
             const mockUser = {
                 id: '123456789012345678',
                 username: 'Admin_User',
@@ -1245,23 +1274,32 @@
                         id: '987654321098765432',
                         name: 'EnderBot Test Server',
                         icon: null,
-                        permissions: 2147483647,
+                        permissions: 2147483647, // ADMINISTRATOR
                         approximate_member_count: 25
                     },
                     {
                         id: '876543210987654321',
                         name: 'Community Server',
                         icon: null,
-                        permissions: 2147483647,
+                        permissions: 2147483647, // ADMINISTRATOR
                         approximate_member_count: 150
+                    },
+                    {
+                        id: '765432109876543210',
+                        name: 'Gaming Server',
+                        icon: null,
+                        permissions: 0, // No admin
+                        approximate_member_count: 500
                     }
                 ]
             };
             
+            // Mock bot guilds (where EnderBot is installed)
+            botGuildIds = [987654321098765432, 876543210987654321];
+            
             localStorage.setItem('enderbot_user', JSON.stringify(mockUser));
             localStorage.setItem('enderbot_token', 'mock_token_' + code);
             
-            fetchBotGuilds();
             updateUI();
             loadDashboardData();
             hideLoginError();
@@ -1271,17 +1309,64 @@
             }
         }
 
+        // ─── Real API Functions (for production) ───
+        /*
+        async function fetchUserData() {
+            try {
+                const response = await fetch('https://discord.com/api/v10/users/@me', {
+                    headers: { 'Authorization': `Bearer ${accessToken}` }
+                });
+                if (!response.ok) throw new Error('Failed to fetch user data');
+                userData = await response.json();
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+                throw error;
+            }
+        }
+
+        async function fetchUserGuilds() {
+            try {
+                const response = await fetch('https://discord.com/api/v10/users/@me/guilds', {
+                    headers: { 'Authorization': `Bearer ${accessToken}` }
+                });
+                if (!response.ok) throw new Error('Failed to fetch guilds');
+                userGuilds = await response.json();
+            } catch (error) {
+                console.error('Error fetching guilds:', error);
+                throw error;
+            }
+        }
+
         async function fetchBotGuilds() {
             try {
                 const response = await fetch(`${API_URL}/api/guilds`);
                 if (response.ok) {
                     const guilds = await response.json();
                     botGuildIds = guilds.map(g => g.id);
+                    console.log('✅ Bot guilds loaded:', botGuildIds);
                 }
             } catch (error) {
                 console.log('Could not fetch bot guilds:', error);
+                botGuildIds = [];
             }
         }
+
+        function completeLogin() {
+            const user = {
+                id: userData.id,
+                username: userData.username,
+                discriminator: userData.discriminator,
+                avatar: userData.avatar,
+                accessToken: accessToken,
+                guilds: userGuilds
+            };
+            localStorage.setItem('enderbot_user', JSON.stringify(user));
+            updateUI();
+            loadDashboardData();
+            hideLoginError();
+            if (popupWindow && !popupWindow.closed) popupWindow.close();
+        }
+        */
 
         function showLoginError(message) {
             const errorDiv = document.getElementById('loginError');
@@ -1294,6 +1379,7 @@
             document.getElementById('loginError').classList.remove('show');
         }
 
+        // ─── Auth Functions ───
         function isLoggedIn() {
             const user = localStorage.getItem('enderbot_user');
             const token = localStorage.getItem('enderbot_token');
@@ -1312,9 +1398,14 @@
             localStorage.removeItem('enderbot_user');
             localStorage.removeItem('enderbot_token');
             localStorage.removeItem('oauth_code');
+            accessToken = null;
+            userData = null;
+            userGuilds = [];
             updateUI();
+            window.location.href = 'index.html';
         }
 
+        // ─── UI Updates ───
         function updateUI() {
             const loginBtn = document.getElementById('loginBtn');
             const logoutBtn = document.getElementById('logoutBtn');
@@ -1347,6 +1438,7 @@
             }
         }
 
+        // ─── Load Dashboard Data ───
         async function loadDashboardData() {
             if (!isLoggedIn()) return;
 
@@ -1359,20 +1451,26 @@
 
             try {
                 const user = getUser();
-                const token = getToken();
                 
-                if (!user || !token) {
-                    throw new Error('Not authenticated');
+                if (!user || !user.guilds) {
+                    throw new Error('No guilds found');
                 }
 
-                const adminGuilds = user.guilds ? user.guilds.filter(g => 
+                // ─── Filter: Admin Servers (permissions & 0x8) ───
+                const adminGuilds = user.guilds.filter(g => 
                     (g.permissions & 0x8) === 0x8
-                ) : [];
+                );
 
+                // ─── Filter: Servers with EnderBot installed ───
                 const serversWithBot = adminGuilds.filter(g => 
                     botGuildIds.includes(parseInt(g.id))
                 );
 
+                console.log('🔍 Admin Guilds:', adminGuilds.length);
+                console.log('🤖 Servers with Bot:', serversWithBot.length);
+                console.log('📋 Bot Guild IDs:', botGuildIds);
+
+                // ─── Fetch bot stats ───
                 try {
                     const statusRes = await fetch(`${API_URL}/api/status`);
                     if (statusRes.ok) {
@@ -1384,13 +1482,16 @@
                         }
                     }
                 } catch (e) {
+                    console.log('Could not fetch bot stats:', e);
                     document.getElementById('dashServerCount').textContent = '17+';
                     document.getElementById('dashMemberCount').textContent = '4.7K+';
                     document.getElementById('dashLatency').textContent = '24ms';
                 }
 
+                // ─── Update Stats ───
                 document.getElementById('dashAdminServers').textContent = serversWithBot.length;
 
+                // ─── Display Servers ───
                 serverList.innerHTML = '';
                 if (serversWithBot.length === 0) {
                     serverList.innerHTML = `
@@ -1437,7 +1538,7 @@
                     <div class="no-servers">
                         <p>⚠️ Could not load your admin servers.</p>
                         <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted);">
-                            Make sure you're authenticated and the backend is running.
+                            ${error.message || 'Make sure you\'re authenticated and the backend is running.'}
                         </p>
                         <button onclick="refreshDashboard()" style="margin-top: 12px; padding: 8px 24px; background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: 600;">
                             <i class="fas fa-redo"></i> Retry
@@ -1453,11 +1554,11 @@
 
         function refreshDashboard() {
             if (isLoggedIn()) {
-                fetchBotGuilds();
                 loadDashboardData();
             }
         }
 
+        // ─── Check for OAuth Redirect ───
         function checkForOAuthRedirect() {
             const urlParams = new URLSearchParams(window.location.search);
             const code = urlParams.get('code');
@@ -1474,16 +1575,22 @@
             }
         }
 
+        // ─── Initialize ───
         document.addEventListener('DOMContentLoaded', () => {
             checkForOAuthRedirect();
             updateUI();
-            fetchBotGuilds();
+            // Fetch bot guilds if logged in
+            if (isLoggedIn()) {
+                // For demo, botGuildIds is already set in simulateLogin
+                loadDashboardData();
+            }
         });
 
         console.log('🔐 OAuth Configuration:');
         console.log('  Client ID:', DISCORD_CLIENT_ID);
         console.log('  Redirect URI:', REDIRECT_URI);
         console.log('  API URL:', API_URL);
+        console.log('ℹ️ For production, uncomment the real API functions and replace simulateLogin().');
     </script>
 
 </body>
