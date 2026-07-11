@@ -58,7 +58,6 @@
             const code = urlParams.get('code');
             const state = urlParams.get('state');
             const error = urlParams.get('error');
-            const errorDescription = urlParams.get('error_description');
 
             // ─── DOM Elements ───
             const statusText = document.getElementById('statusText');
@@ -70,7 +69,7 @@
             // ─── Handle Error ───
             if (error) {
                 statusText.textContent = 'Authentication Failed';
-                statusSubtext.textContent = errorDescription || 'An error occurred during authentication.';
+                statusSubtext.textContent = 'An error occurred during authentication.';
                 spinner.style.display = 'none';
                 errorDiv.style.display = 'block';
                 return;
@@ -78,25 +77,21 @@
 
             // ─── Handle Success ───
             if (code && state) {
-                // Show success message
                 statusText.textContent = 'Login Successful!';
-                statusSubtext.textContent = 'You are being redirected to the dashboard...';
+                statusSubtext.textContent = 'Redirecting to dashboard...';
                 spinner.style.display = 'none';
                 successDiv.style.display = 'block';
 
                 // ─── FORCE REDIRECT TO DASHBOARD ───
                 setTimeout(function() {
-                    // Redirect to dashboard with the code
                     window.location.href = '/dashboard.html?code=' + code + '&state=' + state;
                 }, 1500);
             } else {
-                // ─── No Code Found ───
                 statusText.textContent = 'No Authorization Code';
-                statusSubtext.textContent = 'No authorization code was received. Please try again.';
+                statusSubtext.textContent = 'No authorization code was received.';
                 spinner.style.display = 'none';
                 errorDiv.style.display = 'block';
                 
-                // Redirect to home after 3 seconds
                 setTimeout(function() {
                     window.location.href = '/index.html';
                 }, 3000);
