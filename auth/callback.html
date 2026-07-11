@@ -39,18 +39,6 @@
         .error { color: #ED4245; display: none; margin-top: 16px; }
         .success { color: #57F287; display: none; margin-top: 16px; }
         .status-text { font-size: 13px; margin-top: 8px; }
-        .debug-info { 
-            font-size: 11px; 
-            color: #6A6A8A; 
-            margin-top: 12px; 
-            text-align: left;
-            word-break: break-all;
-            background: #0A0A0F;
-            padding: 8px;
-            border-radius: 4px;
-            display: none;
-        }
-        .debug-info.show { display: block; }
     </style>
 </head>
 <body>
@@ -61,7 +49,6 @@
         <p class="status-text" id="statusSubtext">Please wait while we authenticate you</p>
         <div class="error" id="errorMessage">⚠️ Authentication failed</div>
         <div class="success" id="successMessage">✅ Login successful! Redirecting...</div>
-        <div class="debug-info" id="debugInfo"></div>
     </div>
 
     <script>
@@ -79,18 +66,6 @@
             const spinner = document.getElementById('spinner');
             const errorDiv = document.getElementById('errorMessage');
             const successDiv = document.getElementById('successMessage');
-            const debugInfo = document.getElementById('debugInfo');
-
-            // ─── Show Debug Info ───
-            debugInfo.classList.add('show');
-            debugInfo.innerHTML = `
-                <strong>Debug Info:</strong><br>
-                Full URL: ${window.location.href}<br>
-                Code: ${code || 'Not found'}<br>
-                State: ${state || 'Not found'}<br>
-                Error: ${error || 'None'}<br>
-                Error Description: ${errorDescription || 'None'}
-            `;
 
             // ─── Handle Error ───
             if (error) {
@@ -109,26 +84,9 @@
                 spinner.style.display = 'none';
                 successDiv.style.display = 'block';
 
-                // ─── Store the code in localStorage ───
-                localStorage.setItem('oauth_code', code);
-                localStorage.setItem('oauth_state', state);
-                
-                // ─── Send message to parent window (if popup) ───
-                if (window.opener) {
-                    try {
-                        window.opener.postMessage({
-                            type: 'discord_oauth',
-                            success: true,
-                            code: code,
-                            state: state
-                        }, window.opener.location.origin);
-                    } catch (e) {
-                        console.log('Could not send message to opener:', e);
-                    }
-                }
-
-                // ─── Redirect to dashboard ───
+                // ─── FORCE REDIRECT TO DASHBOARD ───
                 setTimeout(function() {
+                    // Redirect to dashboard with the code
                     window.location.href = '/dashboard.html?code=' + code + '&state=' + state;
                 }, 1500);
             } else {
@@ -138,15 +96,10 @@
                 spinner.style.display = 'none';
                 errorDiv.style.display = 'block';
                 
-                // ─── Check if this is a redirect from Discord without code ───
-                if (window.location.search.includes('error')) {
-                    statusSubtext.textContent = 'Discord returned an error: ' + window.location.search;
-                }
-                
-                // ─── Redirect to home after 5 seconds ───
+                // Redirect to home after 3 seconds
                 setTimeout(function() {
-                    window.location.href = '/index.html?error=no_code';
-                }, 5000);
+                    window.location.href = '/index.html';
+                }, 3000);
             }
         })();
     </script>
