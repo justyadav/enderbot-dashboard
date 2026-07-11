@@ -1,24 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>EnderBot - Logging in...</title>
-</head>
-<body>
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const code = urlParams.get('code');
-        const state = urlParams.get('state');
-        
-        if (code && state) {
-            window.opener.postMessage({
-                type: 'discord_oauth',
-                success: true,
-                code: code,
-                state: state
-            }, window.opener.location.origin);
-            setTimeout(() => window.close(), 1000);
-        }
-    </script>
-</body>
-</html>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    const state = urlParams.get('state');
+
+    if (code && state) {
+        // Store code and redirect immediately
+        localStorage.setItem('oauth_code', code);
+        localStorage.setItem('oauth_state', state);
+        window.location.href = 'dashboard.html';
+    } else {
+        // Show error or redirect home
+        window.location.href = 'index.html?error=no_code';
+    }
+</script>
