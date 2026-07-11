@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EnderBot – Admin Dashboard</title>
+    <title>EnderBot – Ultimate Discord Bot</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -36,8 +36,6 @@
             --radius-sm: 8px;
             --shadow: 0 8px 32px rgba(108, 60, 225, 0.25);
             --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --danger: #ED4245;
-            --success: #57F287;
         }
 
         * {
@@ -203,6 +201,7 @@
             border: none;
             font-family: 'Rajdhani', sans-serif;
             font-size: 14px;
+            text-decoration: none;
         }
 
         .navbar-links .btn-login:hover {
@@ -224,6 +223,7 @@
             font-family: 'Rajdhani', sans-serif;
             font-size: 14px;
             display: none;
+            text-decoration: none;
         }
 
         .navbar-links .btn-logout:hover {
@@ -267,7 +267,6 @@
             cursor: pointer;
         }
 
-        /* ─── User Badge ─── */
         .user-badge {
             display: none;
             align-items: center;
@@ -307,394 +306,177 @@
             display: flex;
         }
 
-        /* ─── Dashboard Container ─── */
-        .dashboard-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px 2rem 60px;
+        /* ─── Hero ─── */
+        .hero {
+            padding: 80px 2rem 60px;
+            text-align: center;
             position: relative;
             z-index: 1;
         }
 
-        .dashboard-header {
-            text-align: center;
-            margin-bottom: 40px;
+        .hero .badge {
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 20px;
+            background: rgba(108, 60, 225, 0.14);
+            color: var(--primary-light);
+            font-size: 12px;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 1px solid rgba(108, 60, 225, 0.2);
+            margin-bottom: 20px;
         }
 
-        .dashboard-header h2 {
+        .hero h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #fff, var(--primary-light));
+            font-size: clamp(2.2rem, 5.5vw, 4.6rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff 0%, var(--primary-light) 50%, var(--accent) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 60px var(--primary-glow);
         }
 
-        .dashboard-header p {
+        .hero .subtitle {
+            font-size: 1.15rem;
             color: var(--text-gray);
-            font-size: 1.05rem;
-            max-width: 500px;
-            margin: 8px auto 0;
+            max-width: 580px;
+            margin: 0 auto 32px;
+            line-height: 1.7;
         }
 
-        /* ─── Login Card ─── */
-        .login-container {
-            max-width: 420px;
-            margin: 0 auto;
+        .hero .subtitle strong {
+            color: var(--text-white);
         }
 
-        .login-card {
+        .hero .btn-group {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 32px;
+            border-radius: var(--radius-sm);
+            font-size: 15px;
+            font-weight: 700;
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
+            box-shadow: 0 0 40px var(--primary-glow);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 50px var(--primary-glow);
+        }
+
+        .btn-secondary {
             background: var(--card-bg);
-            border-radius: var(--radius);
+            color: var(--text-white);
             border: 1px solid var(--border-color);
-            padding: 40px;
-            text-align: center;
+        }
+        .btn-secondary:hover {
+            background: var(--card-hover);
+            transform: translateY(-3px);
+            border-color: var(--primary);
         }
 
-        .login-card .login-icon {
-            font-size: 64px;
-            margin-bottom: 16px;
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), #cc0066);
+            color: #fff;
+            box-shadow: 0 0 40px var(--accent-glow);
+        }
+        .btn-accent:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 50px var(--accent-glow);
+        }
+
+        /* ─── Stats ─── */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 18px;
+            max-width: 1100px;
+            margin: -30px auto 50px;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 22px 16px;
+            border-radius: var(--radius);
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .stat-card .stat-icon {
+            font-size: 28px;
+            margin-bottom: 6px;
             background: linear-gradient(135deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .login-card h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 22px;
-            margin-bottom: 8px;
-        }
-
-        .login-card p {
-            color: var(--text-gray);
-            font-size: 14px;
-            margin-bottom: 24px;
-        }
-
-        .login-card .discord-login-btn {
-            width: 100%;
-            padding: 14px;
-            background: #5865F2;
-            color: #fff;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: 'Rajdhani', sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .login-card .discord-login-btn:hover {
-            background: #4752C4;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(88, 101, 242, 0.4);
-        }
-
-        .login-card .discord-login-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
-        .login-card .discord-login-btn i {
-            font-size: 24px;
-        }
-
-        .login-card .login-note {
-            margin-top: 16px;
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        .login-card .error-message {
-            background: rgba(237, 66, 69, 0.15);
-            border: 1px solid var(--danger);
-            color: var(--danger);
-            padding: 10px;
-            border-radius: var(--radius-sm);
-            font-size: 13px;
-            margin-bottom: 16px;
-            display: none;
-        }
-
-        .login-card .error-message.show {
-            display: block;
-        }
-
-        /* ─── Dashboard Content ─── */
-        .dashboard-content {
-            display: none;
-        }
-
-        .dashboard-content.active {
-            display: block;
-        }
-
-        /* ─── Quick Actions ─── */
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 30px;
-        }
-
-        .action-card {
-            background: var(--card-bg);
-            padding: 24px;
-            border-radius: var(--radius);
-            border: 1px solid var(--border-color);
-            text-align: center;
-            transition: var(--transition);
-            cursor: pointer;
-            text-decoration: none;
-            color: var(--text-white);
-        }
-
-        .action-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow);
-        }
-
-        .action-card .action-icon {
-            font-size: 32px;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .action-card .action-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .action-card .action-desc {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-
-        /* ─── Stats Cards ─── */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card-dash {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: var(--radius);
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-
-        .stat-card-dash:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow);
-        }
-
-        .stat-card-dash .stat-label {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 12px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .stat-card-dash .stat-value {
+        .stat-card .stat-number {
             font-family: 'Orbitron', sans-serif;
             font-size: 28px;
             font-weight: 800;
             color: var(--text-white);
-            margin-top: 4px;
         }
 
-        .stat-card-dash .stat-change {
-            font-size: 12px;
-            color: var(--secondary);
-            margin-top: 4px;
-        }
-
-        /* ─── Server List ─── */
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            margin-bottom: 16px;
-            color: var(--text-white);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-title i {
-            color: var(--primary);
-        }
-
-        .server-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 12px;
-        }
-
-        .server-item {
-            background: var(--card-bg);
-            padding: 16px;
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            transition: var(--transition);
-        }
-
-        .server-item:hover {
-            border-color: var(--primary);
-            background: var(--card-hover);
-        }
-
-        .server-item .server-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: var(--dark-hover);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            font-weight: 700;
-            flex-shrink: 0;
-            overflow: hidden;
-        }
-
-        .server-item .server-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .server-item .server-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .server-item .server-name {
-            font-weight: 600;
-            font-size: 15px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .server-item .server-members {
+        .stat-card .stat-label {
             color: var(--text-muted);
             font-size: 13px;
-        }
-
-        .server-item .server-status {
-            font-size: 11px;
-            padding: 2px 12px;
-            border-radius: 12px;
             font-weight: 600;
-            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-top: 2px;
         }
 
-        .server-item .server-status.active {
-            background: rgba(87, 242, 135, 0.15);
-            color: var(--success);
-        }
-
-        .server-item .server-status.inactive {
-            background: rgba(237, 66, 69, 0.15);
-            color: var(--danger);
-        }
-
-        .server-item .server-status.admin {
-            background: rgba(108, 60, 225, 0.15);
-            color: var(--primary-light);
-        }
-
-        .server-item .server-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .server-item .server-actions button {
-            padding: 4px 12px;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-size: 11px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: 'Rajdhani', sans-serif;
-        }
-
-        .server-item .server-actions .btn-manage {
-            background: var(--primary);
-            color: #fff;
-        }
-
-        .server-item .server-actions .btn-manage:hover {
-            background: var(--primary-dark);
-            transform: scale(1.05);
-        }
-
-        .server-item .server-actions .btn-invite {
-            background: var(--accent);
-            color: #fff;
-        }
-
-        .server-item .server-actions .btn-invite:hover {
-            background: #cc0066;
-            transform: scale(1.05);
-        }
-
-        /* ─── Loading ─── */
-        .loading-spinner {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-muted);
-        }
-
-        .loading-spinner i {
-            font-size: 32px;
-            color: var(--primary);
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .no-servers {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-muted);
-            background: var(--card-bg);
-            border-radius: var(--radius);
-            border: 1px solid var(--border-color);
-        }
-
-        .no-servers a {
-            color: var(--primary-light);
-            text-decoration: none;
-        }
-
-        .no-servers a:hover {
-            text-decoration: underline;
-        }
-
-        /* ─── Terms & Privacy Sections ─── */
-        .legal-section {
+        /* ─── Features ─── */
+        .section {
             padding: 50px 2rem;
             max-width: 1100px;
             margin: 0 auto;
@@ -702,12 +484,12 @@
             z-index: 1;
         }
 
-        .legal-section .section-header {
+        .section-header {
             text-align: center;
             margin-bottom: 40px;
         }
 
-        .legal-section .section-header h2 {
+        .section-header h2 {
             font-family: 'Orbitron', sans-serif;
             font-size: 2rem;
             font-weight: 800;
@@ -716,90 +498,106 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .legal-section .section-header p {
+        .section-header p {
             color: var(--text-gray);
             font-size: 1.05rem;
             max-width: 500px;
             margin: 8px auto 0;
         }
 
-        .legal-content {
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
             background: var(--card-bg);
+            padding: 28px 24px;
             border-radius: var(--radius);
             border: 1px solid var(--border-color);
-            padding: 40px;
-            max-width: 900px;
-            margin: 0 auto;
+            transition: var(--transition);
+            position: relative;
         }
 
-        .legal-content h3 {
+        .feature-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
+        .feature-card .feature-icon {
+            font-size: 36px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .feature-card h3 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 20px;
-            color: var(--primary-light);
-            margin: 30px 0 12px;
-        }
-
-        .legal-content h3:first-of-type {
-            margin-top: 0;
-        }
-
-        .legal-content h4 {
             font-size: 17px;
-            color: var(--text-white);
-            margin: 20px 0 10px;
-        }
-
-        .legal-content p {
-            color: var(--text-gray);
-            line-height: 1.8;
-            margin-bottom: 16px;
-            font-size: 15px;
-        }
-
-        .legal-content ul {
-            color: var(--text-gray);
-            line-height: 1.8;
-            margin: 8px 0 16px 24px;
-            font-size: 15px;
-        }
-
-        .legal-content ul li {
+            font-weight: 700;
             margin-bottom: 8px;
-        }
-
-        .legal-content .highlight-box {
-            background: rgba(108, 60, 225, 0.08);
-            border-left: 3px solid var(--primary);
-            padding: 16px 20px;
-            border-radius: var(--radius-sm);
-            margin: 16px 0;
-        }
-
-        .legal-content .highlight-box strong {
             color: var(--text-white);
         }
 
-        .legal-content .highlight-box.warning {
-            border-left-color: var(--accent);
-            background: rgba(255, 45, 149, 0.08);
+        .feature-card p {
+            color: var(--text-gray);
+            font-size: 14px;
+            line-height: 1.6;
         }
 
-        .legal-content .last-updated {
-            color: var(--text-muted);
+        /* ─── Commands ─── */
+        .commands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 10px;
+        }
+
+        .command-card {
+            background: var(--card-bg);
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .command-card:hover {
+            border-color: var(--primary);
+            background: var(--card-hover);
+            transform: translateX(4px);
+        }
+
+        .command-card .cmd-name {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            color: var(--secondary);
             font-size: 13px;
-            text-align: right;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-color);
+            min-width: 90px;
         }
 
-        .legal-content a {
+        .command-card .cmd-desc {
+            color: var(--text-gray);
+            font-size: 13px;
+            flex: 1;
+        }
+
+        .command-card .cmd-perm {
+            font-size: 10px;
+            padding: 2px 12px;
+            border-radius: 12px;
+            background: rgba(108, 60, 225, 0.18);
             color: var(--primary-light);
-            text-decoration: none;
+            font-weight: 600;
+            white-space: nowrap;
+            font-family: 'Orbitron', sans-serif;
         }
 
-        .legal-content a:hover {
-            text-decoration: underline;
+        .text-center {
+            text-align: center;
+            margin-top: 32px;
         }
 
         /* ─── Footer ─── */
@@ -871,6 +669,7 @@
         .delay-3 { animation-delay: 0.3s; opacity: 0; }
         .delay-4 { animation-delay: 0.4s; opacity: 0; }
         .delay-5 { animation-delay: 0.5s; opacity: 0; }
+        .delay-6 { animation-delay: 0.6s; opacity: 0; }
 
         .glitch {
             position: relative;
@@ -981,64 +780,78 @@
                 display: none !important;
             }
 
-            .dashboard-container {
-                padding: 20px 1.5rem 40px;
+            .hero {
+                padding: 60px 1.5rem 40px;
             }
 
-            .dashboard-grid {
-                grid-template-columns: 1fr 1fr;
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                margin-top: -20px;
+                gap: 12px;
             }
 
-            .quick-actions {
-                grid-template-columns: 1fr 1fr;
+            .stat-card .stat-number {
+                font-size: 22px;
             }
 
-            .server-list {
-                grid-template-columns: 1fr;
-            }
-
-            .login-card {
-                padding: 24px;
-            }
-
-            .dashboard-header h2 {
-                font-size: 1.6rem;
-            }
-
-            .legal-content {
-                padding: 24px;
-            }
-
-            .legal-section {
+            .section {
                 padding: 30px 1.5rem;
             }
 
-            .legal-section .section-header h2 {
+            .section-header h2 {
                 font-size: 1.6rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .commands-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .btn {
+                padding: 11px 24px;
+                font-size: 13px;
+            }
+
+            .navbar-brand .brand-text {
+                font-size: 18px;
+            }
+
+            .navbar-brand .logo {
+                width: 36px;
+                height: 36px;
+                font-size: 17px;
             }
         }
 
         @media (max-width: 480px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
+            .stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
             }
 
-            .quick-actions {
-                grid-template-columns: 1fr;
+            .stat-card {
+                padding: 16px 12px;
             }
 
-            .stat-card-dash .stat-value {
-                font-size: 22px;
+            .stat-card .stat-number {
+                font-size: 20px;
             }
 
-            .server-item {
-                flex-wrap: wrap;
+            .hero h1 {
+                font-size: 1.8rem;
             }
 
-            .server-item .server-actions {
-                width: 100%;
-                justify-content: flex-start;
-                margin-top: 8px;
+            .hero .subtitle {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 10px 18px;
+                font-size: 12px;
+                gap: 6px;
             }
         }
     </style>
@@ -1049,7 +862,7 @@
 
     <!-- ─── Navigation ─── -->
     <nav class="navbar">
-        <a class="navbar-brand" onclick="showDashboard()">
+        <a href="index.html" class="navbar-brand">
             <div class="logo">E</div>
             <div class="brand-text">Ender<span>Bot</span></div>
         </a>
@@ -1059,252 +872,222 @@
         </button>
 
         <div class="navbar-links" id="navLinks">
-            <a class="active" onclick="showDashboard()">Dashboard</a>
-            <a onclick="showTerms()">Terms</a>
-            <a onclick="showPrivacy()">Privacy</a>
+            <a href="index.html" class="active">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
             <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support</a>
             <div class="status-indicator">
                 <span class="dot"></span>
                 <span class="status-text">Online</span>
             </div>
-            <div class="user-badge" id="userBadge">
-                <div class="user-avatar" id="userAvatar">U</div>
-                <span class="user-name" id="userName">User</span>
-            </div>
-            <button class="btn-login" id="loginBtn" onclick="initiateLogin()">
+            <a href="dashboard.html" class="btn-login">
                 <i class="fab fa-discord"></i> Login
-            </button>
-            <button class="btn-logout" id="logoutBtn" onclick="logout()">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
+            </a>
         </div>
     </nav>
 
-    <!-- ─── Dashboard Section ─── -->
-    <div class="dashboard-container" id="dashboardSection">
-        <div class="dashboard-header">
-            <h2>🛡️ Admin Dashboard</h2>
-            <p>Manage your servers where EnderBot is installed</p>
+    <!-- ─── Hero ─── -->
+    <section class="hero" id="home">
+        <div class="badge animate-in">🚀 Next-Gen Discord Bot</div>
+        <h1 class="glitch animate-in delay-1" data-text="The Ultimate Discord Bot">The Ultimate <br>Discord Bot</h1>
+        <p class="subtitle animate-in delay-2">
+            Advanced moderation, auto-roles, logging, and more — all in one powerful bot.<br>
+            Trusted by <strong>17+</strong> servers and <strong>4,700+</strong> members.
+        </p>
+        <div class="btn-group animate-in delay-3">
+            <a href="https://discord.com/oauth2/authorize?client_id=1244893095326388325&permissions=8" target="_blank" class="btn btn-primary">
+                <i class="fab fa-discord"></i> Add to Server
+            </a>
+            <a href="#features" class="btn btn-secondary">
+                <i class="fas fa-arrow-down"></i> Explore Features
+            </a>
+            <a href="https://discord.gg/PGwbyWX3DS" target="_blank" class="btn btn-accent">
+                <i class="fas fa-headset"></i> Support Server
+            </a>
         </div>
+    </section>
 
-        <!-- Login Container -->
-        <div class="login-container" id="loginContainer">
-            <div class="login-card neon-border animate-in">
-                <div class="login-icon">
-                    <i class="fab fa-discord"></i>
-                </div>
-                <h3>Admin Login</h3>
-                <p>Connect your Discord account to access the admin dashboard</p>
-                <div class="error-message" id="loginError">
-                    <i class="fas fa-exclamation-circle"></i> <span id="errorText">Invalid credentials. Please try again.</span>
-                </div>
-                <button class="discord-login-btn" id="discordLoginBtn" onclick="initiateLogin()">
-                    <i class="fab fa-discord"></i> Login with Discord
-                </button>
-                <p class="login-note">🔒 You must be a server administrator to access this dashboard</p>
-            </div>
+    <!-- ─── Stats ─── -->
+    <div class="stats">
+        <div class="stat-card animate-in delay-1">
+            <div class="stat-icon"><i class="fas fa-server"></i></div>
+            <div class="stat-number">17+</div>
+            <div class="stat-label">Servers</div>
         </div>
-
-        <!-- Dashboard Content -->
-        <div class="dashboard-content" id="dashboardContent">
-            <!-- Quick Actions -->
-            <div class="quick-actions">
-                <a href="https://discord.com/oauth2/authorize?client_id=1244893095326388325&permissions=8" target="_blank" class="action-card">
-                    <span class="action-icon">🤖</span>
-                    <div class="action-title">Invite Bot</div>
-                    <div class="action-desc">Add EnderBot to your server</div>
-                </a>
-                <a href="https://discord.gg/PGwbyWX3DS" target="_blank" class="action-card">
-                    <span class="action-icon">💬</span>
-                    <div class="action-title">Support Server</div>
-                    <div class="action-desc">Get help from the community</div>
-                </a>
-                <a class="action-card" onclick="refreshDashboard()">
-                    <span class="action-icon">🔄</span>
-                    <div class="action-title">Refresh</div>
-                    <div class="action-desc">Update dashboard data</div>
-                </a>
-            </div>
-
-            <!-- Stats -->
-            <div class="dashboard-grid">
-                <div class="stat-card-dash">
-                    <div class="stat-label">Total Servers</div>
-                    <div class="stat-value" id="dashServerCount">0</div>
-                    <div class="stat-change">🟢 Online</div>
-                </div>
-                <div class="stat-card-dash">
-                    <div class="stat-label">Total Members</div>
-                    <div class="stat-value" id="dashMemberCount">0</div>
-                    <div class="stat-change">👥 Active users</div>
-                </div>
-                <div class="stat-card-dash">
-                    <div class="stat-label">Your Admin Servers</div>
-                    <div class="stat-value" id="dashAdminServers">0</div>
-                    <div class="stat-change">🛡️ With EnderBot</div>
-                </div>
-                <div class="stat-card-dash">
-                    <div class="stat-label">Bot Latency</div>
-                    <div class="stat-value" id="dashLatency">0ms</div>
-                    <div class="stat-change">⚡ Fast response</div>
-                </div>
-            </div>
-
-            <!-- Server List -->
-            <div class="section-title">
-                <i class="fas fa-server"></i> Your Servers with EnderBot
-                <span style="font-size: 12px; color: var(--text-muted); font-weight: 400;">(servers where you are admin and EnderBot is installed)</span>
-            </div>
-            <div class="server-list" id="serverList">
-                <div class="server-item" style="justify-content: center; color: var(--text-muted);">
-                    <span><i class="fas fa-spinner fa-spin"></i> Loading your servers...</span>
-                </div>
-            </div>
+        <div class="stat-card animate-in delay-2">
+            <div class="stat-icon"><i class="fas fa-users"></i></div>
+            <div class="stat-number">4.7K+</div>
+            <div class="stat-label">Members</div>
+        </div>
+        <div class="stat-card animate-in delay-3">
+            <div class="stat-icon"><i class="fas fa-terminal"></i></div>
+            <div class="stat-number">77</div>
+            <div class="stat-label">Commands</div>
+        </div>
+        <div class="stat-card animate-in delay-4">
+            <div class="stat-icon"><i class="fas fa-clock"></i></div>
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Online</div>
+        </div>
+        <div class="stat-card animate-in delay-5">
+            <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Protection</div>
+        </div>
+        <div class="stat-card animate-in delay-6">
+            <div class="stat-icon"><i class="fas fa-robot"></i></div>
+            <div class="stat-number">v2.0</div>
+            <div class="stat-label">Version</div>
         </div>
     </div>
 
-    <!-- ─── Terms Section ─── -->
-    <section class="legal-section" id="termsSection" style="display: none;">
+    <!-- ─── Features ─── -->
+    <section class="section" id="features">
         <div class="section-header animate-in">
-            <h2>📜 Terms & Conditions</h2>
-            <p>Please read these terms carefully before using EnderBot</p>
+            <h2>⚡ Powerful Features</h2>
+            <p>Everything you need to manage and grow your Discord server</p>
         </div>
 
-        <div class="legal-content animate-in">
-            <div class="highlight-box">
-                <strong>📌 Important:</strong> By inviting EnderBot to your Discord server or using any of its features, you agree to be bound by these Terms & Conditions. If you do not agree with any part of these terms, you must not use the Bot.
+        <div class="features-grid">
+            <div class="feature-card neon-border animate-in delay-1">
+                <span class="feature-icon">🔨</span>
+                <h3>Advanced Moderation</h3>
+                <p>Kick, ban, mute, warn, and more with automated moderation tools including spam protection and content filtering.</p>
             </div>
-
-            <h3>1. Acceptance of Terms</h3>
-            <p>By inviting EnderBot ("the Bot") to your Discord server or using any of its features, you agree to be bound by these Terms & Conditions. If you do not agree with any part of these terms, you must not use the Bot.</p>
-
-            <h3>2. Description of Service</h3>
-            <p>EnderBot is a Discord bot that provides various features including but not limited to:</p>
-            <ul>
-                <li>Server moderation (kicking, banning, muting, warning members)</li>
-                <li>Auto-role management</li>
-                <li>Server logging</li>
-                <li>Auto-moderation (spam protection, invite filtering)</li>
-                <li>Fun and utility commands</li>
-                <li>Server configuration</li>
-            </ul>
-
-            <h3>3. User Responsibilities</h3>
-            <p>You agree to use EnderBot responsibly and in accordance with Discord's Terms of Service. You shall not:</p>
-            <ul>
-                <li>Use the Bot for illegal or malicious purposes</li>
-                <li>Attempt to exploit, hack, or disrupt the Bot's functionality</li>
-                <li>Use the Bot to harass, threaten, or harm others</li>
-                <li>Use the Bot to violate Discord's Terms of Service</li>
-            </ul>
-
-            <h3>4. Data Collection & Storage</h3>
-            <p>EnderBot may collect and store certain data to provide its services. For more details, please see our <a href="#" onclick="showPrivacy(); return false;">Privacy Policy</a>.</p>
-
-            <h3>5. Bot Availability</h3>
-            <ul>
-                <li>EnderBot is provided "as is" without warranties of any kind</li>
-                <li>We do not guarantee 100% uptime</li>
-                <li>We reserve the right to modify, suspend, or discontinue any feature</li>
-            </ul>
-
-            <h3>6. Limitation of Liability</h3>
-            <div class="highlight-box warning">
-                <strong>⚠️ Disclaimer:</strong> EnderBot is provided "as is" without any warranties. We are not liable for any damages, losses, or issues that arise from using the Bot.
+            <div class="feature-card neon-border animate-in delay-2">
+                <span class="feature-icon">🎭</span>
+                <h3>Auto-Role System</h3>
+                <p>Automatically assign roles to new members, boosters, bots, and verified users with customizable conditions and delays.</p>
             </div>
-
-            <h3>7. Changes to Terms</h3>
-            <p>We reserve the right to update these Terms & Conditions at any time. Continued use of EnderBot after changes constitutes acceptance of the new terms.</p>
-
-            <h3>8. Contact</h3>
-            <p>For questions about these Terms, please contact us through our <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support Server</a>.</p>
-
-            <div class="last-updated">
-                <i class="fas fa-calendar-alt"></i> Last Updated: July 2026 • EnderBot v2.0.0
+            <div class="feature-card neon-border animate-in delay-3">
+                <span class="feature-icon">📋</span>
+                <h3>Comprehensive Logging</h3>
+                <p>Track every action with detailed logs for moderation, messages, voice, members, server events, and auto-mod actions.</p>
+            </div>
+            <div class="feature-card neon-border animate-in delay-4">
+                <span class="feature-icon">🛡️</span>
+                <h3>Auto-Moderation</h3>
+                <p>Protect your server with invite filters, link filters, spam detection, and profanity filtering — all configurable.</p>
+            </div>
+            <div class="feature-card neon-border animate-in delay-5">
+                <span class="feature-icon">⚙️</span>
+                <h3>Full Configuration</h3>
+                <p>Customize every aspect of the bot with per-server configuration, multi-language support, and easy setup commands.</p>
+            </div>
+            <div class="feature-card neon-border animate-in delay-6">
+                <span class="feature-icon">🎮</span>
+                <h3>Fun & Utility</h3>
+                <p>Engage your community with polls, random generators, AI responses, motivation quotes, and fun commands.</p>
             </div>
         </div>
     </section>
 
-    <!-- ─── Privacy Section ─── -->
-    <section class="legal-section" id="privacySection" style="display: none;">
+    <!-- ─── Commands ─── -->
+    <section class="section" id="commands">
         <div class="section-header animate-in">
-            <h2>🔒 Privacy Policy</h2>
-            <p>How we handle and protect your data</p>
+            <h2>📋 Command List</h2>
+            <p>All 77 commands available at your fingertips</p>
         </div>
 
-        <div class="legal-content animate-in">
-            <div class="highlight-box">
-                <strong>🔐 Privacy First:</strong> We only collect data essential for the Bot's functionality. We do not sell or share your data with third parties.
+        <div class="commands-grid">
+            <div class="command-card animate-in delay-1">
+                <span class="cmd-name">/kick</span>
+                <span class="cmd-desc">Kick a member</span>
+                <span class="cmd-perm">Kick</span>
             </div>
-
-            <h3>1. Information We Collect</h3>
-            <p>EnderBot collects and processes the following data to provide its services:</p>
-            <ul>
-                <li><strong>Server Data:</strong> Server ID, name, channel IDs, role IDs</li>
-                <li><strong>User Data:</strong> User ID, username, discriminator, avatar URL</li>
-                <li><strong>Message Data:</strong> Temporarily cached for edit/delete logging</li>
-                <li><strong>Configuration Data:</strong> Server settings, moderation preferences</li>
-            </ul>
-
-            <h3>2. How We Use Your Data</h3>
-            <ul>
-                <li><strong>Service Delivery:</strong> To provide core features</li>
-                <li><strong>Moderation:</strong> To track warnings and actions</li>
-                <li><strong>Logging:</strong> To maintain audit logs</li>
-                <li><strong>Configuration:</strong> To store server settings</li>
-            </ul>
-
-            <h3>3. Data Storage & Security</h3>
-            <ul>
-                <li>Data is stored securely in MongoDB or in-memory (fallback)</li>
-                <li>We implement industry-standard security measures</li>
-                <li>We do not sell or share your data with third parties</li>
-            </ul>
-
-            <h3>4. Data Retention</h3>
-            <ul>
-                <li>Server configurations are stored until the Bot is removed</li>
-                <li>Moderation logs are stored for accountability</li>
-                <li>Message caches are automatically cleared (max 1000 messages)</li>
-            </ul>
-
-            <h3>5. Your Rights</h3>
-            <ul>
-                <li><strong>Access:</strong> View your server's configuration</li>
-                <li><strong>Modification:</strong> Modify your settings</li>
-                <li><strong>Deletion:</strong> Clear warnings and reset configurations</li>
-                <li><strong>Opt-out:</strong> Remove the Bot from your server</li>
-            </ul>
-
-            <h3>6. Data Removal</h3>
-            <p>If you want your data removed from EnderBot:</p>
-            <ul>
-                <li><strong>Server Admins:</strong> Remove the Bot from your server</li>
-                <li><strong>Individual Users:</strong> Contact a server admin to clear your warnings</li>
-                <li><strong>All Users:</strong> Contact us via the support server</li>
-            </ul>
-
-            <div class="highlight-box">
-                <strong>📧 Contact:</strong> For privacy concerns, reach out through our <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support Server</a>.
+            <div class="command-card animate-in delay-2">
+                <span class="cmd-name">/ban</span>
+                <span class="cmd-desc">Ban a member</span>
+                <span class="cmd-perm">Ban</span>
             </div>
-
-            <h3>7. Changes to Privacy Policy</h3>
-            <p>We may update this Privacy Policy from time to time. You are advised to review this policy periodically.</p>
-
-            <div class="last-updated">
-                <i class="fas fa-calendar-alt"></i> Last Updated: July 2026 • EnderBot v2.0.0
+            <div class="command-card animate-in delay-3">
+                <span class="cmd-name">/mute</span>
+                <span class="cmd-desc">Timeout a member</span>
+                <span class="cmd-perm">Moderate</span>
             </div>
+            <div class="command-card animate-in delay-4">
+                <span class="cmd-name">/warn</span>
+                <span class="cmd-desc">Warn a member</span>
+                <span class="cmd-perm">Kick</span>
+            </div>
+            <div class="command-card animate-in delay-5">
+                <span class="cmd-name">/clear</span>
+                <span class="cmd-desc">Delete messages</span>
+                <span class="cmd-perm">Manage Msg</span>
+            </div>
+            <div class="command-card animate-in delay-6">
+                <span class="cmd-name">/lock</span>
+                <span class="cmd-desc">Lock channel</span>
+                <span class="cmd-perm">Manage Chnl</span>
+            </div>
+            <div class="command-card animate-in delay-1">
+                <span class="cmd-name">/nuke</span>
+                <span class="cmd-desc">Nuke channel</span>
+                <span class="cmd-perm">Admin</span>
+            </div>
+            <div class="command-card animate-in delay-2">
+                <span class="cmd-name">/setlog</span>
+                <span class="cmd-desc">Set log channel</span>
+                <span class="cmd-perm">Admin</span>
+            </div>
+            <div class="command-card animate-in delay-3">
+                <span class="cmd-name">/autorole</span>
+                <span class="cmd-desc">Auto-role config</span>
+                <span class="cmd-perm">Admin</span>
+            </div>
+            <div class="command-card animate-in delay-4">
+                <span class="cmd-name">/config</span>
+                <span class="cmd-desc">Server config</span>
+                <span class="cmd-perm">Admin</span>
+            </div>
+            <div class="command-card animate-in delay-5">
+                <span class="cmd-name">/filter-invites</span>
+                <span class="cmd-desc">Toggle invite filter</span>
+                <span class="cmd-perm">Manage Guild</span>
+            </div>
+            <div class="command-card animate-in delay-6">
+                <span class="cmd-name">/ping</span>
+                <span class="cmd-desc">Check latency</span>
+                <span class="cmd-perm">None</span>
+            </div>
+            <div class="command-card animate-in delay-1">
+                <span class="cmd-name">/stats</span>
+                <span class="cmd-desc">Bot statistics</span>
+                <span class="cmd-perm">None</span>
+            </div>
+            <div class="command-card animate-in delay-2">
+                <span class="cmd-name">/help</span>
+                <span class="cmd-desc">Get help</span>
+                <span class="cmd-perm">None</span>
+            </div>
+            <div class="command-card animate-in delay-3">
+                <span class="cmd-name">/poll</span>
+                <span class="cmd-desc">Create a poll</span>
+                <span class="cmd-perm">None</span>
+            </div>
+            <div class="command-card animate-in delay-4">
+                <span class="cmd-name">/ai</span>
+                <span class="cmd-desc">AI response</span>
+                <span class="cmd-perm">None</span>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a href="#" class="btn btn-secondary">
+                <i class="fas fa-list"></i> View All 77 Commands
+            </a>
         </div>
     </section>
 
     <!-- ─── Footer ─── -->
     <footer class="footer">
         <div class="footer-links">
-            <a onclick="showDashboard()">Dashboard</a>
-            <a onclick="showTerms()">Terms</a>
-            <a onclick="showPrivacy()">Privacy</a>
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
             <a href="https://discord.gg/PGwbyWX3DS" target="_blank">Support</a>
-            <a href="https://discord.com/oauth2/authorize?client_id=1244893095326388325&permissions=8" target="_blank">Invite Bot</a>
         </div>
         <div class="footer-text">
             Made with <span class="heart">❤️</span> by <span>yaduvanshi1816_</span> • EnderBot v2.0.0
@@ -1315,59 +1098,16 @@
     </footer>
 
     <script>
-        // ─── Constants ───
-        const API_URL = 'https://enderbot-backend.onrender.com';
-        const INVITE_URL = 'https://discord.com/oauth2/authorize?client_id=1244893095326388325&permissions=8';
-        const SUPPORT_URL = 'https://discord.gg/PGwbyWX3DS';
-        const DISCORD_CLIENT_ID = '1244893095326388325';
-        const REDIRECT_URI = 'https://enderbot.dpdns.org/auth/callback';
-
-        // ─── State ───
-        let accessToken = null;
-        let userData = null;
-        let userGuilds = [];
-        let popupWindow = null;
-        let botGuildIds = [];
-
         // ─── Mobile Toggle ───
         function toggleMobile() {
             document.getElementById('navLinks').classList.toggle('open');
         }
 
-        document.querySelectorAll('.navbar-links a, .navbar-links button').forEach(el => {
-            el.addEventListener('click', () => {
+        document.querySelectorAll('.navbar-links a').forEach(link => {
+            link.addEventListener('click', () => {
                 document.getElementById('navLinks').classList.remove('open');
             });
         });
-
-        // ─── Navigation ───
-        function showDashboard() {
-            document.getElementById('dashboardSection').style.display = 'block';
-            document.getElementById('termsSection').style.display = 'none';
-            document.getElementById('privacySection').style.display = 'none';
-            document.querySelectorAll('.navbar-links a').forEach(a => a.classList.remove('active'));
-            document.querySelector('.navbar-links a[onclick="showDashboard()"]').classList.add('active');
-            
-            if (isLoggedIn()) {
-                loadDashboardData();
-            }
-        }
-
-        function showTerms() {
-            document.getElementById('dashboardSection').style.display = 'none';
-            document.getElementById('termsSection').style.display = 'block';
-            document.getElementById('privacySection').style.display = 'none';
-            document.querySelectorAll('.navbar-links a').forEach(a => a.classList.remove('active'));
-            document.querySelector('.navbar-links a[onclick="showTerms()"]').classList.add('active');
-        }
-
-        function showPrivacy() {
-            document.getElementById('dashboardSection').style.display = 'none';
-            document.getElementById('termsSection').style.display = 'none';
-            document.getElementById('privacySection').style.display = 'block';
-            document.querySelectorAll('.navbar-links a').forEach(a => a.classList.remove('active'));
-            document.querySelector('.navbar-links a[onclick="showPrivacy()"]').classList.add('active');
-        }
 
         // ─── Particles Background ───
         const canvas = document.getElementById('particles-canvas');
@@ -1464,372 +1204,9 @@
 
         document.addEventListener('scroll', resizeCanvas);
 
-        // ─── Console Welcome ───
-        console.log('%c🚀 EnderBot Dashboard', 'font-size: 24px; font-weight: bold; color: #6C3CE1;');
+        console.log('%c🚀 EnderBot', 'font-size: 24px; font-weight: bold; color: #6C3CE1;');
         console.log('%cMade by yaduvanshi1816_', 'font-size: 14px; color: #A8A8C8;');
         console.log('%c💻 Version 2.0.0', 'font-size: 12px; color: #6A6A8A;');
-
-        // ─── OAuth2 Login ───
-        function initiateLogin() {
-            const state = generateState();
-            localStorage.setItem('oauth_state', state);
-            
-            const authUrl = `https://discord.com/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=identify%20guilds&state=${state}`;
-            
-            const width = 500;
-            const height = 700;
-            const left = window.screenX + (window.outerWidth - width) / 2;
-            const top = window.screenY + (window.outerHeight - height) / 2;
-            
-            popupWindow = window.open(
-                authUrl,
-                'Discord Login',
-                `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`
-            );
-            
-            window.addEventListener('message', handleOAuthMessage);
-            
-            const checkPopup = setInterval(() => {
-                if (popupWindow && popupWindow.closed) {
-                    clearInterval(checkPopup);
-                    window.removeEventListener('message', handleOAuthMessage);
-                }
-            }, 500);
-        }
-
-        function generateState() {
-            return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-        }
-
-        function handleOAuthMessage(event) {
-            if (event.origin !== window.location.origin) return;
-            
-            const data = event.data;
-            if (data.type === 'discord_oauth') {
-                if (data.success && data.code) {
-                    localStorage.setItem('oauth_code', data.code);
-                    exchangeCodeForToken(data.code);
-                } else if (data.error) {
-                    showLoginError(data.error);
-                }
-                window.removeEventListener('message', handleOAuthMessage);
-            }
-        }
-
-        async function exchangeCodeForToken(code) {
-            try {
-                // For demo/testing - simulate successful login
-                simulateLogin(code);
-            } catch (error) {
-                console.error('Token exchange error:', error);
-                showLoginError('Authentication failed. Please try again.');
-            }
-        }
-
-        // ─── Simulate Login ───
-        function simulateLogin(code) {
-            const mockUser = {
-                id: '123456789012345678',
-                username: 'Admin_User',
-                discriminator: '0000',
-                avatar: null,
-                guilds: [
-                    {
-                        id: '987654321098765432',
-                        name: 'EnderBot Test Server',
-                        icon: null,
-                        permissions: 2147483647,
-                        approximate_member_count: 25
-                    },
-                    {
-                        id: '876543210987654321',
-                        name: 'Community Server',
-                        icon: null,
-                        permissions: 2147483647,
-                        approximate_member_count: 150
-                    }
-                ]
-            };
-            
-            localStorage.setItem('enderbot_user', JSON.stringify(mockUser));
-            localStorage.setItem('enderbot_token', 'mock_token_' + code);
-            
-            // Fetch bot guilds
-            fetchBotGuilds();
-            
-            updateUI();
-            loadDashboardData();
-            showDashboard();
-            hideLoginError();
-            
-            if (popupWindow && !popupWindow.closed) {
-                popupWindow.close();
-            }
-        }
-
-        // ─── Fetch Bot Guilds ───
-        async function fetchBotGuilds() {
-            try {
-                const response = await fetch(`${API_URL}/api/guilds`);
-                if (response.ok) {
-                    const guilds = await response.json();
-                    botGuildIds = guilds.map(g => g.id);
-                    console.log('✅ Bot guilds loaded:', botGuildIds);
-                }
-            } catch (error) {
-                console.log('Could not fetch bot guilds:', error);
-                // Fallback: assume bot is in all admin servers
-            }
-        }
-
-        function showLoginError(message) {
-            const errorDiv = document.getElementById('loginError');
-            const errorText = document.getElementById('errorText');
-            errorText.textContent = message || 'Authentication failed. Please try again.';
-            errorDiv.classList.add('show');
-        }
-
-        function hideLoginError() {
-            document.getElementById('loginError').classList.remove('show');
-        }
-
-        // ─── Auth Functions ───
-        function isLoggedIn() {
-            const user = localStorage.getItem('enderbot_user');
-            const token = localStorage.getItem('enderbot_token');
-            return user !== null && token !== null;
-        }
-
-        function getUser() {
-            try {
-                return JSON.parse(localStorage.getItem('enderbot_user'));
-            } catch {
-                return null;
-            }
-        }
-
-        function getToken() {
-            return localStorage.getItem('enderbot_token');
-        }
-
-        function logout() {
-            localStorage.removeItem('enderbot_user');
-            localStorage.removeItem('enderbot_token');
-            localStorage.removeItem('oauth_code');
-            accessToken = null;
-            userData = null;
-            userGuilds = [];
-            updateUI();
-            showDashboard();
-        }
-
-        // ─── UI Updates ───
-        function updateUI() {
-            const loginBtn = document.getElementById('loginBtn');
-            const logoutBtn = document.getElementById('logoutBtn');
-            const loginContainer = document.getElementById('loginContainer');
-            const dashboardContent = document.getElementById('dashboardContent');
-            const userBadge = document.getElementById('userBadge');
-            const userName = document.getElementById('userName');
-            const userAvatar = document.getElementById('userAvatar');
-
-            if (isLoggedIn()) {
-                const user = getUser();
-                loginBtn.style.display = 'none';
-                logoutBtn.style.display = 'inline-block';
-                loginContainer.style.display = 'none';
-                dashboardContent.classList.add('active');
-                userBadge.classList.add('show');
-                userName.textContent = user ? user.username : 'User';
-                
-                if (user && user.avatar) {
-                    userAvatar.innerHTML = `<img src="https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png" alt="${user.username}" />`;
-                } else {
-                    userAvatar.textContent = user ? user.username.charAt(0).toUpperCase() : 'U';
-                }
-            } else {
-                loginBtn.style.display = 'inline-block';
-                logoutBtn.style.display = 'none';
-                loginContainer.style.display = 'block';
-                dashboardContent.classList.remove('active');
-                userBadge.classList.remove('show');
-            }
-        }
-
-        // ─── Dashboard Data ───
-        async function loadDashboardData() {
-            if (!isLoggedIn()) return;
-
-            const serverList = document.getElementById('serverList');
-            serverList.innerHTML = `
-                <div class="server-item" style="justify-content: center; color: var(--text-muted);">
-                    <span><i class="fas fa-spinner fa-spin"></i> Loading your servers...</span>
-                </div>
-            `;
-
-            try {
-                const user = getUser();
-                const token = getToken();
-                
-                if (!user || !token) {
-                    throw new Error('Not authenticated');
-                }
-
-                // Get admin servers from user data
-                const adminGuilds = user.guilds ? user.guilds.filter(g => 
-                    (g.permissions & 0x8) === 0x8
-                ) : [];
-
-                // Filter: Only show servers where EnderBot is installed
-                const serversWithBot = adminGuilds.filter(g => 
-                    botGuildIds.includes(parseInt(g.id))
-                );
-
-                // Fetch bot status
-                try {
-                    const statusRes = await fetch(`${API_URL}/api/status`);
-                    if (statusRes.ok) {
-                        const statusData = await statusRes.json();
-                        if (statusData.status === 'online') {
-                            document.getElementById('dashServerCount').textContent = statusData.stats.guilds || 0;
-                            document.getElementById('dashMemberCount').textContent = (statusData.stats.users || 0).toLocaleString();
-                            document.getElementById('dashLatency').textContent = statusData.stats.latency_ms + 'ms';
-                        }
-                    }
-                } catch (e) {
-                    console.log('Could not fetch bot stats:', e);
-                    document.getElementById('dashServerCount').textContent = '17+';
-                    document.getElementById('dashMemberCount').textContent = '4.7K+';
-                    document.getElementById('dashLatency').textContent = '24ms';
-                }
-
-                document.getElementById('dashAdminServers').textContent = serversWithBot.length;
-
-                // Display servers
-                serverList.innerHTML = '';
-                if (serversWithBot.length === 0) {
-                    serverList.innerHTML = `
-                        <div class="no-servers">
-                            <p>You don't have admin permissions in any servers where EnderBot is installed.</p>
-                            <p style="margin-top: 8px;">
-                                <a href="${INVITE_URL}" target="_blank">Invite EnderBot</a> to a server where you are an admin to manage it here.
-                            </p>
-                        </div>
-                    `;
-                } else {
-                    serversWithBot.forEach(guild => {
-                        const item = document.createElement('div');
-                        item.className = 'server-item';
-                        
-                        const iconInitial = guild.name.charAt(0).toUpperCase();
-                        const iconUrl = guild.icon 
-                            ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png` 
-                            : null;
-                        const iconHtml = iconUrl 
-                            ? `<img src="${iconUrl}" alt="${guild.name}" />` 
-                            : iconInitial;
-
-                        item.innerHTML = `
-                            <div class="server-icon">${iconHtml}</div>
-                            <div class="server-info">
-                                <div class="server-name">${guild.name}</div>
-                                <div class="server-members">👥 ${guild.approximate_member_count || '?'} members</div>
-                            </div>
-                            <span class="server-status active">✅ Bot Active</span>
-                            <div class="server-actions">
-                                <button class="btn-manage" onclick="manageServer('${guild.id}')">
-                                    <i class="fas fa-cog"></i> Manage
-                                </button>
-                            </div>
-                        `;
-                        serverList.appendChild(item);
-                    });
-                }
-
-            } catch (error) {
-                console.error('Error loading dashboard data:', error);
-                serverList.innerHTML = `
-                    <div class="no-servers">
-                        <p>⚠️ Could not load your admin servers.</p>
-                        <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted);">
-                            Make sure you're authenticated and the backend is running.
-                        </p>
-                        <button onclick="refreshDashboard()" style="margin-top: 12px; padding: 8px 24px; background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: 600;">
-                            <i class="fas fa-redo"></i> Retry
-                        </button>
-                    </div>
-                `;
-            }
-        }
-
-        function manageServer(guildId) {
-            // This will open the server management panel
-            // For now, redirect to the server settings
-            alert(`Server management for guild ${guildId} is coming soon!`);
-            // In production: window.location.href = `/manage/${guildId}`;
-        }
-
-        function refreshDashboard() {
-            if (isLoggedIn()) {
-                fetchBotGuilds();
-                loadDashboardData();
-            }
-        }
-
-        // ─── Fetch Live Stats ───
-        async function fetchBotStats() {
-            try {
-                const response = await fetch(`${API_URL}/api/status`);
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data.status === 'online') {
-                        const servers = data.stats.guilds || 0;
-                        const users = data.stats.users || 0;
-                        const formattedUsers = users >= 1000 ? (users / 1000).toFixed(1) + 'K' : users;
-                        
-                        document.getElementById('serverCountDisplay').textContent = servers + '+';
-                        document.getElementById('userCountDisplay').textContent = formattedUsers + '+';
-                    }
-                }
-            } catch (error) {
-                console.log('Could not fetch live stats:', error.message);
-            }
-        }
-
-        // ─── Check for OAuth Redirect ───
-        function checkForOAuthRedirect() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const code = urlParams.get('code');
-            const state = urlParams.get('state');
-            
-            if (code && state) {
-                const savedState = localStorage.getItem('oauth_state');
-                if (state === savedState) {
-                    exchangeCodeForToken(code);
-                } else {
-                    showLoginError('Invalid state parameter. Please try again.');
-                }
-                window.history.replaceState({}, document.title, window.location.pathname);
-            }
-        }
-
-        // ─── Initialize ───
-        document.addEventListener('DOMContentLoaded', () => {
-            checkForOAuthRedirect();
-            updateUI();
-            fetchBotGuilds();
-            setTimeout(fetchBotStats, 1000);
-            setInterval(fetchBotStats, 60000);
-
-            // Default to dashboard
-            showDashboard();
-        });
-
-        console.log('🔐 OAuth Configuration:');
-        console.log('  Client ID:', DISCORD_CLIENT_ID);
-        console.log('  Redirect URI:', REDIRECT_URI);
-        console.log('  API URL:', API_URL);
-        console.log('ℹ️ For production, replace simulateLogin() with real backend call.');
     </script>
 
 </body>
