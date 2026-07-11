@@ -210,27 +210,6 @@
             background: linear-gradient(135deg, var(--primary-light), var(--primary));
         }
 
-        .navbar-links .btn-logout {
-            background: linear-gradient(135deg, var(--accent), #cc0066);
-            color: #fff;
-            padding: 8px 22px;
-            border-radius: var(--radius-sm);
-            font-weight: 700;
-            box-shadow: 0 0 30px var(--accent-glow);
-            transition: var(--transition);
-            cursor: pointer;
-            border: none;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 14px;
-            display: none;
-            text-decoration: none;
-        }
-
-        .navbar-links .btn-logout:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 50px var(--accent-glow);
-        }
-
         .status-indicator {
             display: flex;
             align-items: center;
@@ -265,45 +244,6 @@
             color: var(--text-white);
             font-size: 26px;
             cursor: pointer;
-        }
-
-        .user-badge {
-            display: none;
-            align-items: center;
-            gap: 8px;
-            padding: 4px 12px;
-            background: var(--card-hover);
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border-color);
-        }
-
-        .user-badge .user-avatar {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 700;
-            overflow: hidden;
-        }
-
-        .user-badge .user-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .user-badge .user-name {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-white);
-        }
-
-        .user-badge.show {
-            display: flex;
         }
 
         /* ─── Hero ─── */
@@ -766,18 +706,13 @@
                 padding: 12px;
             }
 
-            .navbar-links .btn-login,
-            .navbar-links .btn-logout {
+            .navbar-links .btn-login {
                 width: 100%;
                 text-align: center;
             }
 
             .status-indicator {
                 display: none;
-            }
-
-            .user-badge {
-                display: none !important;
             }
 
             .hero {
@@ -893,7 +828,7 @@
         <h1 class="glitch animate-in delay-1" data-text="The Ultimate Discord Bot">The Ultimate <br>Discord Bot</h1>
         <p class="subtitle animate-in delay-2">
             Advanced moderation, auto-roles, logging, and more — all in one powerful bot.<br>
-            Trusted by <strong>17+</strong> servers and <strong>4,700+</strong> members.
+            Trusted by <strong id="serverCountDisplay">17+</strong> servers and <strong id="userCountDisplay">4,700+</strong> members.
         </p>
         <div class="btn-group animate-in delay-3">
             <a href="https://discord.com/oauth2/authorize?client_id=1244893095326388325&permissions=8" target="_blank" class="btn btn-primary">
@@ -917,7 +852,7 @@
         </div>
         <div class="stat-card animate-in delay-2">
             <div class="stat-icon"><i class="fas fa-users"></i></div>
-            <div class="stat-number">4.7K+</div>
+            <div class="stat-number" id="userCount">4.7K+</div>
             <div class="stat-label">Members</div>
         </div>
         <div class="stat-card animate-in delay-3">
@@ -1203,6 +1138,32 @@
         });
 
         document.addEventListener('scroll', resizeCanvas);
+
+        // ─── Fetch Live Stats ───
+        async function fetchBotStats() {
+            try {
+                const response = await fetch('https://enderbot-backend.onrender.com/api/status');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.status === 'online') {
+                        const servers = data.stats.guilds || 0;
+                        const users = data.stats.users || 0;
+                        const formattedUsers = users >= 1000 ? (users / 1000).toFixed(1) + 'K' : users;
+                        
+                        document.getElementById('serverCountDisplay').textContent = servers + '+';
+                        document.getElementById('userCount').textContent = formattedUsers + '+';
+                        document.getElementById('userCountDisplay').textContent = formattedUsers + '+';
+                    }
+                }
+            } catch (error) {
+                console.log('Could not fetch live stats:', error.message);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(fetchBotStats, 1000);
+            setInterval(fetchBotStats, 60000);
+        });
 
         console.log('%c🚀 EnderBot', 'font-size: 24px; font-weight: bold; color: #6C3CE1;');
         console.log('%cMade by yaduvanshi1816_', 'font-size: 14px; color: #A8A8C8;');
