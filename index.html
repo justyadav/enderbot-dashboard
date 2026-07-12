@@ -11,52 +11,50 @@
 
     <nav class="bg-[#202225] p-4 flex justify-between items-center shadow-md">
         <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center font-bold text-white">E</div>
-            <span class="text-xl font-bold tracking-wide text-white">Ender Bot</span>
+            <div id="bot-avatar-container" class="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center font-bold text-white overflow-hidden">
+                <span id="bot-initial">E</span>
+            </div>
+            <span class="text-xl font-bold tracking-wide text-white" id="nav-bot-name">Ender Bot</span>
         </div>
         <button id="login-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-md font-medium transition flex items-center space-x-2">
             <i class="fab fa-discord"></i>
-            <span>Login with Discord</span>
+            <span id="login-text">Connecting...</span>
         </button>
     </nav>
 
     <main class="max-w-6xl mx-auto p-6 mt-8">
         
-        <section id="server-selector" class="hidden">
-            <h2 class="text-2xl font-bold mb-6 text-white">Select a Server</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-[#36393f] p-5 rounded-lg shadow-lg flex flex-col items-center border border-gray-700">
-                    <div class="w-16 h-16 bg-gray-600 rounded-full mb-4 flex items-center justify-center text-xl font-bold text-white">GS</div>
-                    <h3 class="text-lg font-semibold text-white mb-4">Gaming Server</h3>
-                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded font-medium transition">Manage</button>
-                </div>
+        <div id="loading-state" class="flex flex-col items-center justify-center py-20">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500 mb-4"></div>
+            <p class="text-gray-400">Fetching live data from Ender Bot...</p>
+        </div>
 
-                <div class="bg-[#36393f] p-5 rounded-lg shadow-lg flex flex-col items-center border border-gray-700 opacity-75">
-                    <div class="w-16 h-16 bg-gray-600 rounded-full mb-4 flex items-center justify-center text-xl font-bold text-white">CS</div>
-                    <h3 class="text-lg font-semibold text-white mb-4">Chill Space</h3>
-                    <button class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded font-medium transition">Invite Bot</button>
+        <section id="server-selector" class="hidden">
+            <h2 class="text-2xl font-bold mb-6 text-white">Select a Server to Manage</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 </div>
-            </div>
         </section>
 
-        <section id="settings-panel" class="">
+        <section id="settings-panel" class="hidden">
             <div class="flex items-center space-x-4 mb-6">
-                <a href="#" class="text-gray-400 hover:text-white transition"><i class="fas fa-arrow-left text-xl"></i></a>
-                <h2 class="text-2xl font-bold text-white">Guild Settings: <span class="text-indigo-400">Gaming Server</span></h2>
+                <button onclick="goBackToSelector()" class="text-gray-400 hover:text-white transition cursor-pointer">
+                    <i class="fas fa-arrow-left text-xl"></i>
+                </button>
+                <h2 class="text-2xl font-bold text-white">Guild Settings: <span id="current-guild-name" class="text-indigo-400">Loading...</span></h2>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div class="bg-[#202225] p-4 rounded-lg h-fit space-y-2">
                     <a href="#" class="block bg-[#36393f] text-white p-3 rounded font-medium transition"><i class="fas fa-cog mr-3 text-indigo-400"></i>General Settings</a>
-                    <a href="#" class="block hover:bg-[#36393f] text-gray-300 p-3 rounded font-medium transition"><i class="fas fa-door-open mr-3"></i>Welcome Message</a>
-                    <a href="#" class="block hover:bg-[#36393f] text-gray-300 p-3 rounded font-medium transition"><i class="fas fa-shield-alt mr-3"></i>Moderation</a>
+                    <a href="#" class="block hover:bg-[#36393f] text-gray-300 p-3 rounded font-medium transition opacity-50 cursor-not-allowed"><i class="fas fa-door-open mr-3"></i>Welcome Message (Soon)</a>
+                    <a href="#" class="block hover:bg-[#36393f] text-gray-300 p-3 rounded font-medium transition opacity-50 cursor-not-allowed"><i class="fas fa-shield-alt mr-3"></i>Moderation (Soon)</a>
                 </div>
 
                 <div class="lg:col-span-2 bg-[#36393f] p-6 rounded-lg shadow-lg border border-gray-700">
                     <form id="settings-form" class="space-y-6">
                         <div>
                             <label class="block text-sm font-semibold uppercase tracking-wider text-gray-400 mb-2">Bot Prefix</label>
-                            <input type="text" value="!" class="w-full bg-[#202225] border border-gray-600 rounded p-3 text-white focus:outline-none focus:border-indigo-500 transition" maxlength="5">
+                            <input type="text" id="prefix-input" value="!" class="w-full bg-[#202225] border border-gray-600 rounded p-3 text-white focus:outline-none focus:border-indigo-500 transition" maxlength="5">
                             <p class="text-xs text-gray-400 mt-1">The character used before commands (e.g., !help)</p>
                         </div>
 
@@ -66,13 +64,13 @@
                                 <p class="text-xs text-gray-400">Allows users to earn coins and use the shop commands.</p>
                             </div>
                             <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" checked class="sr-only peer">
+                                <input type="checkbox" id="economy-toggle" class="sr-only peer">
                                 <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
                             </label>
                         </div>
 
                         <div class="pt-4 border-t border-gray-700 flex justify-end">
-                            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded.md font-semibold transition shadow-md">
+                            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-md font-semibold transition shadow-md cursor-pointer">
                                 Save Changes
                             </button>
                         </div>
@@ -84,12 +82,134 @@
     </main>
 
     <script>
-        // Simple UI view toggling for testing layout
-        // Later, your JavaScript will use fetch() to talk to your Python backend here!
-        document.getElementById('settings-form').addEventListener('submit', function(e) {
+        // ─── CONFIGURATION ───────────────────────────────────────────
+        // 🚨 REPLACE THIS WITH YOUR LIVE RENDER BACKEND URL 🚨
+        const BACKEND_URL = "https://enderbot-backend.onrender.com"; 
+        
+        let selectedGuildId = null;
+
+        // ─── DASHBOARD INITIALIZATION ─────────────────────────────────
+        async function initializeDashboard() {
+            try {
+                // 1. Fetch live bot status
+                const statusRes = await fetch(`${BACKEND_URL}/api/status`);
+                if (!statusRes.ok) throw new Error("Backend unavailable");
+                const statusData = await statusRes.json();
+                
+                if (statusData.status === "online") {
+                    document.getElementById('login-text').innerText = `${statusData.bot.name} Online`;
+                    document.getElementById('nav-bot-name').innerText = statusData.bot.name;
+                    if (statusData.bot.avatar) {
+                        document.getElementById('bot-avatar-container').innerHTML = `<img src="${statusData.bot.avatar}" class="w-full h-full object-cover">`;
+                    }
+                }
+
+                // 2. Load connected servers from your bot
+                const guildsRes = await fetch(`${BACKEND_URL}/api/guilds`);
+                const guilds = await guildsRes.json();
+                
+                document.getElementById('loading-state').classList.add('hidden');
+                renderServerSelector(guilds);
+            } catch (err) {
+                console.error("Dashboard connection fault:", err);
+                document.getElementById('loading-state').innerHTML = `
+                    <div class="text-center p-6 bg-red-900/20 border border-red-500/50 rounded-lg max-w-md mx-auto">
+                        <i class="fas fa-exclamation-triangle text-red-500 text-3xl mb-2"></i>
+                        <h3 class="text-lg font-bold text-white">Connection Failed</h3>
+                        <p class="text-sm text-gray-300 mt-1">Could not connect to your Python API backend. Make sure your Render Web Service is running and CORS allows this domain.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // ─── RENDERING CHANNELS ───────────────────────────────────────
+        function renderServerSelector(guilds) {
+            const container = document.getElementById('server-selector');
+            const grid = container.querySelector('.grid');
+            grid.innerHTML = ""; // Wipe older placeholder assets
+            
+            container.classList.remove('hidden');
+            document.getElementById('settings-panel').classList.add('hidden');
+
+            if(guilds.length === 0) {
+                grid.innerHTML = `<p class="col-span-3 text-center text-gray-400 py-8">The bot is currently not in any servers.</p>`;
+                return;
+            }
+
+            guilds.forEach(guild => {
+                // Use default image if guild doesn't possess a specific icon asset
+                const guildIcon = guild.icon ? guild.icon : "https://cdn.discordapp.com/embed/avatars/0.png";
+                const card = document.createElement('div');
+                card.className = "bg-[#36393f] p-5 rounded-lg shadow-lg flex flex-col items-center border border-gray-700 transition transform hover:-translate-y-1";
+                card.innerHTML = `
+                    <img src="${guildIcon}" class="w-16 h-16 rounded-full mb-3 object-cover shadow-inner">
+                    <h3 class="text-lg font-semibold text-white mb-1 text-center truncate w-full">${guild.name}</h3>
+                    <p class="text-xs text-gray-400 mb-4">${guild.member_count} Members</p>
+                    <button onclick="openSettings(${guild.id})" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded font-medium transition cursor-pointer">Manage</button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // ─── ROUTING & TRANSITIONS ────────────────────────────────────
+        async function openSettings(guildId) {
+            selectedGuildId = guildId;
+            document.getElementById('server-selector').classList.add('hidden');
+            document.getElementById('settings-panel').classList.remove('hidden');
+            document.getElementById('current-guild-name').innerText = "Loading attributes...";
+
+            try {
+                const res = await fetch(`${BACKEND_URL}/api/guilds/${guildId}`);
+                const data = await res.json();
+
+                document.getElementById('current-guild-name').innerText = data.name;
+                
+                // Populate dashboard configs with stored attributes or defaults
+                document.getElementById('prefix-input').value = data.config.prefix || "/";
+                document.getElementById('economy-toggle').checked = data.config.economy_enabled ?? false;
+            } catch (err) {
+                alert("Failed to target configurations for the specified server id.");
+                goBackToSelector();
+            }
+        }
+
+        function goBackToSelector() {
+            document.getElementById('settings-panel').classList.add('hidden');
+            document.getElementById('server-selector').classList.remove('hidden');
+            selectedGuildId = null;
+        }
+
+        // ─── DATA PERSISTENCE FORMS ──────────────────────────────────
+        document.getElementById('settings-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            alert('Settings layout working! Next step: Connect to Python backend.');
+            
+            const prefixValue = document.getElementById('prefix-input').value;
+            const economyValue = document.getElementById('economy-toggle').checked;
+
+            try {
+                const res = await fetch(`${BACKEND_URL}/api/guilds/${selectedGuildId}/settings`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        prefix: prefixValue,
+                        economy_enabled: economyValue
+                    })
+                });
+
+                if (res.ok) {
+                    alert("Configurations committed to database engine successfully!");
+                } else {
+                    const errorData = await res.json();
+                    alert(`Failed to save: ${errorData.detail || "Server error"}`);
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Network error processing sync changes request.");
+            }
         });
+
+        // Trigger loading routine upon complete document asset creation
+        window.onload = initializeDashboard;
     </script>
 </body>
 </html>
