@@ -1,0 +1,32 @@
+<body>
+    <div class="login-card">
+        <h2>Console Access</h2>
+        <form id="loginForm">
+            <div class="input-group"><label>Username</label><input type="text" id="username" required></div>
+            <div class="input-group"><label>Password</label><input type="password" id="password" required></div>
+            <button type="submit">Sign In</button>
+            <p style="text-align:center; font-size:0.9rem; margin-top:1rem;">
+                Don't have an account? <a href="signup.html" style="color:#38bdf8;">Sign Up</a>
+            </p>
+        </form>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username: document.getElementById('username').value,
+                    password: document.getElementById('password').value
+                })
+            });
+            const data = await response.json();
+            if (response.ok) {
+                window.location.href = data.redirectTo;
+            } else {
+                alert(data.message);
+            }
+        });
+    </script>
+</body>
