@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ender Bot Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-[#2f3136] text-gray-200 font-sans">
+
+    <nav class="bg-[#202225] p-4 flex justify-between items-center shadow-md">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center font-bold text-white">E</div>
+            <span class="text-xl font-bold tracking-wide text-white">Ender Bot</span>
+        </div>
+        <button id="login-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-md font-medium transition flex items-center space-x-2">
+            <i class="fab fa-discord"></i>
+            <span>Login with Discord</span>
+        </button>
+    </nav>
+
+    <main class="max-w-6xl mx-auto p-6 mt-8">
+        
+        <section id="server-selector" class="hidden">
+            <h2 class="text-2xl font-bold mb-6 text-white">Select a Server</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-[#36393f] p-5 rounded-lg shadow-lg flex flex-col items-center border border-gray-700">
+                    <div class="w-16 h-16 bg-gray-600 rounded-full mb-4 flex items-center justify-center text-xl font-bold text-white">GS</div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Gaming Server</h3>
+                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded font-medium transition">Manage</button>
+                </div>
+
+                <div class="bg-[#36393f] p-5 rounded-lg shadow-lg flex flex-col items-center border border-gray-700 opacity-75">
+                    <div class="w-16 h-16 bg-gray-600 rounded-full mb-4 flex items-center justify-center text-xl font-bold text-white">CS</div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Chill Space</h3>
+                    <button class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded font-medium transition">Invite Bot</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="settings-panel" class="">
+            <div class="flex items-center space-x-4 mb-6">
+                <a href="#" class="text-gray-400 hover:text-white transition"><i class="fas fa-arrow-left text-xl"></i></a>
+                <h2 class="text-2xl font-bold text-white">Guild Settings: <span class="text-indigo-400">Gaming Server</span></h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="bg-[#202225] p-4 rounded-lg h-fit space-y-2">
+                    <a href="#" class="block bg-[#36393f] text-white p-3 rounded font-medium transition"><i class="fas fa-cog mr-3 text-indigo-400"></i>General Settings</a>
+                    <a href="#" class="block hover:bg-[#36393f] text-gray-300 p-3 rounded font-medium transition"><i class="fas fa-door-open mr-3"></i>Welcome Message</a>
+                    <a href="#" class="block hover:bg-[#36393f] text-gray-300 p-3 rounded font-medium transition"><i class="fas fa-shield-alt mr-3"></i>Moderation</a>
+                </div>
+
+                <div class="lg:col-span-2 bg-[#36393f] p-6 rounded-lg shadow-lg border border-gray-700">
+                    <form id="settings-form" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-semibold uppercase tracking-wider text-gray-400 mb-2">Bot Prefix</label>
+                            <input type="text" value="!" class="w-full bg-[#202225] border border-gray-600 rounded p-3 text-white focus:outline-none focus:border-indigo-500 transition" maxlength="5">
+                            <p class="text-xs text-gray-400 mt-1">The character used before commands (e.g., !help)</p>
+                        </div>
+
+                        <div class="flex justify-between items-center py-3 border-t border-gray-700">
+                            <div>
+                                <h4 class="text-white font-medium">Enable Economy System</h4>
+                                <p class="text-xs text-gray-400">Allows users to earn coins and use the shop commands.</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" checked class="sr-only peer">
+                                <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+                            </label>
+                        </div>
+
+                        <div class="pt-4 border-t border-gray-700 flex justify-end">
+                            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded.md font-semibold transition shadow-md">
+                                Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Simple UI view toggling for testing layout
+        // Later, your JavaScript will use fetch() to talk to your Python backend here!
+        document.getElementById('settings-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Settings layout working! Next step: Connect to Python backend.');
+        });
+    </script>
+</body>
+</html>
