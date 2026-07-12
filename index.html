@@ -12,27 +12,26 @@
     <nav class="bg-[#202225] p-4 flex justify-between items-center shadow-md">
         <div class="flex items-center space-x-3">
             <div id="bot-avatar-container" class="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center font-bold text-white overflow-hidden">
-                <span id="bot-initial">E</span>
+                <span>E</span>
             </div>
             <span class="text-xl font-bold tracking-wide text-white" id="nav-bot-name">Ender Bot</span>
         </div>
-        <button id="login-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-md font-medium transition flex items-center space-x-2">
+        <button id="login-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-md font-medium transition flex items-center space-x-2 cursor-pointer">
             <i class="fab fa-discord"></i>
-            <span id="login-text">Connecting...</span>
+            <span id="login-text">Login with Discord</span>
         </button>
     </nav>
 
     <main class="max-w-6xl mx-auto p-6 mt-8">
         
-        <div id="loading-state" class="flex flex-col items-center justify-center py-20">
-            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500 mb-4"></div>
-            <p class="text-gray-400">Fetching live data from Ender Bot...</p>
+        <div id="status-state" class="flex flex-col items-center justify-center py-20">
+            <div id="spinner" class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500 mb-4"></div>
+            <p id="status-msg" class="text-gray-400">Connecting to Ender Bot systems...</p>
         </div>
 
         <section id="server-selector" class="hidden">
             <h2 class="text-2xl font-bold mb-6 text-white">Select a Server to Manage</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
         </section>
 
         <section id="settings-panel" class="hidden">
@@ -40,175 +39,155 @@
                 <button onclick="goBackToSelector()" class="text-gray-400 hover:text-white transition cursor-pointer">
                     <i class="fas fa-arrow-left text-xl"></i>
                 </button>
-                <h2 class="text-2xl font-bold text-white">Guild Settings: <span id="current-guild-name" class="text-indigo-400">Loading...</span></h2>
+                <h2 class="text-2xl font-bold text-white">Settings: <span id="current-guild-name" class="text-indigo-400">Loading...</span></h2>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div class="bg-[#202225] p-4 rounded-lg h-fit space-y-2">
-                    <a href="#" class="block bg-[#36393f] text-white p-3 rounded font-medium transition"><i class="fas fa-cog mr-3 text-indigo-400"></i>General Settings</a>
-                    <a href="#" class="block hover:bg-[#36393f] text-gray-300 p-3 rounded font-medium transition opacity-50 cursor-not-allowed"><i class="fas fa-door-open mr-3"></i>Welcome Message (Soon)</a>
-                    <a href="#" class="block hover:bg-[#36393f] text-gray-300 p-3 rounded font-medium transition opacity-50 cursor-not-allowed"><i class="fas fa-shield-alt mr-3"></i>Moderation (Soon)</a>
+                    <a href="#" class="block bg-[#36393f] text-white p-3 rounded font-medium transition"><i class="fas fa-cog mr-3 text-indigo-400"></i>General Options</a>
                 </div>
 
                 <div class="lg:col-span-2 bg-[#36393f] p-6 rounded-lg shadow-lg border border-gray-700">
                     <form id="settings-form" class="space-y-6">
                         <div>
                             <label class="block text-sm font-semibold uppercase tracking-wider text-gray-400 mb-2">Bot Prefix</label>
-                            <input type="text" id="prefix-input" value="!" class="w-full bg-[#202225] border border-gray-600 rounded p-3 text-white focus:outline-none focus:border-indigo-500 transition" maxlength="5">
-                            <p class="text-xs text-gray-400 mt-1">The character used before commands (e.g., !help)</p>
+                            <input type="text" id="prefix-input" class="w-full bg-[#202225] border border-gray-600 rounded p-3 text-white focus:outline-none focus:border-indigo-500 transition" maxlength="5">
                         </div>
 
                         <div class="flex justify-between items-center py-3 border-t border-gray-700">
                             <div>
-                                <h4 class="text-white font-medium">Enable Economy System</h4>
-                                <p class="text-xs text-gray-400">Allows users to earn coins and use the shop commands.</p>
+                                <h4 class="text-white font-medium">Enable Economy Module</h4>
+                                <p class="text-xs text-gray-400">Allows game commands and custom coin transactions.</p>
                             </div>
                             <label class="relative inline-flex items-center cursor-pointer">
                                 <input type="checkbox" id="economy-toggle" class="sr-only peer">
-                                <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+                                <div class="w-11 h-6 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
                             </label>
                         </div>
 
                         <div class="pt-4 border-t border-gray-700 flex justify-end">
-                            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-md font-semibold transition shadow-md cursor-pointer">
-                                Save Changes
-                            </button>
+                            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-md font-semibold transition cursor-pointer">Save Configurations</button>
                         </div>
                     </form>
                 </div>
             </div>
         </section>
-
     </main>
 
     <script>
-        // ─── CONFIGURATION ───────────────────────────────────────────
-        // 🚨 REPLACE THIS WITH YOUR LIVE RENDER BACKEND URL 🚨
-        const BACKEND_URL = "https://enderbot-backend.onrender.com"; 
-        
+        // 🚨 CONFIGURATION 🚨
+        const BACKEND_URL = "https://enderbot-dashboard-1xtu.onrender.com"; 
         let selectedGuildId = null;
 
-        // ─── DASHBOARD INITIALIZATION ─────────────────────────────────
+        function checkAuthToken() {
+            const hash = window.location.hash;
+            if (hash && hash.startsWith("#token=")) {
+                const token = hash.split("=")[1];
+                localStorage.setItem("discord_token", token);
+                window.location.hash = ""; 
+            }
+            return localStorage.getItem("discord_token");
+        }
+
         async function initializeDashboard() {
+            // Setup Login trigger redirect
+            document.getElementById('login-btn').onclick = () => {
+                window.location.href = `${BACKEND_URL}/api/auth/login`;
+            };
+
             try {
-                // 1. Fetch live bot status
                 const statusRes = await fetch(`${BACKEND_URL}/api/status`);
-                if (!statusRes.ok) throw new Error("Backend unavailable");
                 const statusData = await statusRes.json();
-                
                 if (statusData.status === "online") {
-                    document.getElementById('login-text').innerText = `${statusData.bot.name} Online`;
                     document.getElementById('nav-bot-name').innerText = statusData.bot.name;
-                    if (statusData.bot.avatar) {
-                        document.getElementById('bot-avatar-container').innerHTML = `<img src="${statusData.bot.avatar}" class="w-full h-full object-cover">`;
-                    }
+                    document.getElementById('bot-avatar-container').innerHTML = `<img src="${statusData.bot.avatar}" class="w-full h-full object-cover">`;
                 }
 
-                // 2. Load connected servers from your bot
-                const guildsRes = await fetch(`${BACKEND_URL}/api/guilds`);
-                const guilds = await guildsRes.json();
+                const token = checkAuthToken();
+                if (!token) {
+                    document.getElementById('spinner').classList.add('hidden');
+                    document.getElementById('status-msg').innerText = "Please log in using your Discord account credentials.";
+                    return;
+                }
+
+                document.getElementById('login-text').innerText = "Logged In";
+
+                const guildsRes = await fetch(`${BACKEND_URL}/api/guilds`, {
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+                if (guildsRes.status === 401) {
+                    localStorage.removeItem("discord_token");
+                    window.location.reload();
+                    return;
+                }
                 
-                document.getElementById('loading-state').classList.add('hidden');
+                const guilds = await guildsRes.json();
+                document.getElementById('status-state').classList.add('hidden');
                 renderServerSelector(guilds);
+
             } catch (err) {
-                console.error("Dashboard connection fault:", err);
-                document.getElementById('loading-state').innerHTML = `
-                    <div class="text-center p-6 bg-red-900/20 border border-red-500/50 rounded-lg max-w-md mx-auto">
-                        <i class="fas fa-exclamation-triangle text-red-500 text-3xl mb-2"></i>
-                        <h3 class="text-lg font-bold text-white">Connection Failed</h3>
-                        <p class="text-sm text-gray-300 mt-1">Could not connect to your Python API backend. Make sure your Render Web Service is running and CORS allows this domain.</p>
-                    </div>
-                `;
+                document.getElementById('spinner').classList.add('hidden');
+                document.getElementById('status-msg').innerHTML = `<span class="text-red-400">Failed to sync with API. Check CORS limits or active Render deployment status.</span>`;
             }
         }
 
-        // ─── RENDERING CHANNELS ───────────────────────────────────────
         function renderServerSelector(guilds) {
             const container = document.getElementById('server-selector');
             const grid = container.querySelector('.grid');
-            grid.innerHTML = ""; // Wipe older placeholder assets
-            
+            grid.innerHTML = "";
             container.classList.remove('hidden');
-            document.getElementById('settings-panel').classList.add('hidden');
 
-            if(guilds.length === 0) {
-                grid.innerHTML = `<p class="col-span-3 text-center text-gray-400 py-8">The bot is currently not in any servers.</p>`;
-                return;
-            }
-
-            guilds.forEach(guild => {
-                // Use default image if guild doesn't possess a specific icon asset
-                const guildIcon = guild.icon ? guild.icon : "https://cdn.discordapp.com/embed/avatars/0.png";
+            guilds.forEach(g => {
+                const icon = g.icon || "https://cdn.discordapp.com/embed/avatars/0.png";
                 const card = document.createElement('div');
-                card.className = "bg-[#36393f] p-5 rounded-lg shadow-lg flex flex-col items-center border border-gray-700 transition transform hover:-translate-y-1";
+                card.className = "bg-[#36393f] p-5 rounded-lg shadow-lg flex flex-col items-center border border-gray-700";
+                
+                let actionBtn = g.bot_in_guild 
+                    ? `<button onclick="openSettings(${g.id})" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded font-medium cursor-pointer">Manage</button>`
+                    : `<a href="https://discord.com/oauth2/authorize?client_id=${g.id}&permissions=8&scope=bot" target="_blank" class="w-full text-center bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded font-medium">Invite Bot</a>`;
+
                 card.innerHTML = `
-                    <img src="${guildIcon}" class="w-16 h-16 rounded-full mb-3 object-cover shadow-inner">
-                    <h3 class="text-lg font-semibold text-white mb-1 text-center truncate w-full">${guild.name}</h3>
-                    <p class="text-xs text-gray-400 mb-4">${guild.member_count} Members</p>
-                    <button onclick="openSettings(${guild.id})" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded font-medium transition cursor-pointer">Manage</button>
+                    <img src="${icon}" class="w-16 h-16 rounded-full mb-3 object-cover">
+                    <h3 class="text-lg font-semibold text-white text-center truncate w-full mb-4">${g.name}</h3>
+                    ${actionBtn}
                 `;
                 grid.appendChild(card);
             });
         }
 
-        // ─── ROUTING & TRANSITIONS ────────────────────────────────────
         async function openSettings(guildId) {
             selectedGuildId = guildId;
             document.getElementById('server-selector').classList.add('hidden');
             document.getElementById('settings-panel').classList.remove('hidden');
-            document.getElementById('current-guild-name').innerText = "Loading attributes...";
-
-            try {
-                const res = await fetch(`${BACKEND_URL}/api/guilds/${guildId}`);
-                const data = await res.json();
-
-                document.getElementById('current-guild-name').innerText = data.name;
-                
-                // Populate dashboard configs with stored attributes or defaults
-                document.getElementById('prefix-input').value = data.config.prefix || "/";
-                document.getElementById('economy-toggle').checked = data.config.economy_enabled ?? false;
-            } catch (err) {
-                alert("Failed to target configurations for the specified server id.");
-                goBackToSelector();
-            }
+            
+            const res = await fetch(`${BACKEND_URL}/api/guilds/${guildId}`);
+            const data = await res.json();
+            
+            document.getElementById('current-guild-name').innerText = data.name;
+            document.getElementById('prefix-input').value = data.config.prefix || "/";
+            document.getElementById('economy-toggle').checked = data.config.economy_enabled ?? false;
         }
 
         function goBackToSelector() {
             document.getElementById('settings-panel').classList.add('hidden');
             document.getElementById('server-selector').classList.remove('hidden');
-            selectedGuildId = null;
         }
 
-        // ─── DATA PERSISTENCE FORMS ──────────────────────────────────
-        document.getElementById('settings-form').addEventListener('submit', async (e) => {
+        document.getElementById('settings-form').onsubmit = async (e) => {
             e.preventDefault();
-            
-            const prefixValue = document.getElementById('prefix-input').value;
-            const economyValue = document.getElementById('economy-toggle').checked;
+            const prefix = document.getElementById('prefix-input').value;
+            const economy = document.getElementById('economy-toggle').checked;
 
-            try {
-                const res = await fetch(`${BACKEND_URL}/api/guilds/${selectedGuildId}/settings`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        prefix: prefixValue,
-                        economy_enabled: economyValue
-                    })
-                });
+            const res = await fetch(`${BACKEND_URL}/api/guilds/${selectedGuildId}/settings`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ prefix, economy_enabled: economy })
+            });
 
-                if (res.ok) {
-                    alert("Configurations committed to database engine successfully!");
-                } else {
-                    const errorData = await res.json();
-                    alert(`Failed to save: ${errorData.detail || "Server error"}`);
-                }
-            } catch (err) {
-                console.error(err);
-                alert("Network error processing sync changes request.");
-            }
-        });
+            if (res.ok) alert("Settings successfully pushed to Ender Bot!");
+            else alert("Error pushing settings values.");
+        };
 
-        // Trigger loading routine upon complete document asset creation
         window.onload = initializeDashboard;
     </script>
 </body>
